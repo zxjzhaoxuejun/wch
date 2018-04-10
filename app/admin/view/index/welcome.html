@@ -1,0 +1,142 @@
+﻿{include file='public/header'/}
+<body>
+<div class="page-container">
+	<p class="f-20 text-success">欢迎使用新友益<span class="f-14">v1.0</span>后台！</p>
+	<p>登录次数：{$data.login_count} </p>
+	<p>上次登录IP：{$data.ip}  上次登录时间：{$data.last_time}</p>
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th colspan="7" scope="col">信息统计</th>
+			</tr>
+			<tr class="text-c">
+				<th>统计</th>
+				<th>资讯库</th>
+				<th>图片库</th>
+				<th>产品库</th>
+				<th>用户</th>
+				<th>管理员</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-c">
+				<td>总数</td>
+				<td>92</td>
+				<td>9</td>
+				<td>0</td>
+				<td>8</td>
+				<td>20</td>
+			</tr>
+			<tr class="text-c">
+				<td>今日</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr class="text-c">
+				<td>昨日</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr class="text-c">
+				<td>本周</td>
+				<td>2</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr class="text-c">
+				<td>本月</td>
+				<td>2</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="table table-border table-bordered table-bg mt-20">
+		<thead>
+			<tr>
+				<th colspan="2" scope="col">服务器信息</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>服务器操作系统 </td>
+				<td>{$info.php_os}</td>
+			</tr>
+			<tr>
+				<th width="30%">运行环境</th>
+				<td>{$info.software}</td>
+			</tr>
+			
+			<tr>
+				<td>服务器IP地址</td>
+				<td>{$info.ip}</td>
+			</tr>
+			<tr>
+				<td>服务器域名</td>
+				<td>{$info.y_name}</td>
+			</tr>
+			<tr>
+				<td>系统类型及版本号</td>
+				<td>{$info.uname}</td>
+			</tr>
+			<tr>
+				<td>服务器的语言种类</td>
+				<td>{$info.language}</td>
+			</tr>
+			<tr>
+				<td>运行方式</td>
+				<td>{$info.php_method}</td>
+			</tr>
+			<tr>
+				<td>ThinkPHP版本</td>
+				<td>{$info.think}</td>
+			</tr>
+			<tr>
+				<td>服务器脚本超时时间 </td>
+				<td>{$info.max_execution_time}</td>
+			</tr>
+			<tr>
+				<td>上传附件限制</td>
+				<td>{$info.upload_max}</td>
+			</tr>
+			<tr>
+				<td>服务器当前时间 </td>
+				<td>{$info.time}</td>
+			</tr>
+			<tr>
+				<td>用户的浏览器信息</td>
+				<td>{$info.http}</td>
+			</tr>
+			<tr>
+				<td>虚拟内存 </td>
+				<td>{$info.space}</td>
+			</tr>
+			<tr>
+				<td>当前系统用户名 </td>
+				<td>{$data.username}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<footer class="footer mt-20">
+	<div class="container">
+		<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
+			Copyright &copy;2015-2017 深圳新友益电子商务有限公司<br>
+			本后台系统由新友益提供技术支持</p>
+	</div>
+</footer>
+
+{include file='public/base_js' /}
+
+</body>
+</html>

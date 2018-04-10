@@ -1,0 +1,53 @@
+{include file='public/header' /}
+<body>
+<div class="cl pd-20" style=" background-color:#5bacb6">
+	{eq name='$info.m_pic' value=""}
+	<img class="avatar size-XL l" src="__STATIC__/members/avatar-default.jpg">
+	{else /}
+	<img class="avatar size-XL l" src="__STATIC__/{$info.m_pic}">
+	{/eq}
+	<dl style="margin-left:80px; color:#fff">
+		<dt>
+			<span class="f-18">{$info.m_alias}</span>
+			<span class="pl-10 f-12">余额：{$info.m_money}</span>
+		</dt>
+		<dd class="pt-10 f-12" style="margin-left:0">{$info.m_words}</dd>
+	</dl>
+</div>
+<div class="pd-20">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th class="text-r" width="80">性别：</th>
+				<td>{$info.m_sex}</td>
+			</tr>
+			<tr>
+				<th class="text-r">手机：</th>
+				<td>{$info.m_phone}</td>
+			</tr>
+			<tr>
+				<th class="text-r">邮箱：</th>
+				<td>{$info.m_email}</td>
+			</tr>
+			<tr>
+				<th class="text-r">地址：</th>
+				<td>{$info.m_city}</td>
+			</tr>
+			<tr>
+				<th class="text-r">注册时间：</th>
+				<td>{$info.create_time}</td>
+			</tr>
+			<tr>
+				<th class="text-r">积分：</th>
+				<td>{$info.m_integral}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!--_footer 作为公共模版分离出去-->
+{include file='public/base_js' /}
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+</body>
+</html>

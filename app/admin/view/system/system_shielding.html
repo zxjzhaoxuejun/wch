@@ -1,0 +1,70 @@
+﻿{include file='public/header'/}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+	<span class="c-gray en">&gt;</span>
+	系统管理
+	<span class="c-gray en">&gt;</span>
+	基本设置
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+	<form id="form-add">
+		<div>
+			<textarea class="textarea" name="not_words" style="width:98%; height:300px; resize:none">{$data.not_words}</textarea>
+		</div>
+		<div class="mt-20 text-c">
+			<button class="btn btn-success radius" type="submit"><i class="icon-ok"></i> 确定</button>
+		</div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+{include file='public/base_js'/}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+<script>
+    //表单验证
+    $("#form-add").validate({
+        rules:{
+            not_words:{
+                maxlength:500,
+            },
+        },
+        onkeyup:false,
+        focusCleanup:true,
+        success:"valid",
+        submitHandler:function(form){
+            $.ajax({
+                type: 'POST',
+                url: "{:url('system/save')}",
+                data:$('#form-add').serialize(),
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==1){
+                        layer.msg(data.msg,{icon:1,time:1000},function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            window.location.href=window.location.href;
+                        });
+                    }else{
+                        layer.msg(data.msg,{icon:1,time:1000},function () {
+                            window.location.href=window.location.href;
+                        });
+                    }
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        }
+    });
+
+</script>
+
+
+
+</body>
+</html>

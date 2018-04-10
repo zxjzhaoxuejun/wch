@@ -1,0 +1,150 @@
+{include file='public/header' /}
+<body>
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="输入用户名"  name="m_alias">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" value="" placeholder="设置密码" id="password"  name="m_password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" value="" placeholder="确认密码" id="re_password" name="re_password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="m_sex" value="1" type="radio" id="sex-1" checked>
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" value="0" id="sex-2" name="m_sex">
+					<label for="sex-2">女</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-3" value="2" name="m_sex">
+					<label for="sex-3">保密</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="输入手机号"  name="m_phone">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="@" name="m_email">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">所在城市：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box">
+				<select class="select" size="1" name="m_city">
+					<option value="" selected>请选择城市</option>
+					{foreach $city as $c}
+					<option value="{$c.name}">{$c.name}</option>
+					{/foreach}
+				</select>
+				</span>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+{include file='public/base_js' /}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-member-add").validate({
+		rules:{
+            m_alias:{
+				required:true,
+				minlength:2,
+				maxlength:24
+			},
+			m_sex:{
+				required:true,
+			},
+			m_phone:{
+				required:true,
+				isMobile:true,
+			},
+			m_email:{
+				email:true,
+			},
+			m_password:{
+				required:true,
+                minlength:6,
+                maxlength:24
+			},
+            re_password:{
+                required:true,
+                equalTo: "#password"
+            },
+			
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:url(\'member/save\')}',
+                data:$('#form-member-add').serialize(),
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==1){
+                        layer.msg(data.msg,{icon:1,time:1000},function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            window.location.href=window.location.href;
+                        });
+                    }else{
+                        layer.msg(data.msg,{icon:1,time:1000},function () {
+                            window.location.href=window.location.href;
+                        });
+                    }
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+
+		}
+	});
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
