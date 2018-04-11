@@ -2,34 +2,33 @@
 <body>
 <div class="page-container">
 	<form class="form form-horizontal" id="form-banner-add">
-		<input type="hidden" name="b_id" value="{$data.b_id}">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片标题：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>理事单位名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{$data.b_name}" placeholder="图片标题"  name="b_name">
+				<input type="text" class="input-text" value="" placeholder="理事单位名"  name="name">
 			</div>
 		</div>
 
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
+			<label class="form-label col-xs-4 col-sm-2">职别：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{$data.b_tag}" placeholder="关键词"  name="b_tag">
+				<input type="text" class="input-text" value="" placeholder="职别"  name="level">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">图片摘要：</label>
+			<label class="form-label col-xs-4 col-sm-2">简介：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="b_keywords" cols="" rows="" class="textarea"  placeholder="图片摘要说点什么...">{$data.b_keywords}</textarea>
+				<textarea name="describe" cols="" rows="" class="textarea"  placeholder="介绍点什么..."></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
 		</div>
 		<div class="row cl">
 			<link rel="stylesheet" href="__STATIC__/lib/webuploader/css/webuploader.css" />
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片上传：</label>
+			<label class="form-label col-xs-4 col-sm-2">公司logo：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<div id="uploader" class="wu-example">
 					<div class="btns-check">
-						<input  type="text" name="b_img" value="{$data.b_img}" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图">
+						<input  type="text" name="pics" value="" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图">
 						<div id="picker" class="webuploader-container" >
 							<div class="webuploader-pick" name="file">选择文件</div>
 						</div>
@@ -38,7 +37,7 @@
 					<!--用来存放文件信息-->
 					<div id="thelist" class="uploader-list"></div>
 				</div>
-				<img src="__STATIC__/{$data.b_img}" id="imgThumb"  style="width: 120px;height: 80px;margin-top: 4px;">
+				<img src="" id="imgThumb"  style="width: 120px;height: 80px;display: none;margin-top: 4px;">
 			</div>
 		</div>
 		<div class="row cl">
@@ -75,18 +74,10 @@ $(function(){
     //表单验证
     $("#form-banner-add").validate({
         rules:{
-            b_name:{
+            name:{
                 required:true,
             },
-            b_img:{
-                required:true,
-            },
-            b_tag:{
-                maxlength:200,
-            },
-            b_keywords:{
-                maxlength:200,
-            }
+
         },
         onkeyup:false,
         focusCleanup:true,
@@ -94,7 +85,7 @@ $(function(){
         submitHandler:function(form){
             $.ajax({
                 type: 'POST',
-                url: "{:url('banner/update')}",
+                url: "{:url('partisan/save')}",
                 data:$('#form-banner-add').serialize(),
                 dataType: 'json',
                 success: function(data){
@@ -137,7 +128,7 @@ $(function(){
             // swf文件路径
             swf: "__STATIC__/lib/webuploader/script/Uploader.swf",
             // 文件接收服务端。
-            server: "{:url('banner/upload')}",
+            server: "{:url('partisan/upload')}",
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',
