@@ -11,14 +11,65 @@ use app\admin\model\Category as CategoryModel;
 class Article extends Base
 {
     /**
-     * 显示资讯列表
-     *
+     * 显示业界动态资讯列表
+     *cate_id=2
      * @return \think\Response
      */
-    public function index()
+    public function industry()
     {
         //
-        $data= ArticleModel::all();
+        $data= ArticleModel::all(function ($query){
+            $query->where('cate_id=2');
+        });
+        $this->assign('data',$data);
+
+        return $this->fetch('article_list');
+    }
+
+
+    /**
+     * 显示协会活动资讯列表
+     *cate_id=3
+     * @return \think\Response
+     */
+    public function activity()
+    {
+        //
+        $data= ArticleModel::all(function ($query){
+            $query->where('cate_id=3');
+        });
+        $this->assign('data',$data);
+
+        return $this->fetch('article_list');
+    }
+
+    /**
+     * 显示协会新闻资讯列表
+     *cate_id=4
+     * @return \think\Response
+     */
+    public function x_news()
+    {
+        //
+        $data= ArticleModel::all(function ($query){
+            $query->where('cate_id=4');
+        });
+        $this->assign('data',$data);
+
+        return $this->fetch('article_list');
+    }
+
+    /**
+     * 显示政策信息资讯列表
+     *cate_id=5
+     * @return \think\Response
+     */
+    public function z_info()
+    {
+        //
+        $data= ArticleModel::all(function ($query){
+            $query->where('cate_id=5');
+        });
         $this->assign('data',$data);
 
         return $this->fetch('article_list');

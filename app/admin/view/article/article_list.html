@@ -8,7 +8,7 @@
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
-					<th width="80">ID</th>
+					<th width="80">序号</th>
 					<th width="200">标题</th>
 					<th width="80">编辑者</th>
 					<th width="80">来源</th>
@@ -19,10 +19,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				{foreach $data as $v}
+				{foreach $data as $i=>$v}
 				<tr class="text-c">
 					<td><input type="checkbox" value="{$v.id}" name="del"></td>
-					<td>{$v.id}</td>
+					<td>{++$i}</td>
 					<td class="text-l">{$v.art_title}</td>
 					<td>{$v.art_author}</td>
 					<td>{$v.art_sources}</td>
@@ -30,22 +30,22 @@
 					<td>{$v.art_view}</td>
 					<td class="td-status">
 						{equal name='$v.art_statue' value='0'}
-						    <span class="label label-success radius" name="0">草稿</span>
+						    <span class="label label-success radius" name="0">默认</span>
 						{/equal}
 						{equal name='$v.art_statue' value='1'}
-						<span class="label label-success radius" name="1">审核</span>
+						<span class="label label-success radius" name="1">推荐</span>
 						{/equal}
 						{equal name='$v.art_statue' value='2'}
-						<span class="label label-success radius" name="2">通过</span>
+						<span class="label label-success radius" name="2">已推荐</span>
 						{/equal}
 						{equal name='$v.art_statue' value='3'}
-						<span class="label label-danger radius" name="3">未通过</span>
+						<span class="label label-danger radius" name="3">未推荐</span>
 						{/equal}
 						{equal name='$v.art_statue' value='4'}
-						<span class="label label-success radius" name="4">申请上线</span>
+						<span class="label label-success radius" name="4">热门</span>
 						{/equal}
 						{equal name='$v.art_statue' value='5'}
-						<span class="label label-success radius" name="5">已发布</span>
+						<span class="label label-success radius" name="5">热门</span>
 						{/equal}
 						{equal name='$v.art_statue' value='6'}
 						<span class="label label-danger radius" name="6">已下架</span>
@@ -54,19 +54,19 @@
 					</td>
 					<td class="f-14 td-manage">
 						{equal name='$v.art_statue' value='0'}
-						<a style="text-decoration:none" onClick="article_shenhe(this,{$v.id})" href="javascript:;" title="审核">审核</a>
+						<a style="text-decoration:none" onClick="article_shenhe(this,{$v.id})" href="javascript:;" title="推荐">推荐</a>
 						{/equal}
 						{equal name='$v.art_statue' value='2'}
-						<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="申请上线">申请上线</a>
+						<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="热门">已推荐</a>
 						{/equal}
 						{equal name='$v.art_statue' value='3'}
-						<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="申请上线">申请上线</a>
+						<a style="text-decoration:none" onClick="article_shenhe(this,{$v.id})" href="javascript:;" title="推荐">未推荐</a>
 						{/equal}
 						{equal name='$v.art_statue' value='5'}
 						<a style="text-decoration:none" onClick="article_stop(this,{$v.id})" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>
 						{/equal}
 						{equal name='$v.art_statue' value='6'}
-						<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>
+						<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="热门"><i class="Hui-iconfont">&#xe603;</i></a>
 						{/equal}
 						<a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','{:url(\'article/edit\')}'+'?id='+{$v.id})" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
 						<a style="text-decoration:none" class="ml-5" onClick="article_del(this,{$v.id})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -161,25 +161,25 @@ function datadel(){
 
 /*资讯-审核*/
 function article_shenhe(obj,id){
-	layer.confirm('审核文章？', {
-		btn: ['通过','不通过','取消'], 
+	layer.confirm('推荐文章？', {
+		btn: ['推荐','不推荐','取消'],
 		shade: false,
 		closeBtn: 0
 	},
 	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="2">通过</span>');
+		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="推荐">推荐</a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="2">推荐</span>');
 		$(obj).remove();
         var _this=$(obj).parents("tr").find(".td-status");
-		layer.msg('通过', {icon:6,time:1000},function () {
+		layer.msg('推荐', {icon:6,time:1000},function () {
             status(2,id);
         });
 	},
 	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius" name="3">未通过</span>');
+		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="推荐">推荐</a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius" name="3">不推荐</span>');
         var _this=$(obj);
-    	layer.msg('未通过', {icon:5,time:1000},function () {
+    	layer.msg('不推荐', {icon:5,time:1000},function () {
             status(3,id);
         });
 	});
@@ -188,7 +188,7 @@ function article_shenhe(obj,id){
 /*资讯-下架*/
 function article_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="热门"><i class="Hui-iconfont">&#xe603;</i></a>');
 		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius" name="6">已下架</span>');
 		$(obj).remove();
 		var _this=$(obj);
@@ -209,9 +209,9 @@ function status(num,id) {
 }
 /*资讯-发布*/
 function article_start(obj,id){
-	layer.confirm('确认要发布吗？',function(index){
+	layer.confirm('确认要发布热门文章吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="5">已发布</span>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="5">热门</span>');
 		$(obj).remove();
         var _this=$(obj);
 		layer.msg('已发布!',{icon: 6,time:1000},function () {

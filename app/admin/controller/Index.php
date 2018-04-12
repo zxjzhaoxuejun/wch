@@ -4,6 +4,8 @@ namespace app\admin\controller;
 use app\admin\common\Base;
 use app\admin\model\SystemLog;
 use app\admin\model\TbAdmin;
+use think\Cache;
+use think\Log;
 
 class Index extends Base
 {
@@ -21,6 +23,24 @@ class Index extends Base
         }
         $this->assign('num',$num);
         return $this->fetch();
+    }
+
+    /**
+     * 清除模版缓存 不删除cache目录
+     */
+    public function clear_sys_cache() {
+        Cache::clear();
+        Log::clear();
+        array_map('unlink', glob(TEMP_PATH . '/*.php'));
+        rmdir(TEMP_PATH);
+
+        $state = [
+            'msg' => '清除成功',
+            'code' => 1
+        ];
+        return $state;
+
+//        $this->success( '清除成功', 'index/index' );
     }
 
 //    欢迎页面

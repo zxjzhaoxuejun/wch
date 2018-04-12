@@ -4,18 +4,18 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:;">后台系统管理</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="javascript:;">管理</a>
 			<!--<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>-->
-			<!--<nav class="nav navbar-nav">-->
-				<!--<ul class="cl">-->
-					<!--<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>-->
+			<nav class="nav navbar-nav">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover"><a href="javascript:;" onClick="clear_fun()" class="dropDown_A"><i class="Hui-iconfont">&#xe6e2;</i> 清理缓存 </a>
 						<!--<ul class="dropDown-menu menu radius box-shadow">-->
-							<!--<li><a href="javascript:;" onclick="article_add('添加资讯','{:url(\'article/create\')}')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>-->
+							<!--<li><a href="javascript:;" onclick="article_add('添加资讯','{:url(\'index/clear_sys_cache\')}')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>-->
 							<!--<li><a href="javascript:;" onclick="picture_add('添加图片','{:url(\'banner/create\')}')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>-->
 							<!--<li><a href="javascript:;" onclick="product_add('添加产品','{:url(\'product/create\')}')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>-->
 							<!--<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>-->
-					<!--</ul>-->
-				<!--</li>-->
-			<!--</ul>-->
-		<!--</nav>-->
+					    <!--</ul>-->
+					</li>
+			</ul>
+		</nav>
 		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>管理员</li>
@@ -102,6 +102,25 @@ function myselfinfo(title,url){
         area: ['600px','400px']
     });
 }
+
+/*缓存*/
+function clear_fun(){
+    layer.confirm('你确定要清除缓存吗？', {icon: 3, title:'提示'}, function(index){
+		$.post("{:url('index/clear_sys_cache')}",function (data) {
+			if(data.code==1){
+				layer.msg(data.msg,{icon:1,time:1000},function () {
+					window.location.href=window.location.href;
+				});
+			}else{
+				layer.msg(data.msg,{icon:1,time:1000},function () {
+					window.location.href=window.location.href;
+				});
+			}
+		})
+        layer.close(index);
+    })
+}
+
 function change_password(title,url,id,w,h){
     layer_show(title,url,w,h);
 }

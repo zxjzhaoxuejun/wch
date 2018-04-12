@@ -8,6 +8,7 @@
 namespace app\admin\common;
 
 use app\admin\model\Province;
+use think\Cache;
 use think\Controller;
 use think\Session;
 
@@ -27,6 +28,7 @@ class Base extends Controller{
 
     }
 
+
 //    未登录
     public function isLogin()
     {
@@ -41,9 +43,6 @@ class Base extends Controller{
 //            $this->error('已登录，请不要重复登录！','Index/index');
 //        }
 //    }
-
-
-
 
 
     
