@@ -10,7 +10,9 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+              <a class="navbar-brand" href="index.html">
+                  <img class="logo-img" src="__STATIC__/index/imgs/logo.png" alt="logo">
+              </a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -127,15 +129,15 @@
                   <!-- 轮播（Carousel）项目 -->
                   <div class="carousel-inner">
                       <div class="item active">
-                          <img src="__STATIC__/index/imgs/banner_1.jpg" alt="banner_1">
+                          <img src="__STATIC__/index/imgs/1.jpg" alt="banner_1">
                           <div class="carousel-caption">标题 1</div>
                       </div>
                       <div class="item">
-                          <img src="__STATIC__/index/imgs/banner_2.jpg" alt="banner_2">
+                          <img src="__STATIC__/index/imgs/2.jpg" alt="banner_2">
                           <div class="carousel-caption">标题 2</div>
                       </div>
                       <div class="item">
-                          <img src="__STATIC__/index/imgs/banner_1.jpg" alt="banner_3">
+                          <img src="__STATIC__/index/imgs/1.jpg" alt="banner_3">
                           <div class="carousel-caption">标题 3</div>
                       </div>
                   </div>
@@ -151,36 +153,138 @@
               </div>
           </div>
           <div class="col-md-6 col-sm-12">
-              <ul class="media-list">
-                  <li class="media">
-                      <a class="media-left" href="#">
-                          <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
-                               alt="通用的占位符图像">
-                      </a>
-                      <div class="media-body">
-                          <h4 class="media-heading">媒体标题</h4>
-                          <p>这是一些示例文本。这是一些示例文本。
-                              这是一些示例文本。这是一些示例文本。
-                              这是一些示例文本。这是一些示例文本。
-                              这是一些示例文本。这是一些示例文本。
-                              这是一些示例文本。这是一些示例文本。</p>
-                      </div>
-                  </li>
-              </ul>
-              <ul class="list-group">
-                  <li class="list-group-item"><a href="#">免费域名注册</a></li>
-                  <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
-                  <li class="list-group-item"><a href="#">图像的数量</a></li>
-                  <li class="list-group-item">
-                      <span class="badge">新</span>
-                      <a href="#">24*7 支持</a>
-                  </li>
-                  <li class="list-group-item"><a href="#">每年更新成本</a></li>
-                  <li class="list-group-item">
-                      <span class="badge">新</span>
-                      <a href="#">折扣优惠</a>
-                  </li>
-              </ul>
+              <div class="new-nav">
+                  <div class="title-tag">
+                      <span class="glyphicon glyphicon-book"></span>
+                      <a href="">资讯中心</a>
+                  </div>
+                  <div class="new-nav-list">
+                      <a href="#" class="new-list-items">业界动态</a>
+                      <a href="#" class="new-list-items">协会动态</a>
+                      <a href="#" class="new-list-items">协会新闻</a>
+                      <a href="#" class="new-list-items">政策信息</a>
+                  </div>
+              </div>
+
+              <!--业界动态-->
+              <div class="new-1" id="news01">
+                  <ul class="media-list">
+                      <li class="media">
+                          <a class="media-left" href="#">
+                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
+                                   alt="通用的占位符图像">
+                          </a>
+                          <div class="media-body">
+                              <h4 class="media-heading">媒体标题</h4>
+                              <p>这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。</p>
+                          </div>
+                      </li>
+                  </ul>
+                  <ul class="list-group">
+                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
+                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
+                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      <li class="list-group-item">
+                          <span class="badge">新</span>
+                          <a href="#">24*7 支持</a>
+                      </li>
+                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                  </ul>
+              </div>
+
+              <!--协会动态-->
+              <div class="new-1" style="display: none;" id="news02">
+                  <ul class="media-list">
+                      <li class="media">
+                          <a class="media-left" href="#">
+                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
+                                   alt="通用的占位符图像">
+                          </a>
+                          <div class="media-body">
+                              <h4 class="media-heading">媒体标题</h4>
+                              <p>这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。</p>
+                          </div>
+                      </li>
+                  </ul>
+                  <ul class="list-group">
+                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
+                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
+                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      <li class="list-group-item">
+                          <span class="badge">新</span>
+                          <a href="#">24*7 支持</a>
+                      </li>
+                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                  </ul>
+              </div>
+
+              <!--协会新闻-->
+              <div class="new-1" style="display: none;" id="news03">
+                  <ul class="media-list" style="display: none;">
+                      <li class="media">
+                          <a class="media-left" href="#">
+                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
+                                   alt="通用的占位符图像">
+                          </a>
+                          <div class="media-body">
+                              <h4 class="media-heading">媒体标题</h4>
+                              <p>这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。</p>
+                          </div>
+                      </li>
+                  </ul>
+                  <ul class="list-group">
+                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
+                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
+                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      <li class="list-group-item">
+                          <span class="badge">新</span>
+                          <a href="#">24*7 支持</a>
+                      </li>
+                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                  </ul>
+              </div>
+
+              <!--政策信息-->
+              <div class="new-1" style="display: none;" id="news04">
+                  <ul class="media-list">
+                      <li class="media">
+                          <a class="media-left" href="#">
+                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
+                                   alt="通用的占位符图像">
+                          </a>
+                          <div class="media-body">
+                              <h4 class="media-heading">媒体标题</h4>
+                              <p>这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。
+                                  这是一些示例文本。这是一些示例文本。</p>
+                          </div>
+                      </li>
+                  </ul>
+                  <ul class="list-group">
+                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
+                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
+                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      <li class="list-group-item">
+                          <span class="badge">新</span>
+                          <a href="#">24*7 支持</a>
+                      </li>
+                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                  </ul>
+              </div>
           </div>
       </div>
 
@@ -294,7 +398,7 @@
       <!--专家顾问-->
       <div class="row">
           <div class="col-lg-12">
-              <h2 class="page-header">专家顾问</h2>
+              <h2 class="page-header">专家顾问<a href="#" class="more-class">MORE&gt;&gt;</a></h2>
           </div>
           <div class="col-md-4 col-sm-6">
               <a href="portfolio-item.html">
