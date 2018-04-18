@@ -17,66 +17,26 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right top-navbar-r">
-                  <li>
-                      <a href="about.html">首页</a>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于协会 <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">协会简介</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">组织架构</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">协会领导</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">专家顾问</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">理事单位</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">分支机构</a></li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a href="contact.html">会员服务</a>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">会员展示 <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">会员单位</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">个人会员</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">加入协会 <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">入会指南</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">会员申请</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">资讯中心 <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">业界动态</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">协会活动</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">协会新闻</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">政策信息</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">双创学院 <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">区块链类培训</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">品牌类培训</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">互联网类培训</a></li>
-                      </ul>
-                  </li>
+                  {foreach $navList as $i=>$v}
+                    {eq name="$v.nav_pid" value="0"}
+                      {eq name="$v.level" value="0"}
+                          <li>
+                              <a href="{$v.nav_url}">{$v.nav_name}</a>
+                          </li>
+                      {else/}
+                          <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$v.nav_name} <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                  {foreach $v.list as $k=>$n}
+                                  <li><a href="{$n.nav_url}">{$n.nav_name}</a></li>
+                                  <li class="divider"></li>
+                                  {/foreach}
+                              </ul>
+                          </li>
+                      {/eq}
+                  {else/}
+                  {/eq}
+                  {/foreach}
               </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -168,121 +128,103 @@
 
               <!--业界动态-->
               <div class="new-1" id="news01">
+
                   <ul class="media-list">
-                      <li class="media">
+                      {foreach $yjNews as $i=>$n}
+                      {eq name="$i" value="0"}
+                      <li class="media" style="margin-bottom: 10px;">
                           <a class="media-left" href="#">
-                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
-                                   alt="通用的占位符图像">
+                              <img class="media-object" src="__STATIC__/{$n.art_thumb}"
+                                   alt="缩略图像">
                           </a>
                           <div class="media-body">
-                              <h4 class="media-heading">媒体标题</h4>
-                              <p>这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。</p>
+                              <h4 class="media-heading">{$n.art_title|mb_substr=0,15,'utf-8'}</h4>
+                              <p>{$n.abstract|mb_substr=0,30,'utf-8'}</p>
                           </div>
                       </li>
-                  </ul>
-                  <ul class="list-group">
-                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
-                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
-                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      {else/}
                       <li class="list-group-item">
-                          <span class="badge">2018-04-17</span>
-                          <a href="#">24*7 支持</a>
+                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
-                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                      {/eq}
+                      {/foreach}
                   </ul>
+
               </div>
 
               <!--协会动态-->
               <div class="new-1" style="display: none;" id="news02">
                   <ul class="media-list">
-                      <li class="media">
+                      {foreach $xhNews as $i=>$n}
+                      {eq name="$i" value="0"}
+                      <li class="media" style="margin-bottom: 10px;">
                           <a class="media-left" href="#">
-                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
-                                   alt="通用的占位符图像">
+                              <img class="media-object" src="__STATIC__/{$n.art_thumb}"
+                                   alt="缩略图像">
                           </a>
                           <div class="media-body">
-                              <h4 class="media-heading">媒体标题</h4>
-                              <p>这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。</p>
+                              <h4 class="media-heading">{$n.art_title|mb_substr=0,15,'utf-8'}</h4>
+                              <p>{$n.abstract|mb_substr=0,30,'utf-8'}</p>
                           </div>
                       </li>
-                  </ul>
-                  <ul class="list-group">
-                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
-                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
-                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      {else/}
                       <li class="list-group-item">
-                          <span class="badge">新</span>
-                          <a href="#">24*7 支持</a>
+                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
-                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                      {/eq}
+                      {/foreach}
                   </ul>
               </div>
 
               <!--协会新闻-->
               <div class="new-1" style="display: none;" id="news03">
                   <ul class="media-list">
-                      <li class="media">
+                      {foreach $news as $i=>$n}
+                      {eq name="$i" value="0"}
+                      <li class="media" style="margin-bottom: 10px;">
                           <a class="media-left" href="#">
-                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
-                                   alt="通用的占位符图像">
+                              <img class="media-object" src="__STATIC__/{$n.art_thumb}"
+                                   alt="缩略图像">
                           </a>
                           <div class="media-body">
-                              <h4 class="media-heading">媒体标题</h4>
-                              <p>这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。</p>
+                              <h4 class="media-heading">{$n.art_title|mb_substr=0,15,'utf-8'}</h4>
+                              <p>{$n.abstract|mb_substr=0,30,'utf-8'}</p>
                           </div>
                       </li>
-                  </ul>
-                  <ul class="list-group">
-                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
-                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
-                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      {else/}
                       <li class="list-group-item">
-                          <span class="badge">新</span>
-                          <a href="#">24*7 支持</a>
+                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
-                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                      {/eq}
+                      {/foreach}
                   </ul>
               </div>
 
               <!--政策信息-->
               <div class="new-1" style="display: none;" id="news04">
                   <ul class="media-list">
-                      <li class="media">
+                      {foreach $zcNews as $i=>$n}
+                      {eq name="$i" value="0"}
+                      <li class="media" style="margin-bottom: 10px;">
                           <a class="media-left" href="#">
-                              <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
-                                   alt="通用的占位符图像">
+                              <img class="media-object" src="__STATIC__/{$n.art_thumb}"
+                                   alt="缩略图像">
                           </a>
                           <div class="media-body">
-                              <h4 class="media-heading">媒体标题</h4>
-                              <p>这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。
-                                  这是一些示例文本。这是一些示例文本。</p>
+                              <h4 class="media-heading">{$n.art_title|mb_substr=0,15,'utf-8'}</h4>
+                              <p>{$n.abstract|mb_substr=0,30,'utf-8'}</p>
                           </div>
                       </li>
-                  </ul>
-                  <ul class="list-group">
-                      <li class="list-group-item"><a href="#">免费域名注册</a></li>
-                      <li class="list-group-item"><a href="#">免费 Window 空间托管</a></li>
-                      <li class="list-group-item"><a href="#">图像的数量</a></li>
+                      {else/}
                       <li class="list-group-item">
-                          <span class="badge">新</span>
-                          <a href="#">24*7 支持</a>
+                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
-                      <li class="list-group-item"><a href="#">每年更新成本</a></li>
+                      {/eq}
+                      {/foreach}
                   </ul>
               </div>
           </div>
@@ -383,7 +325,8 @@
                   双创学院
                   <a href="#" class="more-class">MORE&gt;&gt;</a>
               </h1>
-              <ul class="media-list">
+              <div  style="height: 380px;overflow: hidden">
+                 <ul class="media-list">
                   <li class="media">
                       <a class="media-left" href="#">
                           <img class="media-object" src="__STATIC__/index/imgs/banner_1.jpg"
@@ -430,6 +373,7 @@
                   </li>
 
               </ul>
+              </div>
           </div>
       </div>
 
@@ -440,102 +384,99 @@
                   协会服务
               </h1>
 
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-random img-icon"></span>
+              <div class="row" style="padding: 0 15px;">
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-random img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">政企桥梁</h4>
+                              {$services.bridge}
+                          </div>
                       </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">政企桥梁</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-compressed img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">资源对接</h4>
+                              {$services.resource}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-transfer img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">双创辅助</h4>
+                              {$services.assist}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-level-up img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">项目申请</h4>
+                              {$services.project}
+                          </div>
                       </div>
                   </div>
               </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-compressed img-icon"></span>
+              <div class="row" style="padding: 0 15px;">
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-cutlery img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">投融服务</h4>
+                              {$services.investment}
+                          </div>
                       </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">资源对接</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-blackboard img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">会议会展</h4>
+                              {$services.meeting}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-eye-open img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">年度评选</h4>
+                              {$services.appraise}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="media">
+                          <div class="media-left">
+                              <span class="glyphicon glyphicon-share img-icon"></span>
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">宣传推广</h4>
+                              {$services.publicity}
+                          </div>
                       </div>
                   </div>
               </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-transfer img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">双创辅助</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-level-up img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">项目申请</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-cutlery img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">投融服务</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-blackboard img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">会议会展</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-eye-open img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">年度评选</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="media">
-                      <div class="media-left">
-                          <span class="glyphicon glyphicon-share img-icon"></span>
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">宣传推广</h4>
-                          这是一些示例文本。这是一些示例文本。
-                          这是一些示例文本。这是一些示例文本。
-                      </div>
-                  </div>
-              </div>
+
           </div>
       </div>
 
@@ -612,16 +553,9 @@
               <h2 class="page-header">友情链接</h2>
           </div>
           <ul class="nav nav-pills">
-              <li><a href="#">中安信业</a></li>
-              <li><a href="#">云梦网</a></li>
-              <li><a href="#">个人带块</a></li>
-              <li><a href="#">VB.Net</a></li>
-              <li><a href="#">个人带块</a></li>
-              <li><a href="#">个人带块</a></li>
-              <li><a href="#">iOS</a></li>
-              <li><a href="#">公共模版分离</a></li>
-              <li><a href="#">Java</a></li>
-              <li><a href="#">公共模版分离</a></li>
+              {foreach $links as $l}
+              <li><a href="{$l.url}" title="{$l.alias}">{$l.name}</a></li>
+              {/foreach}
           </ul>
       </div>
   </div>
