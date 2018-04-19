@@ -85,7 +85,7 @@ $(function(){
         submitHandler:function(form){
             $.ajax({
                 type: 'POST',
-                url: "{:url('leader/save')}",
+                url: "{:url('counselor/save')}",
                 data:$('#form-banner-add').serialize(),
                 dataType: 'json',
                 success: function(data){
@@ -128,7 +128,7 @@ $(function(){
             // swf文件路径
             swf: "__STATIC__/lib/webuploader/script/Uploader.swf",
             // 文件接收服务端。
-            server: "{:url('leader/upload')}",
+            server: "{:url('counselor/upload')}",
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',

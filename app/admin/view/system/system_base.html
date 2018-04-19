@@ -38,6 +38,22 @@
 						<input type="text" name="abstract" placeholder="空制在80个汉字，160个字符以内" value="{$data.abstract}" class="input-text">
 					</div>
 				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						<span class="c-red">*</span>
+						公司地址：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" name="address" placeholder="空制在80个汉字，160个字符以内" value="{$data.address}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						<span class="c-red">*</span>
+						联系电话：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" name="tel" placeholder="座机、办公电话" value="{$data.tel}" class="input-text">
+					</div>
+				</div>
 				<!--<div class="row cl">-->
 					<!--<label class="form-label col-xs-4 col-sm-2">-->
 						<!--<span class="c-red">*</span>-->
@@ -122,6 +138,14 @@ $(function(){
                 maxlength:100,
             },
             abstract:{
+                required:true,
+                maxlength:200,
+            },
+            tel:{
+                required:true,
+                maxlength:18,
+            },
+            address:{
                 required:true,
                 maxlength:200,
             },
