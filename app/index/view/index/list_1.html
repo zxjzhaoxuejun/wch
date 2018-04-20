@@ -1,0 +1,42 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<div class="banner-pic">
+    <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
+</div>
+<div class="container list-mode">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-nav">
+                <ul class="ul-left-mode">
+                    <li class="li-title">{$pageTitle}</li>
+                    {foreach $leftNav as $i=>$l}
+                        {eq name="$navId" value="$i"}
+                            <li class="li-nav active"><a href="{:url('about_us')}?id={$i+2}">{$l}</a></li>
+                        {else\}
+                            <li class="li-nav"><a href="{:url('about_us')}?id={$i+2}">{$l}</a></li>
+                        {/eq}
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <div class="page-position">
+               <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
+               <a href="{:url('index')}">首页</a>
+               &gt;&gt;
+               <a href="#">{$navTitle}</a>
+           </div>
+            <div class="article" style="background: #fff;padding: 15px 10px;">
+                {$con}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{include file='public/footer' /}

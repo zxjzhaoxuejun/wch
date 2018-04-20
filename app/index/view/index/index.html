@@ -1,49 +1,5 @@
 {include file='public/header' /}
-<body>
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="index.html">
-                  <img class="logo-img" src="__STATIC__/index/imgs/logo_1.png" alt="logo">
-              </a>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right top-navbar-r">
-                  {foreach $navList as $i=>$v}
-                    {eq name="$v.nav_pid" value="0"}
-                      {eq name="$v.level" value="0"}
-                          <li>
-                              <a href="{$v.nav_url}">{$v.nav_name}</a>
-                          </li>
-                      {else/}
-                          <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$v.nav_name} <b class="caret"></b></a>
-                              <ul class="dropdown-menu">
-                                  {foreach $v.list as $k=>$n}
-                                  <li><a href="{$n.nav_url}">{$n.nav_name}</a></li>
-                                  <li class="divider"></li>
-                                  {/foreach}
-                              </ul>
-                          </li>
-                      {/eq}
-                  {else/}
-                  {/eq}
-                  {/foreach}
-              </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container -->
-  </nav>
-
+{include file='public/nav' /}
   <div id="myCarousel" class="carousel slide banner">
       <!-- 轮播（Carousel）指标 -->
       <ol class="carousel-indicators">
@@ -95,14 +51,14 @@
                       {foreach $hotNews as $i=>$v}
                          {eq name="$i" value="0"}
                           <div class="item active">
-                              <a href="#">
+                              <a href="{:url('index/details')}?id={$v.id}">
                               <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}">
                               <div class="carousel-caption" style="right: 0;left: 0;text-align: left;padding-left:10px;bottom: 0;background: #000;opacity: 0.5;">{$v.art_title|mb_substr=0,15,'utf-8'}</div>
                               </a>
                           </div>
                           {else\}
                           <div class="item">
-                              <a href="#">
+                              <a href="{:url('index/details')}?id={$v.id}">
                                   <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}">
                                   <div class="carousel-caption" style="right: 0;left: 0;padding-left:10px;text-align: left;bottom: 0;background: #000;opacity: 0.5;">{$v.art_title|mb_substr=0,15,'utf-8'}</div>
                               </a>
@@ -126,7 +82,7 @@
               <div class="new-nav">
                   <div class="title-tag">
                       <span class="glyphicon glyphicon-book" style="color:#1779b8"></span>
-                      <a href="#" class="title-name">资讯中心</a>
+                      <a href="{:url('new_list')}?id=2" class="title-name">资讯中心</a>
                   </div>
                   <div class="new-nav-list">
                       <a href="javascript:;" class="new-list-items active-no">业界动态 | </a>
@@ -143,7 +99,7 @@
                       {foreach $yjNews as $i=>$n}
                       {eq name="$i" value="0"}
                       <li class="media" style="margin-bottom: 10px;">
-                          <a class="media-left" href="#">
+                          <a class="media-left" href="{:url('details')}?id={$n.id}">
                               <img class="media-object" src="__STATIC__/{$n.art_thumb}"
                                    alt="缩略图像">
                           </a>
@@ -155,7 +111,7 @@
                       {else/}
                       <li class="list-group-item">
                           <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
+                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -169,7 +125,7 @@
                       {foreach $xhNews as $i=>$n}
                       {eq name="$i" value="0"}
                       <li class="media" style="margin-bottom: 10px;">
-                          <a class="media-left" href="#">
+                          <a class="media-left" href="{:url('details')}?id={$n.id}">
                               <img class="media-object" src="__STATIC__/{$n.art_thumb}"
                                    alt="缩略图像">
                           </a>
@@ -181,7 +137,7 @@
                       {else/}
                       <li class="list-group-item">
                           <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
+                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -194,7 +150,7 @@
                       {foreach $news as $i=>$n}
                       {eq name="$i" value="0"}
                       <li class="media" style="margin-bottom: 10px;">
-                          <a class="media-left" href="#">
+                          <a class="media-left" href="{:url('details')}?id={$n.id}">
                               <img class="media-object" src="__STATIC__/{$n.art_thumb}"
                                    alt="缩略图像">
                           </a>
@@ -206,7 +162,7 @@
                       {else/}
                       <li class="list-group-item">
                           <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
+                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -219,7 +175,7 @@
                       {foreach $zcNews as $i=>$n}
                       {eq name="$i" value="0"}
                       <li class="media" style="margin-bottom: 10px;">
-                          <a class="media-left" href="#">
+                          <a class="media-left" href="{:url('details')}?id={$n.id}">
                               <img class="media-object" src="__STATIC__/{$n.art_thumb}"
                                    alt="缩略图像">
                           </a>
@@ -231,7 +187,7 @@
                       {else/}
                       <li class="list-group-item">
                           <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="#">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
+                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,15,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -486,7 +442,7 @@
       <!--专家顾问-->
       <div class="row">
           <div class="col-lg-12 col-md-12 no-col">
-              <h2 class="page-header">专家顾问<a href="#" class="more-class">MORE&gt;&gt;</a></h2>
+              <h2 class="page-header">专家顾问<a href="{:url('about_us')}?id=5" class="more-class">MORE&gt;&gt;</a></h2>
               {foreach $counselor as $c}
               <div class="col-md-4 col-sm-6">
                   <a href="#">
@@ -524,21 +480,4 @@
           </ul>
       </div>
   </div>
-
-  <footer>
-      <div class="container">
-          <div class="address">
-              <span>{$copyRight.address}</span>
-              <span>电话：{$copyRight.tel}</span>
-              <span>Email：{$copyRight.email}</span>
-          </div>
-          <div class="copy-right">
-              <p>{$copyRight.copy}<a href="#">{$copyRight.icp}</a></p>
-          </div>
-
-      </div>
-  </footer>
-  <!--_footer 作为公共模版分离出去-->
-  {include file='public/base_js' /}
-</body>
-</html>
+{include file='public/footer' /}

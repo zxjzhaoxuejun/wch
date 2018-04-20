@@ -1,0 +1,20 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<div class="container" style="margin-top: 80px;min-height: 500px;">
+    <article class="art-mode">
+        <div class="details-mode">
+            <h2>{$con.art_title}</h2>
+            <div class="aut">
+                <span>发布时间：{$con.create_time}</span>
+                <span>文章来源：{$con.art_sources}</span>
+                <span>浏览量：{$con.art_view}</span>
+            </div>
+        </div>
+        <div class="article">
+            {$con.art_content}
+        </div>
+
+    </article>
+</div>
+
+{include file='public/footer' /}

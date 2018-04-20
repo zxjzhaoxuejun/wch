@@ -11,6 +11,19 @@
 		</div>
 
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="type" class="select">
+					{eq name="$data.type" value="0"}
+					<option value="0" selected>首页轮播图</option>
+					{else\}
+					<option value="1" selected>详情banner图</option>
+					{/eq}
+				</select>
+				</span> </div>
+		</div>
+
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="{$data.b_tag}" placeholder="关键词"  name="b_tag">

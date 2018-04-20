@@ -1,0 +1,43 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <img class="logo-img" src="__STATIC__/index/imgs/logo_1.png" alt="logo">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right top-navbar-r">
+                {foreach $navList as $i=>$v}
+                {eq name="$v.nav_pid" value="0"}
+                {eq name="$v.level" value="0"}
+                <li>
+                    <a href="{:url($v.nav_url)}">{$v.nav_name}</a>
+                </li>
+                {else/}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$v.nav_name} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {foreach $v.list as $k=>$n}
+                        <li><a href="{:url($n.nav_url)}">{$n.nav_name}</a></li>
+                        <li class="divider"></li>
+                        {/foreach}
+                    </ul>
+                </li>
+                {/eq}
+                {else/}
+                {/eq}
+                {/foreach}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>

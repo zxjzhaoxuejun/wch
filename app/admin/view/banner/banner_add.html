@@ -8,6 +8,16 @@
 				<input type="text" class="input-text" value="" placeholder="图片标题"  name="b_name">
 			</div>
 		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="type" class="select">
+					<option value="">请选择</option>
+					<option value="0">首页轮播图</option>
+					<option value="1">详情banner图</option>
+				</select>
+				</span> </div>
+		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
@@ -75,6 +85,9 @@ $(function(){
     $("#form-banner-add").validate({
         rules:{
             b_name:{
+                required:true,
+            },
+            type:{
                 required:true,
             },
             b_img:{
