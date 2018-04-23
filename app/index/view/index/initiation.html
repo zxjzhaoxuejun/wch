@@ -1,6 +1,6 @@
 {include file='public/header' /}
 {include file='public/nav' /}
-<!--协会简介、组织架构、协会指南、分支机构-->
+<!--协会指南-->
 <div class="banner-pic">
     <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
 </div>
@@ -12,9 +12,9 @@
                     <li class="li-title">{$pageTitle}</li>
                     {foreach $leftNav as $i=>$l}
                         {eq name="$navId" value="$i"}
-                            <li class="li-nav active"><a href="{:url('about_us')}?id={$i+2}">{$l}</a></li>
+                            <li class="li-nav active"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
                         {else\}
-                            <li class="li-nav"><a href="{:url('about_us')}?id={$i+2}">{$l}</a></li>
+                            <li class="li-nav"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
                         {/eq}
                     {/foreach}
                 </ul>

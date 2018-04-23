@@ -1,6 +1,6 @@
 {include file='public/header' /}
 {include file='public/nav' /}
-<!--协会简介、组织架构、协会指南、分支机构-->
+<!--协会领导、专家顾问、理事单位-->
 <div class="banner-pic">
     <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
 </div>
@@ -27,9 +27,29 @@
                &gt;&gt;
                <a href="#">{$navTitle}</a>
            </div>
-            <div class="article" style="background: #fff;padding: 15px 10px;">
-                {$con}
-            </div>
+            <ul class="con-list-mode">
+
+                <li class="con-list-items row">
+                    {foreach $yjNews as $y}
+                        <div class="col-md-3">
+                            <div class="m-mode">
+                                {eq name="$y.pics" value=""}
+                                <div class="no-img">200*150(默认)</div>
+                                {else\}
+                                <img src="__STATIC__/{$y.pics}" class="no-img" alt="头像">
+                                {/eq}
+                                <p class="m-name">{$y.name}({$y.level})</p>
+                                <div class="ms-show">
+                                    <p><b>简介：{$y.describe}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    {/foreach}
+                </li>
+                <li class="page-list">
+                    {$yjNews->render()}
+                </li>
+            </ul>
         </div>
     </div>
 </div>

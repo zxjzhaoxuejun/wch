@@ -1,6 +1,6 @@
 {include file='public/header' /}
 {include file='public/nav' /}
-<!--资讯中心-->
+<!--个人会员-->
 <div class="banner-pic">
     <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
 </div>
@@ -12,9 +12,9 @@
                     <li class="li-title">{$pageTitle}</li>
                     {foreach $leftNav as $i=>$l}
                         {eq name="$navId" value="$i"}
-                            <li class="li-nav active"><a href="{:url('new_list')}?id={$i+2}">{$l}</a></li>
+                            <li class="li-nav active"><a href="{:url('member_show')}?id={$i+2}">{$l}</a></li>
                         {else\}
-                            <li class="li-nav"><a href="{:url('new_list')}?id={$i+2}">{$l}</a></li>
+                            <li class="li-nav"><a href="{:url('member_show')}?id={$i+2}">{$l}</a></li>
                         {/eq}
                     {/foreach}
                 </ul>
@@ -28,20 +28,26 @@
                <a href="#">{$navTitle}</a>
            </div>
             <ul class="con-list-mode">
-                {foreach $yjNews as $y}
-                <li class="con-list-items">
-                    <a href="{:url('details')}?id={$y.id}">
-                        <div class="con-md-2 left-time">
-                            <div class="d-time">{$y.create_time|strtotime|date="d",###}</div>
-                            <div class="m-time">{$y.create_time|strtotime|date="m",###}</div>
+
+                <li class="con-list-items row">
+                    {foreach $yjNews as $y}
+                        <div class="col-md-3">
+                            <div class="m-mode">
+                                {eq name="$y.pics" value=""}
+                                <div class="no-img">200*150(默认)</div>
+                                {else\}
+                                <img src="__STATIC__/{$y.pics}" class="no-img" alt="头像">
+                                {/eq}
+                                <p class="m-name">{$y.name}</p>
+                                <div class="ms-show">
+                                    <p><b>简介：{$y.describe}</b></p>
+                                    <p><b>手机：{$y.tel}</b></p>
+                                    <p><b>邮箱：{$y.email}</b></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-10 art-con">
-                            <h3 class="art-con-title">{$y.art_title}</h3>
-                            <p class="art-keywords">{$y.abstract}</p>
-                        </div>
-                    </a>
+                    {/foreach}
                 </li>
-                {/foreach}
                 <li class="page-list">
                     {$yjNews->render()}
                 </li>

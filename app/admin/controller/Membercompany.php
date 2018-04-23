@@ -167,4 +167,24 @@ class Membercompany extends Base{
             return $filepath;
         }
     }
+
+    public function changeStatus(Request $request)
+    {
+        if ($request->isPost(true)){
+            $data=$request->param();
+            $art=new CompanyModel();
+            $res=$art->allowField(true)->save($data,['id'=>$data['id']]);
+
+            if($res){
+                $state=[
+                    'code'=>1
+                ];
+            }else{
+                $state=[
+                    'code'=>0
+                ];
+            }
+            return $state;
+        }
+    }
 }

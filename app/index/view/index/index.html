@@ -200,7 +200,7 @@
       <div class="row" style="margin-top: 15px">
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('about_us')}?id=3">
                       <i class="glyphicon glyphicon-indent-left tag-bg-01"></i>
                       <span class="triangle-right-01 dtd"></span>
                       <i class="tag-info">组织架构</i>
@@ -210,7 +210,7 @@
 
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('about_us')}?id=4">
                       <i class="glyphicon glyphicon-user tag-bg-02"></i>
                       <span class="triangle-right-02 dtd"></span>
                       <i class="tag-info">协会领导</i>
@@ -220,7 +220,7 @@
 
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('about_us')}?id=6">
                       <i class="glyphicon glyphicon-pawn tag-bg-03"></i>
                       <span class="triangle-right-03 dtd"></span>
                       <i class="tag-info">理事单位</i>
@@ -230,7 +230,7 @@
 
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('join_us')}?id=2">
                       <i class="glyphicon glyphicon-send tag-bg-04"></i>
                       <span class="triangle-right-04 dtd"></span>
                       <i class="tag-info">入会指南</i>
@@ -240,7 +240,7 @@
 
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('join_us')}?id=3">
                       <i class="glyphicon glyphicon-plus-sign tag-bg-05"></i>
                       <span class="triangle-right-05 dtd"></span>
                       <i class="tag-info">会员申请</i>
@@ -250,7 +250,7 @@
 
           <div class="col-md-2 col-sm-4 col-xs-4">
               <div class="tag-mode">
-                  <a href="#">
+                  <a href="{:url('download_page')}">
                       <i class="glyphicon glyphicon-paperclip tag-bg-06"></i>
                       <span class="triangle-right-06 dtd"></span>
                       <i class="tag-info">下载专区</i>
@@ -266,7 +266,7 @@
           <div class="col-md-6 no-col-padding">
               <h1 class="page-header">
                   会员单位
-                  <a href="#" class="more-class">MORE&gt;&gt;</a>
+                  <a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>
               </h1>
               <div id="dwList" style="height: 380px;overflow: hidden">
                   <ul class="list-group" id="con1">
@@ -480,4 +480,31 @@
           </ul>
       </div>
   </div>
+<script>
+    //间歇性滚动
+    var scrollDiv2=document.getElementById('dwList');
+    var speed1=50;//滚动速度
+    var delay=1000;//间歇暂停时间
+    scrollDiv2.innerHTML+=scrollDiv2.innerHTML;
+    var li=scrollDiv2.getElementsByTagName('li');
+    var liHeight=li[0].offsetHeight;//滚动的高度30(默认是li的高度)
+    var time;
+    scrollDiv2.scrollTop=0;
+    function starMove(){
+        scrollDiv2.scrollTop++;
+        time=setInterval(scrollUp2,speed1);
+    }
+    function scrollUp2(){
+        if(scrollDiv2.scrollTop%liHeight==0){
+            clearInterval(time);
+            setTimeout(starMove,delay);
+        }else{
+            scrollDiv2.scrollTop++;
+            if(scrollDiv2.scrollTop>=scrollDiv2.scrollHeight/2){
+                scrollDiv2.scrollTop=0;
+            }
+        }
+    }
+    setTimeout(starMove,delay);
+</script>
 {include file='public/footer' /}

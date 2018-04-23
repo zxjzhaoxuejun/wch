@@ -1,0 +1,124 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--协会指南-->
+<div class="banner-pic">
+    <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
+</div>
+<div class="container list-mode">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-nav">
+                <ul class="ul-left-mode">
+                    <li class="li-title">{$pageTitle}</li>
+                    {foreach $leftNav as $i=>$l}
+                        {eq name="$navId" value="$i"}
+                            <li class="li-nav active"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
+                        {else\}
+                            <li class="li-nav"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
+                        {/eq}
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <div class="page-position">
+               <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
+               <a href="{:url('index')}">首页</a>
+               &gt;&gt;
+               <a href="#">{$navTitle}</a>
+           </div>
+            <div class="article" style="background: #fff;padding: 15px 10px;">
+                <form class="form-horizontal" role="form" id="r-form">
+                    <div class="form-group">
+                        <label for="selectList" class="col-sm-4 control-label">选择类别</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="type" id="selectList">
+                                <option value="1">会员单位</option>
+                                <option value="2" selected>个人会员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="r-position"></div>
+                    <!--会员单位-->
+
+
+                    <!--个人会员-->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script>
+    $(function(){
+        //表单验证
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function(value, element) {
+            var length = value.length;
+            var mobile = /^1\d{10}$/;
+            //		alert(mobile.test(value))
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+        $("#r-form").validate({
+            rules:{
+                name:{
+                    required:true,
+                },
+                tel:{
+                    required:true,
+                    digits:true,
+                    isMobile: true
+                },
+                email:{
+                    email:true
+                },
+                url:{
+                    url:true
+                },
+                describe:{
+                    maxlength:200,
+                },
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('save')}",
+                    data:$("#r-form").serialize(),
+                    dataType: 'json',
+                    success: function(data){
+                        console.log(data)
+                        if(data.code==1){
+                            layer.msg(data.msg,{icon:1,time:1000},function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                window.location.href=window.location.href;
+                            });
+                        }else{
+                            layer.msg(data.msg,{icon:1,time:1000},function () {
+                                window.location.href=window.location.href;
+                            });
+                        }
+                    },
+                    error:function(data) {
+                        console.log(data.msg);
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+
+
+
+{include file='public/footer' /}

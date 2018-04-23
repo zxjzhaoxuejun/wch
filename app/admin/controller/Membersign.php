@@ -170,4 +170,28 @@ class Membersign extends Base{
             return $filepath;
         }
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function changeStatus(Request $request)
+    {
+        if ($request->isPost(true)){
+            $data=$request->param();
+            $art=new SignModel();
+            $res=$art->allowField(true)->save($data,['id'=>$data['id']]);
+
+            if($res){
+                $state=[
+                    'code'=>1
+                ];
+            }else{
+                $state=[
+                    'code'=>0
+                ];
+            }
+            return $state;
+        }
+    }
 }
