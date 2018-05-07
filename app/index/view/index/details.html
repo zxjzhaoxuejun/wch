@@ -8,6 +8,11 @@
                 <span>发布时间：{$con.create_time}</span>
                 <span>文章来源：{$con.art_sources}</span>
                 <span>浏览量：{$con.art_view}</span>
+                <div class="fx-mode">
+                    <a href="javascript:;" class="fx-icon wb-icon" onclick="shareToSinaWB(event,'{$con.art_title}')"></a>
+                    <a href="#" class="fx-icon qq-icon" onclick="shareToQzone(event,'{$con.art_title}')"></a>
+                    <a href="javascript:;" class="fx-icon rr-icon" onclick="shareToRenren(event,'{$con.art_title}')"></a>
+                </div>
             </div>
         </div>
         <div class="article">

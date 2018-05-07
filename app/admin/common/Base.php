@@ -21,10 +21,10 @@ class Base extends Controller{
         define('USER_ID',Session::get('user_id'));
         $this->isLogin();
 
-        $city=Province::all();
-        $json=json_encode($city,JSON_UNESCAPED_UNICODE);
-        $c='var city='.$json;
-        file_put_contents('./static/admin/js/city.js',$c);
+//        $city=Province::all();
+//        $json=json_encode($city,JSON_UNESCAPED_UNICODE);
+//        $c='var city='.$json;
+//        file_put_contents('./static/admin/js/city.js',$c);
 
     }
 

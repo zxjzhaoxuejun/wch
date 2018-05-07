@@ -13,51 +13,43 @@
 				<th>统计</th>
 				<th>资讯库</th>
 				<th>图片库</th>
-				<th>产品库</th>
-				<th>用户</th>
-				<th>管理员</th>
+				<th>会员单位</th>
+				<th>个人会员</th>
+				<!--<th>管理员</th>-->
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="text-c">
 				<td>总数</td>
-				<td>92</td>
-				<td>9</td>
-				<td>0</td>
-				<td>8</td>
-				<td>20</td>
+				<td>{$tableInfo.art_total}</td>
+				<td>{$tableInfo.banner_total}</td>
+				<td>{$tableInfo.company_total}</td>
+				<td>{$tableInfo.sign_total}</td>
+				<!--<td>20</td>-->
 			</tr>
 			<tr class="text-c">
 				<td>今日</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-			</tr>
-			<tr class="text-c">
-				<td>昨日</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
+				<td>{$tableInfo.art_today}</td>
+				<td>{$tableInfo.banner_today}</td>
+				<td>{$tableInfo.company_today}</td>
+				<td>{$tableInfo.sign_today}</td>
+				<!--<td>0</td>-->
 			</tr>
 			<tr class="text-c">
 				<td>本周</td>
-				<td>2</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
+				<td>{$tableInfo.art_week}</td>
+				<td>{$tableInfo.banner_week}</td>
+				<td>{$tableInfo.company_week}</td>
+				<td>{$tableInfo.sign_week}</td>
+				<!--<td>0</td>-->
 			</tr>
 			<tr class="text-c">
 				<td>本月</td>
-				<td>2</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
+				<td>{$tableInfo.art_month}</td>
+				<td>{$tableInfo.banner_month}</td>
+				<td>{$tableInfo.company_month}</td>
+				<td>{$tableInfo.sign_month}</td>
+				<!--<td>0</td>-->
 			</tr>
 		</tbody>
 	</table>

@@ -22,6 +22,8 @@ class Partisan extends Base{
             "navPosition"=>"关于协会",
             "title"=>"理事单位",
             "imgName"=>"公司logo",
+            "linkName"=>"联系人",
+            "linkTel"=>"联系方式",
             "name"=>"理事单位名",
             "describe"=>"简介",
             "level"=>"职别",
@@ -177,6 +179,26 @@ class Partisan extends Base{
         }
     }
 
+
+    public function changeStatus(Request $request)
+    {
+        if ($request->isPost(true)){
+            $data=$request->param();
+            $art=new PartisanModel();
+            $res=$art->allowField(true)->save($data,['id'=>$data['id']]);
+
+            if($res){
+                $state=[
+                    'code'=>1
+                ];
+            }else{
+                $state=[
+                    'code'=>0
+                ];
+            }
+            return $state;
+        }
+    }
 
 
 

@@ -11,6 +11,8 @@
 					<th width="80">ID</th>
 					<th width="100">{$title.imgName}</th>
 					<th width="150">{$title.name}</th>
+					<th width="150">{$title.linkName}</th>
+					<th width="150">{$title.linkTel}</th>
 					<th width="300">{$title.describe}</th>
 					<th width="150">{$title.tb_url}</th>
 					<th width="150">更新时间</th>
@@ -28,11 +30,13 @@
 							{eq name='$v.pics' value=''}
 
 							{else/}
-							<img width="120" height="40" class="picture-thumb" src="__STATIC__/{$v.pics}">
+							<img width="40" height="40" class="picture-thumb" src="__STATIC__/{$v.pics}">
 							{/eq}
 						</a>
 					</td>
 					<td class="text-l">{$v.name}</td>
+					<td class="text-l">{$v.link_man}</td>
+					<td class="text-l">{$v.tel}</td>
 					<td class="text-c">{$v.describe}</td>
 					<td>{$v.tb_url}</td>
 					<td>{$v.create_time}</td>

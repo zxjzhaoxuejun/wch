@@ -171,7 +171,6 @@ class Leader extends Base{
             $info=$file->rule('date')->move('static/leader');//移动文件路径并重新命名
             $path=$info->getSaveName();//获取保存后文件的名字和位置
             $filepath='leader/'.$path;
-
             return $filepath;
         }
     }

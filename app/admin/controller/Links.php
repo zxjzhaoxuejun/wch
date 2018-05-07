@@ -168,4 +168,17 @@ class Links extends Base
 
     }
 
+    //上传图片
+    public function upload(Request $request)
+    {
+        $file=$request->file('file');
+        if($file->isValid()){//检验上传文件是否有效
+            $info=$file->rule('date')->move('static/links');//移动文件路径并重新命名
+            $path=$info->getSaveName();//获取保存后文件的名字和位置
+            $filepath='links/'.$path;
+
+            return $filepath;
+        }
+    }
+
 }

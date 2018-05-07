@@ -11,38 +11,90 @@
                 <ul class="ul-left-mode">
                     <li class="li-title">{$pageTitle}</li>
                     {foreach $leftNav as $i=>$l}
-                        {eq name="$navId" value="$i"}
-                            <li class="li-nav active"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
-                        {else\}
-                            <li class="li-nav"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
-                        {/eq}
+                    {eq name="$navId" value="$i"}
+                    <li class="li-nav active"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
+                    {else\}
+                    <li class="li-nav"><a href="{:url('join_us')}?id={$i+2}">{$l}</a></li>
+                    {/eq}
                     {/foreach}
                 </ul>
             </div>
         </div>
         <div class="col-md-9">
-           <div class="page-position">
-               <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
-               <a href="{:url('index')}">首页</a>
-               &gt;&gt;
-               <a href="#">{$navTitle}</a>
-           </div>
+            <div class="page-position">
+                <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
+                <a href="{:url('index')}">首页</a>
+                &gt;&gt;
+                <a href="#">{$navTitle}</a>
+            </div>
             <div class="article" style="background: #fff;padding: 15px 10px;">
                 <form class="form-horizontal" role="form" id="r-form">
                     <div class="form-group">
-                        <label for="selectList" class="col-sm-4 control-label">选择类别</label>
+                        <label for="selectList" class="col-sm-4 control-label"><strong style="color: red">*</strong>选择级别</label>
                         <div class="col-sm-8">
                             <select class="form-control" name="type" id="selectList">
-                                <option value="1">会员单位</option>
-                                <option value="2" selected>个人会员</option>
+                                <option value="1" selected>会员单位</option>
+                                <option value="2">理事单位</option>
+                                <option value="3">副会长单位</option>
+                                <option value="4">联席会长单位</option>
                             </select>
                         </div>
                     </div>
-                    <div id="r-position"></div>
-                    <!--会员单位-->
+                    <div class="r-mode company-mode">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>公司名称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="name"
+                                       placeholder="请输入公司名称">
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>联系人</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="link_man" class="form-control"
+                                       placeholder="请输入联系人">
+                            </div>
+                        </div>
 
-                    <!--个人会员-->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>联系方式</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="tel" class="form-control"
+                                       placeholder="请输入电话">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">邮箱</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="email"
+                                       placeholder="请输入邮箱">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">公司网址</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="tb_url"
+                                       placeholder="请输入http://">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">简介</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" placeholder="说点什么..."
+                                          name="describe"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-4">
+                                <button type="submit" class="btn btn-default">提交申请</button>
+                            </div>
+                        </div>
+                    </div>
 
                 </form>
             </div>
@@ -55,60 +107,67 @@
 <script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
 <script>
-    $(function(){
+    $(function () {
         //表单验证
         // 手机号码验证
-        $.validator.addMethod("isMobile", function(value, element) {
+        $.validator.addMethod("isMobile", function (value, element) {
             var length = value.length;
             var mobile = /^1\d{10}$/;
             //		alert(mobile.test(value))
             return this.optional(element) || (length == 11 && mobile.test(value));
         }, "请正确填写您的手机号码");
         $("#r-form").validate({
-            rules:{
-                name:{
-                    required:true,
+            rules: {
+                name: {
+                    required: true,
                 },
-                tel:{
-                    required:true,
-                    digits:true,
+                type: {
+                    required: true,
+                },
+                tel: {
+                    required: true,
+                    digits: true,
                     isMobile: true
                 },
-                email:{
-                    email:true
+                link_man:{
+                    required: true,
+                    maxlength: 20,
                 },
-                url:{
-                    url:true
+                email: {
+                    email: true
                 },
-                describe:{
-                    maxlength:200,
+                url: {
+                    url: true
+                },
+                describe: {
+                    maxlength: 300,
                 },
             },
-            onkeyup:false,
-            focusCleanup:true,
-            success:"valid",
-            submitHandler:function(form){
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
 
                 $.ajax({
                     type: 'POST',
                     url: "{:url('save')}",
-                    data:$("#r-form").serialize(),
+                    data: $("#r-form").serialize(),
                     dataType: 'json',
-                    success: function(data){
+                    success: function (data) {
                         console.log(data)
-                        if(data.code==1){
-                            layer.msg(data.msg,{icon:1,time:1000},function () {
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
                                 var index = parent.layer.getFrameIndex(window.name);
                                 parent.layer.close(index);
-                                window.location.href=window.location.href;
+                                window.location.href = window.location.href;
                             });
-                        }else{
-                            layer.msg(data.msg,{icon:1,time:1000},function () {
-                                window.location.href=window.location.href;
+                        } else {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                window.location.href = window.location.href;
                             });
                         }
                     },
-                    error:function(data) {
+                    error: function (data) {
                         console.log(data.msg);
                     },
                 });
@@ -117,8 +176,6 @@
     });
 
 </script>
-
-
 
 
 {include file='public/footer' /}

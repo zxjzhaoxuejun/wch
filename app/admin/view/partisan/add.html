@@ -8,6 +8,25 @@
 				<input type="text" class="input-text" value="" placeholder="理事单位名"  name="name">
 			</div>
 		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>联系人：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="联系人名称"  name="link_man">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">联系电话：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="tel" class="input-text" value="" placeholder="联系方式"  name="tel">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">联系邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="联系邮箱"  name="email">
+			</div>
+		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">职别：</label>
@@ -19,7 +38,7 @@
 			<label class="form-label col-xs-4 col-sm-2">简介：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<textarea name="describe" cols="" rows="" class="textarea"  placeholder="介绍点什么..."></textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/300</p>
 			</div>
 		</div>
 		<div class="row cl">
@@ -28,7 +47,7 @@
 			<div class="formControls col-xs-8 col-sm-9">
 				<div id="uploader" class="wu-example">
 					<div class="btns-check">
-						<input  type="text" name="pics" value="" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图">
+						<input  type="text" name="pics" value="" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图40*40">
 						<div id="picker" class="webuploader-container" >
 							<div class="webuploader-pick" name="file">选择文件</div>
 						</div>
@@ -40,6 +59,13 @@
 				<img src="" id="imgThumb"  style="width: 120px;height: 80px;display: none;margin-top: 4px;">
 			</div>
 		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章内容：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<script id="editor" type="text/plain" style="width:100%;height:400px;" name="content"></script></div>
+		</div>
+
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
@@ -58,6 +84,9 @@
 <script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript" src="__STATIC__/lib/webuploader/script/webuploader.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 function article_save(){
 	window.parent.location.reload();
@@ -69,14 +98,20 @@ $(function(){
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
 	});
-    $(".textarea").Huitextarealength({ maxlength:200});
+    $(".textarea").Huitextarealength({ maxlength:300});
 
     //表单验证
     $("#form-banner-add").validate({
         rules:{
             name:{
-                required:true,
+                required:true
             },
+            link_man:{
+                required:true
+            },
+            content:{
+                required:true
+            }
 
         },
         onkeyup:false,
@@ -213,7 +248,7 @@ $(function(){
         });
     });
 
-
+    var ue = UE.getEditor('editor');
 });
 
 

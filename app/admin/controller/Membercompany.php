@@ -19,8 +19,10 @@ class Membercompany extends Base{
         $title=[
             "navPosition"=>"会员展示",
             "title"=>"会员单位",
-            "imgName"=>"公司照片",
-            "name"=>"名称",
+            "imgName"=>"公司logo",
+            "linkName"=>"联系人",
+            "linkTel"=>"联系电话",
+            "name"=>"公司名称",
             "describe"=>"简介",
             "tb_url"=>"官网网址",
         ];

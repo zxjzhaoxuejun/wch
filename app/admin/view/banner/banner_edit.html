@@ -16,8 +16,21 @@
 				<select name="type" class="select">
 					{eq name="$data.type" value="0"}
 					<option value="0" selected>首页轮播图</option>
-					{else\}
-					<option value="1" selected>详情banner图</option>
+					{/eq}
+					{eq name="$data.type" value="1"}
+					<option value="1" selected>资讯中心banner图</option>
+					{/eq}
+					{eq name="$data.type" value="2"}
+					<option value="2" selected>加入协会banner图</option>
+					{/eq}
+					{eq name="$data.type" value="3"}
+					<option value="3" selected>会员展示banner图</option>
+					{/eq}
+					{eq name="$data.type" value="4"}
+					<option value="4" selected>关于协会banner图</option>
+					{/eq}
+					{eq name="$data.type" value="5"}
+					<option value="4" selected>双创学院banner图</option>
 					{/eq}
 				</select>
 				</span> </div>
