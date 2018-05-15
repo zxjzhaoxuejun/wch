@@ -31,13 +31,14 @@
                 {foreach $yjNews as $y}
                 <li class="con-list-items">
                     <a href="{:url('details')}?id={$y.id}">
-                        <div class="con-md-2 left-time">
+                        <div class="con-md-2 left-time hidden-xs">
                             <div class="d-time">{$y.create_time|strtotime|date="d",###}</div>
                             <div class="m-time">{$y.create_time|strtotime|date="m",###}</div>
                         </div>
                         <div class="col-md-10 art-con">
                             <h3 class="art-con-title">{$y.art_title}</h3>
                             <p class="art-keywords">{$y.abstract}</p>
+                            <div style="color: #666666;float: right" class="visible-xs">发布时间： {$y.create_time|strtotime|date="Y-m-d",###}</div>
                         </div>
                     </a>
                 </li>

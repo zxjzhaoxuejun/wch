@@ -31,13 +31,12 @@
                 {foreach $yjNews as $y}
                 <li class="con-list-items row">
                     <a href="{:url('company_details')}?id={$y.id}">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h3 class="art-con-title">{$y.name}</h3>
                             <p class="art-keywords">{$y.describe}</p>
+                            <div style="color: #666666;float: right">发布时间： {$y.create_time|strtotime|date="Y-m-d",###}</div>
                         </div>
-                        <div class="con-md-2">
-                            <div>{$y.create_time|strtotime|date="Y-m-d",###}</div>
-                        </div>
+
                     </a>
                 </li>
                 {/foreach}

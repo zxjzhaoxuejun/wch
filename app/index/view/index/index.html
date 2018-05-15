@@ -16,11 +16,11 @@
           {foreach $banner as $i=>$b}
           {eq name="$i" value="0"}
           <div class="item active">
-              <img src="__STATIC__/{$b.b_img}" style="min-height: 180px;" alt="{$b.b_name}_{$i}">
+              <img src="__STATIC__/{$b.b_img}" style="min-height: 120px;" alt="{$b.b_name}_{$i}">
           </div>
           {else\}
           <div class="item active">
-              <img src="__STATIC__/{$b.b_img}" style="min-height: 180px;" alt="{$b.b_name}_{$i}">
+              <img src="__STATIC__/{$b.b_img}" style="min-height: 120px;" alt="{$b.b_name}_{$i}">
           </div>
           {/eq}
           {/foreach}
@@ -40,7 +40,7 @@
 
       <!--1-->
       <div class="row">
-          <div class="col-md-6 col-sm-12" style="margin-bottom: 10px">
+          <div class="col-md-6 col-sm-12 no-all-padding" style="margin-bottom: 10px">
               <div id="leftBanner" class="carousel slide">
                   <!-- 轮播（Carousel）指标 -->
                   <ol class="carousel-indicators" style="width:100%;left: 0;margin-left: 0;padding-right:1%;bottom: 5px;text-align: right">
@@ -58,14 +58,14 @@
                          {eq name="$i" value="0"}
                           <div class="item active">
                               <a href="{:url('index/details')}?id={$v.id}">
-                              <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}" style="height: 352px;">
+                              <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}" style="min-height: 230px;max-height: 352px">
                               <div class="carousel-caption" style="right: 0;left: 0;text-align: left;padding-left:10px;bottom: 0;background: #000;opacity: 0.5;">{$v.art_title|mb_substr=0,25,'utf-8'}</div>
                               </a>
                           </div>
                           {else\}
                           <div class="item">
                               <a href="{:url('index/details')}?id={$v.id}">
-                                  <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}" style="height: 352px;">
+                                  <img src="__STATIC__/{$v.art_thumb}" alt="{$v.art_title}" style="min-height:230px;max-height: 352px;">
                                   <div class="carousel-caption" style="right: 0;left: 0;padding-left:10px;text-align: left;bottom: 0;background: #000;opacity: 0.5;">{$v.art_title|mb_substr=0,25,'utf-8'}</div>
                               </a>
                           </div>
@@ -84,7 +84,7 @@
                   </a>
               </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-6 col-sm-12 no-all-padding">
               <div class="new-nav">
                   <div class="title-tag">
                       <span class="glyphicon glyphicon-book" style="color:#1779b8"></span>
@@ -112,14 +112,15 @@
                           <div class="media-body">
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
-                              <p>{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
                               </a>
                           </div>
                       </li>
                       {else/}
                       <li class="list-group-item">
-                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,20,'utf-8'}</a>
+                          <span class="badge hidden-xs">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="{:url('details')}?id={$n.id}">● {$n.art_title|mb_substr=0,20,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -140,14 +141,15 @@
                           <div class="media-body">
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
-                              <p>{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
                               </a>
                           </div>
                       </li>
                       {else/}
                       <li class="list-group-item">
-                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,20,'utf-8'}</a>
+                          <span class="badge hidden-xs">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="{:url('details')}?id={$n.id}">● {$n.art_title|mb_substr=0,20,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -167,14 +169,15 @@
                           <div class="media-body">
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
-                              <p>{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
                               </a>
                           </div>
                       </li>
                       {else/}
                       <li class="list-group-item">
-                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,20,'utf-8'}</a>
+                          <span class="badge hidden-xs">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="{:url('details')}?id={$n.id}">● {$n.art_title|mb_substr=0,20,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -194,14 +197,15 @@
                           <div class="media-body">
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
-                              <p>{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
+                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
                               </a>
                           </div>
                       </li>
                       {else/}
                       <li class="list-group-item">
-                          <span class="badge">{$n.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{:url('details')}?id={$n.id}">{$i}.{$n.art_title|mb_substr=0,20,'utf-8'}</a>
+                          <span class="badge hidden-xs">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                          <a href="{:url('details')}?id={$n.id}">● {$n.art_title|mb_substr=0,20,'utf-8'}</a>
                       </li>
                       {/eq}
                       {/foreach}
@@ -212,7 +216,7 @@
 
       <!--中间页签-->
       <div class="row" style="margin-top: 15px">
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('about_us')}?id=3">
                       <i class="glyphicon glyphicon-indent-left tag-bg-01"></i>
@@ -222,7 +226,7 @@
               </div>
           </div>
 
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('about_us')}?id=4">
                       <i class="glyphicon glyphicon-user tag-bg-02"></i>
@@ -232,7 +236,7 @@
               </div>
           </div>
 
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('member_show')}?id=3">
                       <i class="glyphicon glyphicon-pawn tag-bg-03"></i>
@@ -242,7 +246,7 @@
               </div>
           </div>
 
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('join_us')}?id=2">
                       <i class="glyphicon glyphicon-send tag-bg-04"></i>
@@ -252,7 +256,7 @@
               </div>
           </div>
 
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('join_us')}?id=3">
                       <i class="glyphicon glyphicon-plus-sign tag-bg-05"></i>
@@ -262,7 +266,7 @@
               </div>
           </div>
 
-          <div class="col-md-2 col-sm-4 col-xs-6">
+          <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('download_page')}">
                       <i class="glyphicon glyphicon-paperclip tag-bg-06"></i>
@@ -282,12 +286,12 @@
                   会员单位
                   <a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>
               </h1>
-              <div id="dwList" style="height: 380px;overflow: hidden">
+              <div id="dwList" style="height: 380px;overflow: hidden;background: #ffffff">
                   <ul class="list-group" id="con1">
                       {foreach $memberCompany as $m}
                       <li class="list-group-item">
                           <span class="badge">{$m.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{$m.tb_url}" target="_blank">{$m.name|mb_substr=0,20,'utf-8'}</a>
+                          <a href="{:url('company_details')}?id={$m.id}" target="_blank">{$m.name|mb_substr=0,20,'utf-8'}</a>
                       </li>
                       {/foreach}
                   </ul>
@@ -298,10 +302,10 @@
                   双创学院
                   <a href="{:url('school_list')}?id=0" class="more-class">MORE&gt;&gt;</a>
               </h1>
-              <div  style="height: 380px;overflow: hidden">
+              <div  style="height: 380px;overflow: hidden;background: #ffffff">
                  <ul class="media-list">
                      {foreach $schoolNews as $s}
-                  <li class="media" style="margin-top: 15px!important">
+                  <li class="media" style="margin-top: 17px!important">
                       <a class="media-left" href="{:url('school_details')}?id={$s.id}">
                           {eq name="$s.art_thumb" value=""}
                           <div class="no-img" style="height: 100px;width: 150px;line-height: 100px">150*100(默认)</div>
@@ -313,7 +317,8 @@
                       <div class="media-body">
                           <a href="{:url('school_details')}?id={$s.id}">
                           <h4 class="media-heading">{$s.art_title|mb_substr=0,25,'utf-8'}</h4>
-                          <p>{$s.abstract|mb_substr=0,90,'utf-8'}</p>
+                          <p class="hidden-xs">{$s.abstract|mb_substr=0,90,'utf-8'}</p>
+                          <p class="visible-xs">{$s.abstract|mb_substr=0,25,'utf-8'}</p>
                           </a>
                       </div>
                   </li>
@@ -325,7 +330,7 @@
 
       <!--协会服务-->
       <div class="row">
-          <div class="col-lg-12 col-md-12 no-col">
+          <div class="col-lg-12 col-md-12 no-col" style="background: #ffffff">
               <h1 class="page-header">
                   协会服务
               </h1>
@@ -428,15 +433,15 @@
 
       <!--专家顾问-->
       <div class="row">
-          <div class="col-lg-12 col-md-12 no-col">
+          <div class="col-lg-12 col-md-12 no-col" style="background: #ffffff">
               <h2 class="page-header">专家顾问<a href="{:url('about_us')}?id=5" class="more-class">MORE&gt;&gt;</a></h2>
               {foreach $counselor as $c}
-              <div class="col-md-4 col-sm-6">
-                  <a href="#">
+              <div class="col-md-3 col-sm-6">
+                  <a href="{:url('about_us')}?id=5">
                       <div class="thumbnail">
                           <img class="img-responsive img-portfolio img-hover" src="__STATIC__/{$c.pics}" alt="{$c.name}">
                           <div class="caption">
-                              <h3 style="text-align: center">{$c.name}({$c.level})</h3>
+                              <h3 style="text-align: center;font-size: 12px">{$c.name}</h3>
                           </div>
                       </div>
                   </a>
@@ -456,17 +461,17 @@
       </div>
 
       <!--links-->
-      <div class="row">
-          <div class="col-lg-12">
+      <div class="row hidden-xs">
+          <div class="col-lg-12 col-md-12 no-col" style="background: #ffffff">
               <h2 class="page-header">友情链接</h2>
+              <ul class="nav nav-pills links-mode">
+                  {foreach $links as $l}
+                  <li><a href="{$l.url}" title="{$l.name}" target="_blank" style="color: #1779b8;text-decoration: underline;">
+                      <img src="__STATIC__/{$l.logo}" alt="links" style="width: 180px;max-height: 45px;height: auto">
+                  </a></li>
+                  {/foreach}
+              </ul>
           </div>
-          <ul class="nav nav-pills">
-              {foreach $links as $l}
-              <li><a href="{$l.url}" title="{$l.name}" target="_blank" style="color: #1779b8;text-decoration: underline;">
-                  <img src="__STATIC__/{$l.logo}" alt="links" style="width: 180px;max-height: 45px;height: auto">
-              </a></li>
-              {/foreach}
-          </ul>
       </div>
   </div>
 <script>

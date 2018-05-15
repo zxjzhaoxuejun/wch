@@ -2,6 +2,8 @@
 <body>
 <div class="page-container">
 	<p class="f-20 text-success">欢迎使用网创会<span class="f-14">v1.0</span>后台！</p>
+	<p>会员单位：<span style="color: red">有({$tableInfo.company_check})条数据待审核...</span></p>
+	<p>理事单位：<span style="color: red">有({$tableInfo.partisan_check})条数据待审核...</span></p>
 	<p>登录次数：{$data.login_count} </p>
 	<p>上次登录IP：{$data.ip}  上次登录时间：{$data.last_time}</p>
 	<table class="table table-border table-bordered table-bg">
@@ -14,7 +16,7 @@
 				<th>资讯库</th>
 				<th>图片库</th>
 				<th>会员单位</th>
-				<th>个人会员</th>
+				<th>理事单位</th>
 				<!--<th>管理员</th>-->
 			</tr>
 		</thead>

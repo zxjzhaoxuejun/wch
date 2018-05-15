@@ -8,6 +8,7 @@ use app\admin\model\Article;//资讯
 use app\admin\model\Banner;//轮播图
 use app\admin\model\MemberCompany;//会员单位
 use app\admin\model\MemberSign;//个人会员
+use app\admin\model\Partisan;//理事单位
 use think\Cache;
 use think\Log;
 
@@ -83,11 +84,14 @@ class Index extends Base
             'company_today'=>MemberCompany::where($this->find_createtime(1))->count(),
             'company_week'=>MemberCompany::where($this->find_createtime(2))->count(),
             'company_total'=>MemberCompany::count(),
+            'company_check'=>MemberCompany::where('show_val',0)->count(),
+            'company_check'=>MemberCompany::where('show_val',0)->count(),
             'company_month'=>MemberCompany::where($this->find_createtime(3))->count(),
-            'sign_today'=>MemberSign::where($this->find_createtime(1))->count(),
-            'sign_week'=>MemberSign::where($this->find_createtime(2))->count(),
-            'sign_total'=>MemberSign::count(),
-            'sign_month'=>MemberSign::where($this->find_createtime(3))->count(),
+            'sign_today'=>Partisan::where($this->find_createtime(1))->count(),
+            'sign_week'=>Partisan::where($this->find_createtime(2))->count(),
+            'sign_total'=>Partisan::count(),
+            'sign_month'=>Partisan::where($this->find_createtime(3))->count(),
+            'partisan_check'=>Partisan::where('show_val',0)->count(),
         );
         $this->assign('tableInfo',$tableInfo);
         $this->assign('info',$info);

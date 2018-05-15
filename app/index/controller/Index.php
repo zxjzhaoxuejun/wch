@@ -63,7 +63,7 @@ class Index extends Controller {
         });
 
         $counselor=Counselor::all(function ($query){//专家顾问
-            $query->limit(6)->order('create_time','desc');
+            $query->limit(8)->order('create_time','desc');
         });
 
         $banner=Banner::all(function ($query){//轮播图
@@ -73,6 +73,7 @@ class Index extends Controller {
         $copy=System::get(1);//底部地址、联系电话、关键字
 
         $this->assign('pageTitle','深圳市互联网创业创新服务促进会');
+        $this->assign('pageId',0);
         $this->assign('services',$services);
         $this->assign('navList',$navList);
         $this->assign('links',$links);
@@ -117,6 +118,7 @@ class Index extends Controller {
         }
 
         $this->assign('pageTitle','资讯中心');
+        $this->assign('pageId',5);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('banner',$banner);
@@ -155,6 +157,7 @@ class Index extends Controller {
         }
 
         $this->assign('pageTitle','双创学院');
+        $this->assign('pageId',6);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('banner',$banner);
@@ -182,6 +185,7 @@ class Index extends Controller {
         $con= AboutUs::get(1);
 
         $this->assign('pageTitle','关于协会');
+        $this->assign('pageId',1);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('banner',$banner);
@@ -198,14 +202,14 @@ class Index extends Controller {
             $this->assign('navTitle','分支机构');
             $this->assign('con',$con['organization']);
         }else if($data['id']==4){//协会领导
-            $yjData= Leader::order('id','asc')->paginate(8, false, [
+            $yjData= Leader::order('id','asc')->paginate(6, false, [
                 'query' => input('param.'),
             ]);
             $this->assign('yjNews',$yjData);
             $this->assign('navTitle',$leftNav[$data['id']-2]);
             return $this->fetch('xh_mode');
         }else if($data['id']==5){//'专家顾问'
-            $yjData= Counselor::order('create_time','desc')->paginate(8, false, [
+            $yjData= Counselor::order('create_time','desc')->paginate(6, false, [
                 'query' => input('param.'),
             ]);
             $this->assign('yjNews',$yjData);
@@ -234,6 +238,7 @@ class Index extends Controller {
 
 
         $this->assign('pageTitle','加入协会');
+        $this->assign('pageId',3);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('banner',$banner);
@@ -270,6 +275,7 @@ class Index extends Controller {
         $leftNav=['会员单位','理事单位'];//2,3
 
         $this->assign('pageTitle','会员展示');
+        $this->assign('pageId',4);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('banner',$banner);
@@ -309,6 +315,7 @@ class Index extends Controller {
         $actMode->allowField(true)->save(['art_view'=>$con['art_view']+1],['id'=>$data['id']]);
 
         $this->assign('pageTitle','资讯详情页');
+        $this->assign('pageId',5);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
@@ -331,6 +338,7 @@ class Index extends Controller {
         $con= Partisan::get($data['id']);
 
         $this->assign('pageTitle','理事单位详情页');
+        $this->assign('pageId',4);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
@@ -347,6 +355,7 @@ class Index extends Controller {
         $con= MemberCompany::get($data['id']);
 
         $this->assign('pageTitle','会员单位详情页');
+        $this->assign('pageId',4);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
@@ -371,6 +380,7 @@ class Index extends Controller {
         $actMode->allowField(true)->save(['art_view'=>$con['art_view']+1],['id'=>$data['id']]);
 
         $this->assign('pageTitle','双创学院详情页');
+        $this->assign('pageId',6);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
@@ -387,8 +397,13 @@ class Index extends Controller {
         $navList=(new Nav())->navOut();//导航
         $copy=System::get(1);//底部地址、联系电话、关键字
         $con=MemberService::get(1);
+        $banner=Banner::get(function ($query){//banner图
+            $query->where('type',6)->limit(1)->order('create_time','desc');
+        });
         $this->assign('pageTitle','协会服务');
+        $this->assign('pageId',2);
         $this->assign('navList',$navList);
+        $this->assign('banner',$banner);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
 
@@ -403,8 +418,13 @@ class Index extends Controller {
     {
         $navList=(new Nav())->navOut();//导航
         $copy=System::get(1);//底部地址、联系电话、关键字
+        $banner=Banner::get(function ($query){//banner图
+            $query->where('type',7)->limit(1)->order('create_time','desc');
+        });
         $con=Download::all();
         $this->assign('pageTitle','下载专区');
+        $this->assign('pageId',3);
+        $this->assign('banner',$banner);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);

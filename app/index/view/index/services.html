@@ -1,24 +1,54 @@
 {include file='public/header' /}
 {include file='public/nav' /}
-<div class="container" style="margin-top: 80px;min-height: 500px;">
+<div class="banner-pic">
+    <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
+</div>
+<div class="container detail-container" style="min-height: 500px;">
     <article class="art-mode">
         <div class="details-mode">
             <h2>{$pageTitle}</h2>
             <div class="aut">
-                <span>发布时间：{$con.create_time}</span>
-
             </div>
         </div>
-        <div class="article">
-            <h3><b>政企桥梁：</b>{$con.bridge}</h3>
-            <h3><b>资源对接：</b>{$con.resource}</h3>
-            <h3><b>双创辅助：</b>{$con.assist}</h3>
-            <h3><b>项目申请：</b>{$con.project}</h3>
-            <h3><b>投融服务：</b>{$con.investment}</h3>
-            <h3><b>会议会展：</b>{$con.meeting}</h3>
-            <h3><b>年度评选：</b>{$con.appraise}</h3>
-            <h3><b>宣传推广：</b>{$con.publicity}</h3>
+        <div class="row">
+            <div class="col-md-6 hidden-xs" style="margin-top: 30px">
+                <img src="__STATIC__/index/imgs/ruhui-l1.png">
+            </div>
+            <div class="article col-md-6">
+                <div class="s-list">
+                    <h3><b>政企桥梁</b></h3>
+                    <div>{$con.bridge}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>资源对接</b></h3>
+                    <div>{$con.resource}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>双创辅导</b></h3>
+                    <div>{$con.assist}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>项目申请</b></h3>
+                    <div>{$con.project}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>投融服务</b></h3>
+                    <div>{$con.investment}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>会议会展</b></h3>
+                    <div>{$con.meeting}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>年度评选</b></h3>
+                    <div>{$con.appraise}</div>
+                </div>
+                <div class="s-list">
+                    <h3><b>宣传推广</b></h3>
+                    <div>{$con.publicity}</div>
+                </div>
 
+            </div>
         </div>
 
     </article>

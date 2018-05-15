@@ -1,15 +1,41 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="top-mode hidden-sm hidden-xs">
+        <div class="container">
+            <div class="top-left-mode"><marquee direction=left behavior=scroll scrollamount=5 scrolldelay=1000 align=middle hspace=20 vspace=10 >您好！欢迎来到深圳市互联网创业创新服务促进会</marquee></div>
+            <div class="top-right">
+                <ul>
+                    <li class="top-li show-qr-code">
+                        <a href="javascript:void(0)">微信</a>
+                        <div class="top-qr-code">
+                            <img class="logo-img" src="__STATIC__/{$copyRight.qr_code}" alt="qr_code">
+                        </div>
+                    </li>
+                    <li class="top-li">
+                        <a href="javascript:void(0)" onclick="setHome(this,window.location)"
+                           style="cursor:hand">设为首页</a>
+                    </li>
+                    <li class="top-li">
+                        <a href="javascript:void(0)" onclick="shoucang(document.title,window.location)">加入收藏</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                <img class="logo-img" src="__STATIC__/index/imgs/logo_1.png" alt="logo">
+            <a class="navbar-brand hidden-xs hidden-sm" href="index.html">
+                <img class="logo-img" src="__STATIC__/index/imgs/logo.png" alt="logo">
+            </a>
+            <a class="navbar-brand visible-sm visible-xs" href="index.html">
+                <img class="logo-img" src="__STATIC__/index/imgs/logo_2.png" alt="logo">
             </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -18,11 +44,11 @@
                 {foreach $navList as $i=>$v}
                 {eq name="$v.nav_pid" value="0"}
                 {eq name="$v.level" value="0"}
-                <li>
-                    <a href="{:url($v.nav_url)}">{$v.nav_name}</a>
+                <li {if condition="$pageId eq $i" }class="nav-active" {/if}>
+                <a href="{:url($v.nav_url)}">{$v.nav_name}</a>
                 </li>
                 {else/}
-                <li class="dropdown">
+                <li class="dropdown {if condition='$pageId eq $i'}nav-active{/if}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$v.nav_name} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {foreach $v.list as $k=>$n}

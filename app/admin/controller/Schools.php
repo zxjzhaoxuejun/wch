@@ -1,78 +1,27 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: 赵学军
+ * Date: 2018-04-29
+ * Time: 16:47
+ */
 namespace app\admin\controller;
-
 use app\admin\common\Base;
-use app\admin\model\SystemLog;
+use app\admin\model\Schools as SchoolModel;
 use think\Request;
-use app\admin\model\Article as ArticleModel;
-use app\admin\model\Category as CategoryModel;
 
-class Article extends Base
-{
+class Schools extends Base{
     /**
-     * 显示业界动态资讯列表
-     *cate_id=2
+     * 显示列表
+     *
      * @return \think\Response
      */
-    public function industry()
+    public function index()
     {
         //
-        $data= ArticleModel::all(function ($query){
-            $query->where('cate_id=2');
-        });
+        $data= SchoolModel::all();
         $this->assign('data',$data);
-
-        return $this->fetch('article_list');
-    }
-
-
-    /**
-     * 显示协会活动资讯列表
-     *cate_id=3
-     * @return \think\Response
-     */
-    public function activity()
-    {
-        //
-        $data= ArticleModel::all(function ($query){
-            $query->where('cate_id=3');
-        });
-        $this->assign('data',$data);
-
-        return $this->fetch('article_list');
-    }
-
-    /**
-     * 显示协会新闻资讯列表
-     *cate_id=4
-     * @return \think\Response
-     */
-    public function x_news()
-    {
-        //
-        $data= ArticleModel::all(function ($query){
-            $query->where('cate_id=4');
-        });
-        $this->assign('data',$data);
-
-        return $this->fetch('article_list');
-    }
-
-    /**
-     * 显示政策信息资讯列表
-     *cate_id=5
-     * @return \think\Response
-     */
-    public function z_info()
-    {
-        //
-        $data= ArticleModel::all(function ($query){
-            $query->where('cate_id=5');
-        });
-        $this->assign('data',$data);
-
-        return $this->fetch('article_list');
+        return $this->fetch('list');
     }
 
     /**
@@ -83,9 +32,9 @@ class Article extends Base
     public function create()
     {
         //
-        $cate=(new CategoryModel())->tree();//分层展示数据
+        $cate=["双创培训"];
         $this->assign('cate',$cate);
-        return $this->fetch('article_add');
+        return $this->fetch('add');
     }
 
     /**
@@ -99,7 +48,7 @@ class Article extends Base
         //
         if ($request->isAjax(true)) {
             $data = $request->param();
-            $art = new ArticleModel();
+            $art = new SchoolModel();
             $res = $art->allowField(true)->save($data);
             if ($res) {
                 $state = [
@@ -136,11 +85,11 @@ class Article extends Base
     public function edit(Request $request)
     {
 
-        $info=ArticleModel::get($request->param('id'));
+        $info=SchoolModel::get($request->param('id'));
         $this->assign('info',$info);
-        $cate=(new CategoryModel())->tree();//分层展示数据
+        $cate=["双创培训"];
         $this->assign('cate',$cate);
-        return $this->fetch('article_edit');
+        return $this->fetch('edit');
     }
 
     /**
@@ -155,16 +104,16 @@ class Article extends Base
         //
         if ($request->isAjax(true)){
             $data=$request->param();
-            $article=new ArticleModel();
+            $article=new SchoolModel();
             $res=$article->allowField(true)->save($data,['id'=>$data['id']]);
             if($res){
                 $state=[
-                    'msg'=>'文章修改成功!',
+                    'msg'=>'修改成功!',
                     'code'=>1
                 ];
             }else{
                 $state=[
-                    'msg'=>'文章修改失败!',
+                    'msg'=>'修改失败!',
                     'code'=>0
                 ];
             }
@@ -183,8 +132,7 @@ class Article extends Base
     public function delete(Request $request)
     {
         $id=$request->param();
-
-        $res=ArticleModel::destroy($id['id'],true);
+        $res=SchoolModel::destroy($id['id'],true);
 
         if($res){
             $state=[
@@ -206,9 +154,9 @@ class Article extends Base
     {
         $file=$request->file('file');
         if($file->isValid()){//检验上传文件是否有效
-            $info=$file->rule('date')->move('static/uploads');//移动文件路径并重新命名
+            $info=$file->rule('date')->move('static/schools');//移动文件路径并重新命名
             $path=$info->getSaveName();//获取保存后文件的名字和位置
-            $filepath='uploads/'.$path;
+            $filepath='schools/'.$path;
 
             return $filepath;
         }
@@ -219,7 +167,7 @@ class Article extends Base
     {
         if ($request->isPost(true)){
             $data=$request->param();
-            $art=new ArticleModel();
+            $art=new SchoolModel();
             $res=$art->allowField(true)->save($data,['id'=>$data['id']]);
 
             if($res){
@@ -234,6 +182,4 @@ class Article extends Base
             return $state;
         }
     }
-
-
 }

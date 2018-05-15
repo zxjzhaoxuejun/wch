@@ -19,7 +19,7 @@ return [
     '__JS__'    => '/static/js',
     'captcha'  => [
         // 验证码字符集合
-        'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY',
+        'codeSet'  => '123456789',
         //// 验证码字体大小(px)
         'fontSize' => 18,
         // 是否画混淆曲线
