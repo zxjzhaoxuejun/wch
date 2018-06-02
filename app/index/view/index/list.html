@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-md-10 art-con">
                             <h3 class="art-con-title">{$y.art_title}</h3>
-                            <p class="art-keywords">{$y.abstract}</p>
+                            <p class="art-keywords">{$y.abstract|mb_substr=0,100,'utf-8'}</p>
                             <div style="color: #666666;float: right" class="visible-xs">发布时间： {$y.create_time|strtotime|date="Y-m-d",###}</div>
                         </div>
                     </a>

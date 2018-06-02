@@ -13,6 +13,7 @@ use app\admin\model\Article;
 use app\admin\model\MemberCompany;//会员单位
 use app\admin\model\MemberSign;//个人会员
 use app\admin\model\Counselor;//专家顾问
+use app\admin\model\Recruitment;
 use app\admin\model\System;
 use app\admin\model\Banner;//轮播图
 use app\admin\model\AboutUs;
@@ -71,7 +72,7 @@ class Index extends Controller {
         });
 
         $copy=System::get(1);//底部地址、联系电话、关键字
-
+        $this->assign('navTitle','首页');
         $this->assign('pageTitle','深圳市互联网创业创新服务促进会');
         $this->assign('pageId',0);
         $this->assign('services',$services);
@@ -104,7 +105,7 @@ class Index extends Controller {
         $banner=Banner::get(function ($query){//banner图
             $query->where('type',1)->limit(1)->order('create_time','desc');
         });
-        $leftNav=['业界动态','协会动态','协会新闻','政策信息'];
+        $leftNav=['业界动态','协会动态','会员资讯','政策信息'];
         if($data['id']==''){
             $yjData= Article::order('create_time','desc')->paginate(8, false, [
                 'query' => input('param.'),
@@ -148,7 +149,7 @@ class Index extends Controller {
             $yjData= Schools::order('create_time','desc')->paginate(8, false, [
                 'query' => input('param.'),
             ]);
-            $this->assign('navTitle','双创学院');
+            $this->assign('navTitle','网创学院');
         }else{
             $yjData= Schools::where('cate_id',$data['id'])->order('create_time','desc')->paginate(8, false, [
                 'query' => input('param.'),
@@ -156,7 +157,7 @@ class Index extends Controller {
             $this->assign('navTitle',$leftNav[$data['id']]);
         }
 
-        $this->assign('pageTitle','双创学院');
+        $this->assign('pageTitle','网创学院');
         $this->assign('pageId',6);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
@@ -181,7 +182,7 @@ class Index extends Controller {
         $banner=Banner::get(function ($query){//banner图
             $query->where('type',4)->limit(1)->order('create_time','desc');
         });
-        $leftNav=['协会简介','组织架构','协会领导','专家顾问','分支机构'];//2,3,4
+        $leftNav=['协会简介','组织架构','协会领导','网创智库','分支机构'];//2,3,4
         $con= AboutUs::get(1);
 
         $this->assign('pageTitle','关于协会');
@@ -206,6 +207,7 @@ class Index extends Controller {
                 'query' => input('param.'),
             ]);
             $this->assign('yjNews',$yjData);
+            $this->assign('titleName','职务');
             $this->assign('navTitle',$leftNav[$data['id']-2]);
             return $this->fetch('xh_mode');
         }else if($data['id']==5){//'专家顾问'
@@ -213,6 +215,7 @@ class Index extends Controller {
                 'query' => input('param.'),
             ]);
             $this->assign('yjNews',$yjData);
+            $this->assign('titleName','领域');
             $this->assign('navTitle',$leftNav[$data['id']-2]);
             return $this->fetch('xh_mode');
         }
@@ -313,8 +316,7 @@ class Index extends Controller {
 
         $actMode=New Article();
         $actMode->allowField(true)->save(['art_view'=>$con['art_view']+1],['id'=>$data['id']]);
-
-        $this->assign('pageTitle','资讯详情页');
+        $this->assign('pageTitle',$con['art_title']);
         $this->assign('pageId',5);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
@@ -379,8 +381,29 @@ class Index extends Controller {
         $actMode=New Schools();
         $actMode->allowField(true)->save(['art_view'=>$con['art_view']+1],['id'=>$data['id']]);
 
-        $this->assign('pageTitle','双创学院详情页');
+        $this->assign('pageTitle',$con['art_title']);
         $this->assign('pageId',6);
+        $this->assign('navList',$navList);
+        $this->assign('copyRight',$copy);
+        $this->assign('con',$con);
+
+
+        return $this->fetch('details');
+    }
+
+    /**
+     * 人才招聘
+     */
+    public function recruitment()
+    {
+
+        $navList=(new Nav())->navOut();//导航
+        $copy=System::get(1);//底部地址、联系电话、关键字
+        $con= Recruitment::get(1);
+        $actMode=New Recruitment();
+        $actMode->allowField(true)->save(['art_view'=>$con['art_view']+1],['id'=>1]);
+        $this->assign('pageTitle',$con['art_title']);
+        $this->assign('pageId',3);
         $this->assign('navList',$navList);
         $this->assign('copyRight',$copy);
         $this->assign('con',$con);
@@ -410,6 +433,17 @@ class Index extends Controller {
         return $this->fetch('services');
 
     }
+
+    /**
+     * 测试
+     */
+    public function test_page()
+    {
+
+        return $this->fetch('phone');
+
+    }
+
 
     /**
      * 下载页

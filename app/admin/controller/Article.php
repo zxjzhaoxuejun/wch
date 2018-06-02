@@ -99,6 +99,10 @@ class Article extends Base
         //
         if ($request->isAjax(true)) {
             $data = $request->param();
+            $data['create_time']=strtotime($data['create_time']);
+            if($data['create_time']==''){
+                $data['create_time']=time();
+            }
             $art = new ArticleModel();
             $res = $art->allowField(true)->save($data);
             if ($res) {
@@ -106,6 +110,16 @@ class Article extends Base
                     'msg' => '新增文章成功!',
                     'code' => 1
                 ];
+
+                $user_1=session('data');
+                $log=[
+                    'type'=>'资讯管理模块',
+                    'content'=>'成功添加一篇资讯文章!',
+                    'editor'=>$user_1['username'],
+                ];
+                $logmodel=new SystemLog();
+                $logmodel->allowField(true)->save($log);
+
             } else {
                 $state = [
                     'msg' => '新增文章失败!',
@@ -155,6 +169,10 @@ class Article extends Base
         //
         if ($request->isAjax(true)){
             $data=$request->param();
+            $data['create_time']=strtotime($data['create_time']);
+            if($data['create_time']==''){
+                $data['create_time']=time();
+            }
             $article=new ArticleModel();
             $res=$article->allowField(true)->save($data,['id'=>$data['id']]);
             if($res){

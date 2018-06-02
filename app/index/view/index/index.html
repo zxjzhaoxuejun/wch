@@ -93,7 +93,7 @@
                   <div class="new-nav-list">
                       <a href="javascript:;" class="new-list-items active-no">业界动态 | </a>
                       <a href="javascript:;" class="new-list-items">协会动态 | </a>
-                      <a href="javascript:;" class="new-list-items">协会新闻 | </a>
+                      <a href="javascript:;" class="new-list-items">会员资讯 | </a>
                       <a href="javascript:;" class="new-list-items">政策信息</a>
                   </div>
               </div>
@@ -113,7 +113,7 @@
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
                               <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
-                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
+                             
                               </a>
                           </div>
                       </li>
@@ -142,7 +142,7 @@
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
                               <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
-                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
+
                               </a>
                           </div>
                       </li>
@@ -170,7 +170,7 @@
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
                               <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
-                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
+
                               </a>
                           </div>
                       </li>
@@ -198,7 +198,7 @@
                               <a href="{:url('details')}?id={$n.id}">
                               <h4 class="media-heading">{$n.art_title|mb_substr=0,25,'utf-8'}</h4>
                               <p class="hidden-xs">{$n.abstract|mb_substr=0,70,'utf-8'}</p>
-                              <p class="visible-xs">{$n.abstract|mb_substr=0,25,'utf-8'}</p>
+
                               </a>
                           </div>
                       </li>
@@ -265,7 +265,7 @@
                   </a>
               </div>
           </div>
-
+          <!--//{:url('download_page')}-->
           <div class="col-md-2 col-sm-4 col-xs-6 no-all-padding">
               <div class="tag-mode">
                   <a href="{:url('download_page')}">
@@ -281,7 +281,7 @@
 
       <!--会员单位、双创学院-->
       <div class="row">
-          <div class="col-md-6 no-col-padding">
+          <div class="col-md-6 no-col-padding col-sm-12">
               <h1 class="page-header">
                   会员单位
                   <a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>
@@ -290,16 +290,15 @@
                   <ul class="list-group" id="con1">
                       {foreach $memberCompany as $m}
                       <li class="list-group-item">
-                          <span class="badge">{$m.create_time|strtotime|date="Y-m-d",###}</span>
-                          <a href="{:url('company_details')}?id={$m.id}" target="_blank">{$m.name|mb_substr=0,20,'utf-8'}</a>
+                          <a href="{:url('company_details')}?id={$m.id}" target="_blank">{$m.name|mb_substr=0,30,'utf-8'}</a>
                       </li>
                       {/foreach}
                   </ul>
               </div>
           </div>
-          <div class="col-md-6 no-col-padding" style="margin-left: 20px">
+          <div class="col-md-6 no-col-padding col-sm-12" style="margin-left: 20px">
               <h1 class="page-header">
-                  双创学院
+                  网创学院
                   <a href="{:url('school_list')}?id=0" class="more-class">MORE&gt;&gt;</a>
               </h1>
               <div  style="height: 380px;overflow: hidden;background: #ffffff">
@@ -318,7 +317,7 @@
                           <a href="{:url('school_details')}?id={$s.id}">
                           <h4 class="media-heading">{$s.art_title|mb_substr=0,25,'utf-8'}</h4>
                           <p class="hidden-xs">{$s.abstract|mb_substr=0,90,'utf-8'}</p>
-                          <p class="visible-xs">{$s.abstract|mb_substr=0,25,'utf-8'}</p>
+                          <p class="visible-xs">{$s.abstract|mb_substr=0,20,'utf-8'}</p>
                           </a>
                       </div>
                   </li>
@@ -364,7 +363,7 @@
                               <span class="glyphicon glyphicon-transfer img-icon"></span>
                           </div>
                           <div class="media-body">
-                              <h4 class="media-heading">双创辅助</h4>
+                              <h4 class="media-heading">双创辅导</h4>
                               {$services.assist}
                           </div>
                       </div>
@@ -431,10 +430,10 @@
           </div>
       </div>
 
-      <!--专家顾问-->
+      <!--网创智库-->
       <div class="row">
-          <div class="col-lg-12 col-md-12 no-col" style="background: #ffffff">
-              <h2 class="page-header">专家顾问<a href="{:url('about_us')}?id=5" class="more-class">MORE&gt;&gt;</a></h2>
+          <div class="col-lg-12 col-md-12 no-col" style="background: #ffffff;overflow: hidden">
+              <h2 class="page-header">网创智库<a href="{:url('about_us')}?id=5" class="more-class">MORE&gt;&gt;</a></h2>
               {foreach $counselor as $c}
               <div class="col-md-3 col-sm-6">
                   <a href="{:url('about_us')}?id=5">

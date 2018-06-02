@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<script src="js/jquery-1.11.0.js"></script>
+		<title>月份选择</title>
+		<style>
+			.right-div {
+				width: 65%;
+				float: left;
+				padding: 10px 0;
+			}
+			
+			.right-div >label {
+				display: inline-block;
+				width: 30%;
+				padding: 10px 8px!important;
+			}
+			
+			body,
+			input,
+			select,
+			textarea,option,.mui-input-row select{
+				font-size: 14px;
+			}
+			
+			.payment-mode-title {
+				padding: 15px 0;
+				text-align: center;
+			}
+			
+			.payment-mode .mui-input-row {
+				min-height: 40px;
+				height: auto;
+			}
+			
+			.month-check {
+				padding: 10px;
+				/*background: #f8f8f8;*/
+			}
+			
+			.unit {
+				font-size: 12px;
+				font-weight: normal;
+				position: absolute;
+				right: 10px;
+				top: 10px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #fff;">
+		<div class="payment-mode">
+			<h4 class="payment-mode-title">社保补缴</h4>
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>补缴年份选择:</label>
+					<select class="year-check">
+						<option value="2018">2018年</option>
+						<option value="2017">2017年</option>
+						<option value="2016">2016年</option>
+					</select>
+				</div>
+				<div class="mui-input-row" style="min-height: 40px;height: auto;display: none;">
+					<div class="month-check"></div>
+				</div>
+				<div class="mui-input-row">
+					<label>补缴总费用:</label>
+					<input type="password" class="mui-input-password" placeholder="请输入">
+					<b class="unit">元</b>
+				</div>
+				<div class="mui-input-row">
+					<label>手续费:</label>
+					<input type="password" class="mui-input-password" placeholder="请输入">
+					<b class="unit">元</b>
+				</div>
+				<div class="mui-input-row">
+					<label>年服务费:</label>
+					<input type="password" class="mui-input-password" placeholder="请输入">
+					<b class="unit">元</b>
+				</div>
+				<div class="mui-input-row">
+					<label>滞纳金:</label>
+					<input type="password" class="mui-input-password" placeholder="请输入">
+					<b class="unit">元</b>
+				</div>
+				<div class="mui-button-row" style="margin-top: 50px;">
+					<button type="button" class="mui-btn mui-btn-primary">提交</button>
+				</div>
+			</form>
+		</div>
+		<script>
+			$(function() {
+				var time = new Date;
+				var nowDate = time.getDate(); //当前日
+				var nowMonth = time.getMonth() + 1; //当前月
+				var nowYear = time.getFullYear(); //当前年
+				var monthList = '';
+				var nowList='';
+				var lastList='';
+				var beforLastList='';
+				if (nowDate > 20) { //日期大于20号
+					nowList+= month_list(nowYear, nowMonth, 'now');
+					lastList+= month_list(nowYear - 1, 12, 'last');
+					beforLastList+= month_list(nowYear - 2, 12 - nowMonth, 'befor');
+				} else {
+					nowList+= month_list(nowYear, nowMonth - 1, 'now');
+					lastList+= month_list(nowYear - 1, 12, 'last');
+					beforLastList+= month_list(nowYear - 2, 12 - nowMonth, 'befor');
+				}
+				$('.year-check').click(function(){
+					var year=$(this).children('option:checked').val();
+					if(nowYear-year==0){
+						monthList = nowList;
+					}else if(nowYear-year==1){
+						monthList = lastList;
+					}else{
+						monthList = beforLastList;
+					}
+					$('.month-check').children().remove();
+				        $(monthList).appendTo('.month-check');
+					$('.month-check').parent().show();
+				})
+				
+				/**
+				 * 月份列表显示
+				 * @param {Object} y 年份
+				 * @param {Object} nub 月份数
+				 * @param {Object} id 标签前缀
+				 */
+				function month_list(y, nub, id) {
+					var liTab = '';
+					if (id == 'befor') {
+						for (var m = nub; m <= 12; m++) {
+							if (m < 10) {
+								m = '0' + m;
+							} else {
+								m = m;
+							}
+							liTab += '<label for="' + id + m + '"><input name="month" value="' + m + '" type="checkbox" id="' + id + m + '">' + m + '月</label>';
+						}
+					} else {
+						for (var m = 1; m <= nub; m++) {
+							if (m < 10) {
+								m = '0' + m;
+							} else {
+								m = m;
+							}
+							liTab += '<label for="' + id + m + '"><input name="month" value="' + m + '" type="checkbox" id="' + id + m + '">' + m + '月</label>';
+						}
+					}
+					var html = '<label>' + y + '年度:</label><div class="right-div">' + liTab + '</div>';
+					return html;
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -13,9 +13,7 @@
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
 				<select name="cate_id" class="select">
-					{foreach $cate as $v}
-					<option value="{$v.cate_id}" {equal name='$v.cate_id' value='$info.cate_id'}selected{/equal}>{$v._cate_name}</option>
-					{/foreach}
+					<option value="0" selected>招聘信息</option>
 				</select>
 				</span> </div>
 		</div>
@@ -26,7 +24,7 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章摘要：</label>
+			<label class="form-label col-xs-4 col-sm-2">文章摘要：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么..." >{$info.abstract}</textarea>
 			</div>
@@ -43,30 +41,24 @@
 				<input type="text" class="input-text" placeholder="文章来源" value="{$info.art_sources}" name="art_sources">
 			</div>
 		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">发布时间：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" style="width: 300px" placeholder="发布时间" value="{$info.create_time}" name="create_time">
-			</div>
-		</div>
-		<div class="row cl">
-			<link rel="stylesheet" href="__STATIC__/lib/webuploader/css/webuploader.css" />
-			<label class="form-label col-xs-4 col-sm-2">缩略图：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<div id="uploader" class="wu-example">
-					<div class="btns-check">
-						<input id="art_thumb" type="text" name="art_thumb" value="{$info.art_thumb}" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图">
-						<div id="picker" class="webuploader-container" >
-							<div class="webuploader-pick" name="file">选择文件</div>
-						</div>
-						<!-- <a id="ctlBtn" class="btn btn-default" >开始上传</a> -->
-					</div>
-					<!--用来存放文件信息-->
-					<div id="thelist" class="uploader-list"></div>
-				</div>
-				<img src="__STATIC__/{$info.art_thumb}" alt="" style="width: 200px;height: 150px;margin-top: 4px;">
-			</div>
-		</div>
+		<!--<div class="row cl">-->
+			<!--<link rel="stylesheet" href="__STATIC__/lib/webuploader/css/webuploader.css" />-->
+			<!--<label class="form-label col-xs-4 col-sm-2">缩略图：</label>-->
+			<!--<div class="formControls col-xs-8 col-sm-9">-->
+				<!--<div id="uploader" class="wu-example">-->
+					<!--<div class="btns-check">-->
+						<!--<input id="art_thumb" type="text" name="art_thumb" value="{$info.art_thumb}" class="input-text pic-input" style="width: 300px;" readonly placeholder="请选择上传图">-->
+						<!--<div id="picker" class="webuploader-container" >-->
+							<!--<div class="webuploader-pick" name="file">选择文件</div>-->
+						<!--</div>-->
+						<!--&lt;!&ndash; <a id="ctlBtn" class="btn btn-default" >开始上传</a> &ndash;&gt;-->
+					<!--</div>-->
+					<!--&lt;!&ndash;用来存放文件信息&ndash;&gt;-->
+					<!--<div id="thelist" class="uploader-list"></div>-->
+				<!--</div>-->
+				<!--<img src="__STATIC__/{$info.art_thumb}" alt="" style="width: 200px;height: 150px;margin-top: 4px;">-->
+			<!--</div>-->
+		<!--</div>-->
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章内容：</label>
 			<div class="formControls col-xs-8 col-sm-9"> 
@@ -76,7 +68,7 @@
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存提交</button>
-				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</form>
@@ -120,7 +112,6 @@ $(function(){
                 maxlength:200,
 			},
 			abstract:{
-				required:true,
 				maxlength:200,
 			},
 
@@ -132,7 +123,7 @@ $(function(){
 		submitHandler:function(form){
             $.ajax({
                 type: 'POST',
-                url: "{:url('article/update')}",
+                url: "{:url('recruitment/update')}",
                 data:$('#form-article-add').serialize(),
                 dataType: 'json',
                 success: function(data){
@@ -174,7 +165,7 @@ $(function(){
             // swf文件路径
             swf: "__STATIC__/lib/webuploader/script/Uploader.swf",
             // 文件接收服务端。
-            server: "{:url('article/upload')}",
+            server: "{:url('recruitment/upload')}",
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',
