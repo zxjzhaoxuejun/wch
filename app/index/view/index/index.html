@@ -1,11 +1,5 @@
 {include file='public/header' /}
 {include file='public/nav' /}
-<div id=img1 style="Z-INDEX: 10000; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
-    visibility: visible;">
-    <a href="http://www.lanrentuku.com/" target="_blank">
-        <img src="images/pic.gif" width="80" height="80" border="0">
-    </a>
-</div>
 <div id="myCarousel" class="carousel slide banner">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators">
@@ -56,7 +50,11 @@
 </div>
 
 <div class="main container">
-
+    <!-- 悬浮飞图 -->
+    <div id="moveWindow" class="moveWindow">
+        <div id="removeMW" class="removeMW">&times;</div>
+        <a href="{:url('index/wc_issue')}" class="fly"><img src="__STATIC__/index/imgs/fly.png" alt="悬浮图"></a>
+    </div>
     <!--1-->
     <div class="row">
         <div class="col-md-6 col-sm-12 no-all-padding" style="margin-bottom: 10px">

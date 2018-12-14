@@ -1,21 +1,43 @@
 {include file='public/header' /}
 {include file='public/nav' /}
 <div class="container detail-container" style="margin-top: 135px;min-height: 500px;">
-    <article class="art-mode">
-        <div class="details-mode">
-            <h2>{$con.name}</h2>
-            <div class="aut">
-                <span>发布时间：{$con.create_time}</span>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-nav-mode">
+                <div class="wc-fb">
+                    <a href="{:url('index/wc_issue')}">网创发布</a>
+                </div>
+                <div class="login-in">
+                    <a href="{:url('index/login')}">登录</a>
+                </div>
+                <div class="reg-in">
+                    <a href="{:url('index/reg')}">注册</a>
+                </div>
+                <div class="qr-wx">
+                    <img src="__STATIC__/index/imgs/minwx.jpg" alt="小程序" />
+                    <p>扫码进入小程序</p>
+                </div>
             </div>
         </div>
-        <div class="article">
-            {$con.content}
+        <div class="col-md-9">
+            <article class="art-mode">
+                <div class="details-mode">
+                    <h2>{$con.name}</h2>
+                    <div class="aut">
+                        <span>发布时间：{$con.create_time}</span>
+                    </div>
+                </div>
+                <div class="article">
+                    {$con.content}
+                </div>
+                <div class="company-code" style="width: 220px;height: auto;margin: 120px auto 0 auto;text-align: center">
+                    <img src="__STATIC__/{$copyRight.qr_code}" alt="网创会二维码" style="width: 200px; height: 200px;">
+                    <p style="color: #0e90d2">关注深圳市网创会公众号</p>
+                </div>
+            </article>
         </div>
-        <div class="company-code" style="width: 220px;height: auto;margin: 120px auto 0 auto;text-align: center">
-            <img src="__STATIC__/{$copyRight.qr_code}" alt="网创会二维码" style="width: 200px; height: 200px;">
-            <p style="color: #0e90d2">关注深圳市网创会公众号</p>
-        </div>
-    </article>
+    </div>
+
 </div>
 
 {include file='public/footer' /}
