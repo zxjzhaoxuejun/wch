@@ -1,0 +1,33 @@
+{include file='aipiaward/head' /}
+<!--评选动态-->
+<div class="row vote-model" id="page4">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 30px">
+        <h1 class="page-title">
+            <a href="javascript:history.go(-1);" class="more-class">&lt;&lt; 返回</a>
+            评选动态
+            <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+        </h1>
+    </div>
+    {foreach $data as $p}
+    <div class="col-sm-6 col-md-3 col-xs-12">
+        <a href="{:url('vote/details')}?id={$p.id}">
+            <div class="thumbnail" style="height: 348px;overflow: hidden">
+                <img src="__STATIC__/{$p.art_thumb}" alt="...">
+                <div class="caption">
+                    <h3 style="text-align: left">{$p.art_title}</h3>
+                    <div>发布日期：{$p.create_time}</div>
+                    <div style="line-height: 25px;font-size:12px;color: #575757;">{$p.abstract}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {/foreach}
+
+    <div class="page-list">
+        {$page}
+    </div>
+</div>
+
+
+
+{include file='aipiaward/footer' /}

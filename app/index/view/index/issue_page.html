@@ -1,0 +1,53 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<div class="banner-pic">
+    <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
+</div>
+<div class="container list-mode" style="min-height: 500px;">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-nav">
+                <ul class="ul-left-mode">
+                    <li class="li-title">{$pageTitle}</li>
+                    <li class="li-nav active"><a href="{:url('login')}">登录</a></li>
+                    <li class="li-nav active"><a href="{:url('reg')}">注册</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="page-position">
+                <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
+                <a href="{:url('index')}">首页</a>
+                &gt;&gt;
+                <a href="#">{$navTitle}</a>
+            </div>
+            <div class="article" style="background: #fff;padding: 15px 10px;">
+                <ul class="con-list-mode">
+                    {foreach $list as $y}
+                    <li class="con-list-items">
+                        <a href="{:url('index/fb_details')}?id={$y.id}">
+                            <div class="con-md-2 left-time hidden-xs">
+                                <div class="d-time">{$y.create_time|strtotime|date="d",###}</div>
+                                <div class="m-time">{$y.create_time|strtotime|date="m",###}</div>
+                            </div>
+                            <div class="col-md-10 art-con">
+                                <h3 class="art-con-title">{$y.art_title}</h3>
+                                <p class="art-keywords">{$y.abstract|mb_substr=0,100,'utf-8'}</p>
+                                <div style="color: #666666;float: right" class="visible-xs">发布时间： {$y.create_time|strtotime|date="Y-m-d",###}</div>
+                            </div>
+                        </a>
+                    </li>
+                    {/foreach}
+                    <li class="page-list">
+                        {$list->render()}
+                    </li>
+                </ul>
+                {eq name="$count" value="0"}
+                <p style="color: #999;text-align: center;padding: 20px 0;">目前还没有发布文章...</p>
+                {/eq}
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file='public/footer' /}

@@ -1,0 +1,214 @@
+{include file='aipiaward/head' /}
+<!--艾丕奖简介-->
+<div class="row vote-model" id="page1">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 15px">
+        <h1 class="page-title">
+            艾丕奖简介
+            <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+        </h1>
+    </div>
+    <div class="col-md-4" style="padding: 10px;">
+        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="320" height="264"
+            poster="__STATIC__/index/imgs/1.jpg" data-setup="{}">
+            <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+            <source src="http://vjs.zencdn.net/v/oceans.ogg" type="video/ogg">
+            <track kind="captions" src="../shared/example-captions.vtt" srclang="en" label="English"></track>
+            <!-- Tracks need an ending tag thanks to IE9 -->
+            <track kind="subtitles" src="../shared/example-captions.vtt" srclang="en" label="English"></track>
+            <!-- Tracks need an ending tag thanks to IE9 -->
+        </video>
+    </div>
+    <div class="col-md-8">
+        <div class="vote-js">
+            {$con.content|mb_substr=0,800,'utf-8'}
+        </div>
+        <div class="vote-btn">
+            <a href="{:url('intro_des')}?id=2" class="btn btn-danger" style="margin-bottom: 6px;">活动背景</a>
+            <a href="{:url('intro_des')}?id=3" class="btn btn-danger" style="margin-bottom: 6px;">奖项介绍</a>
+            <a href="{:url('intro_des')}?id=4" class="btn btn-danger" style="margin-bottom: 6px;">区域设置</a>
+            <a href="{:url('intro_des')}?id=5" class="btn btn-danger" style="margin-bottom: 6px;">评选标准</a>
+            <a href="{:url('intro_des')}?id=6" class="btn btn-danger" style="margin-bottom: 6px;">奖项设置</a>
+            <a href="{:url('intro_des')}?id=7" class="btn btn-danger" style="margin-bottom: 6px;">时间安排</a>
+        </div>
+    </div>
+</div>
+
+<!--评选动态-->
+<div class="row vote-model" id="page2">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg">
+        <h1 class="page-title">
+            评选动态
+            <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+        </h1>
+    </div>
+
+
+    <div class="slide-content">
+        <div class="slide-item">
+            <div class="slide-item-box">
+                <div class="hd">
+                    <a href="javascript:;" class="prev prev-bg"></a>
+                    <a href="javascript:;" class="next next-bg"></a>
+                </div>
+                <div class="bd slide-item-body">
+                    <ul class="clearfix" style="overflow:visible">
+                        {foreach $art as $n}
+                        <li>
+                            <a href="{:url('vote/details')}?id={$n.id}">
+                                <div class="new-img">
+                                    <img src="__STATIC__/{$n.art_thumb}" alt="{$n.art_title}" style="max-height: 174px">
+                                </div>
+                                <div class="new-body">
+                                    <p class="new-body-title">{$n.art_title}</p>
+                                    <p>发布日期：{$n.create_time}</p>
+                                    <p class="new-body-text">{$n.abstract}</p>
+                                </div>
+                            </a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-links">
+            <a href="{:url('vote/art_list')}">更多动态 &gt; </a>
+        </div>
+    </div>
+
+
+
+</div>
+
+<!--专家评委-->
+<div class="row vote-model" id="page3">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 30px;">
+        <h1 class="page-title">
+            专家评委
+        </h1>
+    </div>
+    {foreach $specialist as $z}
+    <div class="col-sm-6 col-md-3 col-xs-12 pw-item">
+        <div class="thumbnail">
+            <img src="__STATIC__/{$z.pics}" alt="...">
+            <div class="caption">
+                <h3>{$z.name}</h3>
+                <p>
+                    <b>领域：</b>{$z.level}</p>
+                <p>
+                    <b>简介：</b>{$z.describe|mb_substr=0,90,'utf-8'}</p>
+                <p class="btn-mode">
+                    <a href="{:url('vote/professor_des')}?id={$z.id}" class="btn btn-danger" role="button">查看详情</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+
+    <div class="slide-links">
+        <a href="{:url('vote/specialist')}">查看更多评委 &gt; </a>
+    </div>
+</div>
+
+
+
+<!--入围品牌-->
+<div class="row vote-model" id="page4">
+    <div class="page-bg" style="margin-bottom: 30px;padding: 4px 0">
+        <ul class="page-title" style="padding: 0">
+            <li class="active">入围人物</li>
+            <li>入围企业</li>
+            <li>入围产品</li>
+        </ul>
+    </div>
+    <div class="project" style="display: block">
+    {foreach $project1 as $p}
+    <div class="col-sm-6 col-md-4 col-xs-12">
+        <div class="thumbnail" style="height: 380px;">
+            <img src="__STATIC__/{$p.imgs}" alt="...">
+            <div class="caption">
+                <h3>{$p.title}</h3>
+                <p style="max-height: 80px;">
+                    <b>入围理由：</b>{$p.reason}</p>
+                <p>
+                    <b>推荐单位：</b>{$p.referrer}</p>
+                <p>
+                    <b>网络投票：</b>
+                    <span class="poll-num">{$p.poll}</span>
+                </p>
+                <p class="btn-mode">
+                    <a href="javascript:void(0)" class="btn btn-danger poll-click" data-id="{$p.id}" role="button">投票</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+    </div>
+    <div class="project" style="display: none">
+        {foreach $project2 as $p}
+        <div class="col-sm-6 col-md-4 col-xs-12">
+            <div class="thumbnail" style="height: 380px;">
+                <img src="__STATIC__/{$p.imgs}" alt="...">
+                <div class="caption">
+                    <h3>{$p.title}</h3>
+                    <p style="max-height: 80px;">
+                        <b>入围理由：</b>{$p.reason}</p>
+                    <p>
+                        <b>推荐单位：</b>{$p.referrer}</p>
+                    <p>
+                        <b>网络投票：</b>
+                        <span class="poll-num">{$p.poll}</span>
+                    </p>
+                    <p class="btn-mode">
+                        <a href="javascript:void(0)" class="btn btn-danger poll-click" data-id="{$p.id}" role="button">投票</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+    <div class="project" style="display: none">
+        {foreach $project3 as $p}
+        <div class="col-sm-6 col-md-4 col-xs-12">
+            <div class="thumbnail" style="height: 380px;">
+                <img src="__STATIC__/{$p.imgs}" alt="...">
+                <div class="caption">
+                    <h3>{$p.title}</h3>
+                    <p style="max-height: 80px;">
+                        <b>入围理由：</b>{$p.reason}</p>
+                    <p>
+                        <b>推荐单位：</b>{$p.referrer}</p>
+                    <p>
+                        <b>网络投票：</b>
+                        <span class="poll-num">{$p.poll}</span>
+                    </p>
+                    <p class="btn-mode">
+                        <a href="javascript:void(0)" class="btn btn-danger poll-click" data-id="{$p.id}" role="button">投票</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+    <div class="slide-links">
+        <a href="{:url('vote/poll_list')}?id=1" id="pollIndex">更多入围品牌 &gt; </a>
+    </div>
+</div>
+
+
+<!--合作机构-->
+<div class="row" id="page5">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 25px">
+        <h1 class="page-title">
+            合作机构
+        </h1>
+    </div>
+    {foreach $parts as $j}
+    <div class="col-xs-6 col-md-3">
+        <a href="{$j.url}" class="thumbnail" target="_blank">
+            <img src="__STATIC__/{$j.logo}" alt="{$j.name}" style="max-height: 45px;width: 100%">
+        </a>
+    </div>
+    {/foreach}
+</div>
+{include file='aipiaward/footer' /}

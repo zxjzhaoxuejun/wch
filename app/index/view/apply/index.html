@@ -1,0 +1,338 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--协会指南-->
+<div class="banner-pic">
+    <img src="__STATIC__/index/imgs/form.jpg" class="logo-img" alt="轮播图" style="width:100%;">
+</div>
+<div class="container list-mode" style="padding-top: 0px;">
+            <div class="article" style="background: #fff;padding: 20px 10px;">
+                <div class="title-con">
+                    <p>
+                        <b style="color: #323232;font-size: 14px;">深人社函〔2018〕2042号通知公告：</b><span style="color: red;">深圳市人力资源和社会保障局关于印发2018年深圳技能大赛------网页制作职业技能竞赛实施方案和技术文件的通知</span>。
+                        <a href="http://www.szhrss.gov.cn/tzgg/201811/t20181114_14499925.htm?from=timeline&isappinstalled=0" target="_blank" style="color: #0f9ae0;">详见深圳市人力资源和社会保障局官方网站：http://www.szhrss.gov.cn</a>
+                    </p>
+                    <p>
+                        为全面贯彻落实党的十九大提出“建设知识型、技能型、创新型劳动者大军，弘扬劳模精神和工匠精神，营造劳动光荣的社会风尚和精益求精的敬业风气”的要求，根据《深圳市人力资源和社会保障局关于组织开展2018年深圳技能大赛活动的通知》（深人社发〔2018〕53号）总体安排，决定组织以“新时代、新技能、新梦想”为主题的2018年深圳技能大赛——网页制作职业技能竞赛。
+                    </p>
+                    <p style="font-weight: 600;">本次竞赛活动由深圳市职业技能鉴定指导办公室指导，由深圳市互联网创业创新服务促进会主办，腾讯众创空间、赛格众创空间，华南城电子商务产业园协办。以及第一商务控股（289数字半岛）、深圳朋年投资集团、蚂蚁帮产服集团、京东云.博实永道（深圳）联创中心、中科美城、深商企业公馆等联合支持。欢迎大家踊跃报名！参赛咨询，陈老师：<a href="tel:13590246045" style="color: #0e90d2;">135 9024 6045</a></p>
+                </div>
+                <form class="form-horizontal" role="form" id="r-form">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>姓名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="name"
+                                       placeholder="请输入姓名">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>身份证号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="identity"
+                                       placeholder="请输入身份证">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label for="selectList_1" class="col-sm-4 control-label"><strong style="color: red">*</strong>性别</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="sex" id="selectList_1">
+                                    <option value="1" selected>男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>出生日期</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control Wdate" name="date" readonly
+                                       placeholder="请输入出生日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>竞赛项目工龄</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="seniority"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>社保卡电脑号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="card"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label for="selectList_2" class="col-sm-4 control-label"><strong style="color: red">*</strong>学历</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="education" id="selectList_2">
+                                    <option value="1" selected>小学</option>
+                                    <option value="2">初中</option>
+                                    <option value="3">高中</option>
+                                    <option value="4">职高</option>
+                                    <option value="5">中专</option>
+                                    <option value="6">中技</option>
+                                    <option value="7">高技</option>
+                                    <option value="8">大专</option>
+                                    <option value="9">本科</option>
+                                    <option value="10">硕士</option>
+                                    <option value="11">博士</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label for="selectList_3" class="col-sm-4 control-label"><strong style="color: red">*</strong>现有职业资格等级</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="level" id="selectList_3">
+                                    <option value="1" selected>初级工</option>
+                                    <option value="2">中级工</option>
+                                    <option value="3">高级工</option>
+                                    <option value="4">技师</option>
+                                    <option value="5">高级技师</option>
+                                    <option value="6">无等级</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>现有职业资格</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="job"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>移动电话</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="tel"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="col-sm-4 control-label"><strong style="color: red">*</strong>单位名称（全称）</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="company"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label for="selectList" class="col-sm-4 control-label"><strong style="color: red">*</strong>推荐机构</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="organization" id="selectList">
+                                    <option value="1" selected>深圳市互联网创业创新服务促进会</option>
+                                    <option value="2">腾讯众创空间</option>
+                                    <option value="3">赛格众创空间</option>
+                                    <option value="4">华南城电商产业园</option>
+									<option value="5">第一商务控股（289数字半岛）</option>
+									<option value="6">深圳朋年投资集团</option>
+                                    <option value="7">蚂蚁帮产服集团</option>
+									<option value="8">京东云.博实永道（深圳）联创中心</option>
+									<option value="9">中科美城</option>
+									<option value="10">深商企业公馆</option>
+                                    <option value="11">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label for="selectList_4" class="col-sm-4 control-label"><strong style="color: red">*</strong>户籍所在地</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="city" id="selectList_4">
+                                    <option value="1" selected>本市</option>
+                                    <option value="2">市外省内</option>
+                                    <option value="3">省外</option>
+                                    <option value="4">境外</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><strong style="color: red">*</strong>个人照片</label>
+                        <div class="col-sm-8">
+                            <input type="file" id="avator">
+                            <input type="hidden" name="pic" id="avatorVal" value="">
+                            <p style="color: #ff6600;">请选择jpg/png格式的（2寸白底）照片，上传照片大小不能超过200k!</p>
+                            <img class="preview" alt="预览头像" style="max-width: 90px;height: 120px;display: none">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><strong style="color: red">*</strong>工作简历</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="5" placeholder=""
+                                      name="resume"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="submit" class="btn btn-default">提交申请</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="title-con">
+                    <p><b style="color: red">备注：</b>本次竞赛限深圳市参保及工作的职业人员参赛。凡预报名资料通过审核（重点提醒：报名单位名称与个人社保单位名称需要一致！），组委会会通知收取盖章报名资料及个人社保参保证明等正式报名资料以提交主管部门进行备案。</p>
+                </div>
+                <div class="title-con">
+                    <p><b style="color: red">附件：</b></p>
+                    <p>
+                        <a href="__STATIC__/download/20181120/P020181114338917833595.doc" style="color:#0e90d2;">1.2018年深圳技能大赛——网页制作职业技能竞赛实施方案.doc</a>
+                    </p>
+                    <p>
+                        <a href="__STATIC__/download/20181120/P020181114338918063722.doc" style="color:#0e90d2;">2.2018年深圳技能大赛——网页制作职业技能竞赛技术文件.doc</a>
+                    </p>
+                    <p>
+                        <a href="__STATIC__/download/20181120/P020181114338917833596.doc" style="color:#0e90d2;">3.2018年深圳技能大赛——网页制作职业技能竞赛个人报名表.doc</a>
+                    </p>
+                </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script>
+    $(function () {
+
+        $('#avator').change(function () {
+            if (this.files.length != 0) {
+                var file = this.files[0],
+                    reader = new FileReader();
+                if (!reader) {
+                    this.value = '';
+                    return;
+                };
+                console.log(file.size)
+                if (file.size >= 1024 * 1024 / 5.12) {
+                    layer.msg("请上传小于200kb的图片!")
+                    return
+                }
+                reader.onload = function (e) {
+                    this.value = '';
+                    $('form .preview').attr('src', e.target.result)
+                    $('form .preview').fadeIn().css('display','block')
+                    $('#avatorVal').val(e.target.result)
+                };
+                reader.readAsDataURL(file);
+            };
+        })
+
+        //表单验证
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^1\d{10}$/;
+            //		alert(mobile.test(value))
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+        $("#r-form").validate({
+            rules: {
+                identity: {
+                    required: true,
+                    maxlength:18,
+                    minlength:18,
+                },
+                name: {
+                    required: true,
+                    maxlength:10,
+                },
+                sex: {
+                    required: true
+                },
+                date: {
+                    required: true
+                },
+                seniority: {
+                    required: true,
+                    maxlength:3,
+                },
+                card: {
+                    required: true,
+                    maxlength:11,
+                },
+                education: {
+                    required: true
+                },
+                level: {
+                    required: true
+                },
+                job: {
+                    required: true,
+                    maxlength:20,
+                },
+                tel: {
+                    required: true,
+                    digits: true,
+                    isMobile: true
+                },
+                organization:{
+                    required: true
+                },
+                company: {
+                    required: true,
+                    maxlength:100,
+                },
+                pic:{
+                    required: true
+                },
+                resume: {
+                    required: true,
+                    maxlength: 500,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                if($('#avatorVal').val()==''){
+                    layer.msg('个人照片必选')
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('apply/save')}",
+                    data: $("#r-form").serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                window.location.href = window.location.href;
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 5, time: 1000});
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.msg);
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+
+{include file='public/footer' /}

@@ -1,0 +1,588 @@
+{include file='public/header' /}
+<div class="menu-nav">
+    <div class="menu-list">
+        <a href="{:url('index')}">协会官网</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page1">要闻聚焦</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page2">主旨演讲</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page3">出席嘉宾</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page4">大会直播</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page5">科创之星</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page6">评审专家</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page7">评选报名</a>
+    </div>
+    <div class="menu-list">
+        <a href="#page8">联系我们</a>
+    </div>
+</div>
+    <header class="head-img">
+        <img src="__STATIC__/index/img/bg_2.jpg" class="b-img" alt="活动banner">
+    </header>
+    <div class="main container">
+    <!--1-->
+        <div class="row" id="page1">
+        <div class="col-md-6 col-sm-12 no-all-padding" style="margin-bottom: 10px">
+            <div id="leftBanner" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators" style="width:100%;left: 0;margin-left: 0;padding-right:1%;bottom: 5px;text-align: right">
+                    {foreach $hotNews as $i=>$v}
+                    {eq name="$i" value="0"}
+                    <li data-target="#leftBanner" data-slide-to="{$i}" class="active"></li>
+                    {else\}
+                    <li data-target="#leftBanner" data-slide-to="{$i}"></li>
+                    {/eq}
+                    {/foreach}
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    {foreach $hotNews as $i=>$v}
+                    {eq name="$i" value="0"}
+                    <div class="item active">
+                       <img src="__STATIC__/{$v.art_thumb}" alt="占位图" style="min-height: 230px;max-height: 352px;">
+                    </div>
+                    {else\}
+                    <div class="item">
+                        <img src="__STATIC__/{$v.art_thumb}" alt="占位图" style="min-height:230px;max-height: 352px;">
+                    </div>
+                    {/eq}
+                    {/foreach}
+
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="left carousel-control" href="#leftBanner" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#leftBanner" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 no-all-padding">
+            <div class="new-nav">
+                <div class="title-tag">
+                    <span class="glyphicon glyphicon-book" style="color:#1779b8"></span>
+                    <a href="{:url('new_list')}?id=6" class="title-name">要闻聚焦</a>
+                </div>
+                <a href="{:url('new_list')}?id=6" class="more-class" style="text-align: right">MORE&gt;&gt;</a>
+            </div>
+
+            <!--业界动态-->
+            <div class="new-1" id="news01">
+                <ul class="media-list">
+                    {foreach $yjNews as $i=>$n}
+                    <li class="list-group-item">
+                        <span class="badge hidden-xs">{$n.create_time|strtotime|date="Y-m-d",###}</span>
+                        <a href="{:url('details')}?id={$n.id}">● {$n.art_title|mb_substr=0,20,'utf-8'}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+    </div>
+</div>
+        <!--主旨演讲-->
+        <div class="row" id="page2">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header">
+                    主旨演讲
+                    <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+                </h1>
+            </div>
+            {foreach $sd as $i=>$s}
+            <div class="col-md-4">
+                <img src="__STATIC__/{$s.pic}" alt="占位图" style="max-width: 100%;height: auto">
+                <div class="p-text" style="margin-top: 15px">
+                    <div class="text-center">{$s.title}</div>
+                    <div class="text-center" style="margin: 10px 0"><b>{$s.name}</b> {$s.level}</div>
+                </div>
+            </div>
+            {/foreach}
+
+        </div>
+
+        <!--出席嘉宾-->
+        <div class="row" id="page3">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header">
+                    出席嘉宾
+                    <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+                </h1>
+            </div>
+            <div class="col-md-12">
+                <div id="demo5" class="scroll-img">
+                    <ul>
+                        {foreach $honors as $h}
+                        <li>
+                            <a href="#"><img src="__STATIC__/{$h.pic}" alt="{$h.name}" style="max-width: 124px;"></a>
+                            <p>{$h.name}</p>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div id="demo5-btn" class="text-center">
+                    <button class="btn" id="demo5-backward"><i class="icon-chevron-left"></i> 上一张</button>
+                    <button class="btn" id="demo5-forward">下一张 <i class="icon-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!--大会直播-->
+        <div class="row" id="page4">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header">
+                    大会直播
+                </h1>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="http://www.soucent.com/course/216449/pc/play?_shareId=CNTDAHF120&lessonId=225584" target="_blank">
+                <img src="__STATIC__/index/img/3_1.png" class="hand-icon">
+                深港科创大会视频直播 &gt;&gt;</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="http://qianhuiwuyou.pailixiang.com/album_ia106188860.html?from=timeline&isappinstalled=0" target="_blank">
+                <img src="__STATIC__/index/img/3_2.png" class="hand-icon">
+                深港科创大会图片直播 &gt;&gt;</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="http://www.soucent.com/course/play/form?courseId=216509&source=homepage&_shareId=CNTDAHF120&from=singlemessage&isappinstalled=0" target="_blank">
+                <img src="__STATIC__/index/img/3_3.png" class="hand-icon">
+                深港科技众创空间发展论坛视频直播 &gt;&gt;</a>
+            </div>
+        </div>
+
+        <!--科创之星-->
+        <div class="row" id="page5">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header text-center">
+                    科创之星
+                </h1>
+            </div>
+            <div class="col-md-12">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" style="padding: 0;background: #f1f1f1;border: 1px solid #1779b8">
+                        <a href="#home" data-toggle="tab" style="border-radius:0;margin-right: 0;border: none">评选简介</a>
+                    </li>
+                    <li class="col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" style="padding: 0;background: #f1f1f1;border: 1px solid #1779b8">
+                        <a href="#lc" data-toggle="tab" style="border-radius:0;margin-right: 0;border: none">评选流程</a>
+                    </li>
+                    <li class="col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" style="padding: 0;background: #f1f1f1;border: 1px solid #1779b8;">
+                        <a href="#jp" data-toggle="tab" style="border-radius:0;margin-right: 0;border: none">奖项设置</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="home">
+                        <p style="line-height: 28px;">7月18日，由深圳市科学技术协会、香港科技社团联盟发起，深圳市互联网创业创新服务促进会、深圳市骐骥前海科技产业研究院承办的主题为“新时代的科技创新与融合发展”的2018深港科创大会暨科创之星评选说明会在深圳五洲宾馆隆重举行，大会吸引了超过200名来自深港两地科创产业的政府领导、协会专家、大学教授以及相关从业人员莅临，大家济济一堂，共话深港科创融合百年大计。</p>
+                        <p style="line-height: 28px;">依托深港科创大会， 2018深港科创之星评选活动的隆重启动，预示着在今后的4个月里，活动组委会将会优选深港两地在科创领域拥有重大突破、或具有广泛影响力，或具有代表性的优秀科创企业家和优秀科创项目以及优秀科创项目，经网络投票、专家终审等评选出科创之星企业TOP10、科创之星项目TOP10、科创之星人物TOP10，给予一定的创业扶持。深港科创之星评选活动成功启动将能有效推动政府政策落地实施，为深港澳大湾区吸纳创新人才，凝聚创新能量提供保障。深港科创之星评选活动与深港科创大会相伴而生，每年举行一次，是深港两地规模最大，也是最具权威，最系统的一次科创类评选活动。</p>
+                    </div>
+                    <div class="tab-pane fade" id="lc">
+                        <p style="line-height: 28px;">深港科创之心评选活动将历时4个月，从2018年7月18日-12月18日，具体如下：</p>
+                        <p style="line-height: 28px;">7月18日-9月30日：海选报名</p>
+                        <p style="line-height: 28px;">10月1日-10月31日：网络投票</p>
+                        <p style="line-height: 28px;">11月1日-11月31日：活动决选</p>
+                        <p style="line-height: 28px;">12月18日：举行颁奖典礼，颁发所有奖项</p>
+                    </div>
+                    <div class="tab-pane fade" id="jp">
+                        <p style="line-height: 28px;"><b>1、参选条件</b></p>
+                        <p style="line-height: 28px;">在科创领域拥有重大突破、具有广泛影响力、具有代表性的优秀科创企业、项目、人物</p>
+                        <p style="line-height: 28px;"><b>2、参选范围</b></p>
+                        <p style="line-height: 28px;">符合以下行业领域的创新企业、创新个人、创新项目均可报名参选：</p>
+                        <p style="line-height: 28px;">物联网、金融科技、人工智能、节能环保、新一代信息技术、生物及生命健康、高端装备制造、新材料、新能源及新能源汽车、科创院所及相关部门、科技金融相关机构、科创孵化机服务等。</p>
+                        <p style="line-height: 28px;"><b>3、奖项设置：</b></p>
+                        <p style="line-height: 28px;">企业类：科创之星企业奖TOP10</p>
+                        <p style="line-height: 28px;">项目类：科创之星项目奖TOP10</p>
+                        <p style="line-height: 28px;">人物类：科创之星人物奖TOP10	</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--评审专家-->
+        <div class="row" id="page6">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header text-center">
+                    评审专家
+                    <a href="{:url('review')}" class="more-class">MORE&gt;&gt;</a>
+                </h1>
+            </div>
+            <div class="col-md-12" style="margin-top: -35px;">
+                <ul class="media-list">
+                    {foreach $reviews as $r}
+                        <li class="media col-md-4" style="padding-top: 20px">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="__STATIC__/{$r.pic}"
+                                     alt="通用的占位符图像">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{$r.name}</h4>
+                                <div>
+                                    职务：{$r.level}
+                                </div>
+                                <div>
+                                    简介：{$r.introduce|mb_substr=0,20,'utf-8'}
+                                </div>
+                            </div>
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+
+        <!--评选报名-->
+        <div class="row" id="page7">
+            <div class="col-md-12 h-bg">
+                <h1 class="page-header text-center">
+                    评选报名
+                    <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+                </h1>
+            </div>
+
+            <div class="col-md-12" style="color: #ff6600">
+                说明：科技产业相关企业、社会组织、高等院校及从业人员均可报名，包括且不限于：互联网、金融科技、人工智能、节能环保、新一代信息技术、生物及生命健康、高端装备制造、新材料、新能源及新能源汽车、科创院及相关部门、科技金融相关机构、科创孵化及服务。
+            </div>
+
+            <div class="col-md-8 col-lg-8 form-list col-md-offset-2 col-lg-offset-2">
+                <form class="form form-horizontal" id="defaultForm">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">公司名称</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="输入公司名称" name="company">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申报奖项</label>
+                        <div class="col-md-9">
+                            <select class="form-control" name="prize">
+                                <option value="">请选择</option>
+                                <option value="1">1、科创之星企业奖TOP10</option>
+                                <option value="2">2、科创之星项目奖TOP10</option>
+                                <option value="3">3、科创之星人物奖TOP10</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="project">
+                        <label class="col-md-2 control-label">项目名称</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="输入项目名称" name="project">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申报人姓名</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="输入申报人姓名" name="link_man">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申报人职务</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="输入申报人职务" name="level">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申报人手机</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="输入联系人手机" name="tel">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <link rel="stylesheet" href="__STATIC__/lib/webuploader/css/webuploader.css" />
+                        <label class="col-md-2 control-label">上传申报表</label>
+                        <div class="col-md-9">
+                            <div id="uploader" class="wu-example">
+                                <div class="btns-check">
+                                    <input  type="text" name="material" value="" class="form-control pic-input" style="width: 300px;" readonly placeholder="请选择上传资料">
+                                    <div id="picker" class="webuploader-container" >
+                                        <div class="webuploader-pick" name="file">选择文件</div>
+                                    </div>
+                                    <a href="__STATIC__/uploads/2018table.xlsx" class="btn btn-primary" style="background: #ff6600">下载申请表</a>
+                                    <!-- <a id="ctlBtn" class="btn btn-default" >开始上传</a> -->
+                                </div>
+                                <!--用来存放文件信息-->
+                                <div id="thelist" class="uploader-list"></div>
+                            </div>
+                            <p style="color: #ff6600">只能上传pdf,doc,docx,ppt,pptx,zip,xls,xlsx等格式文件，文件大小不能超过10MB</p>
+                        </div>
+                    </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" style="background: #1779b8">提交报名</button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+<script type="text/javascript" src="__STATIC__/lib/webuploader/script/webuploader.js"></script>
+<script>
+    $(function () {
+        $('#demo5').scrollbox({
+            direction: 'h',
+            distance: 144
+        });
+        $('#demo5-backward').click(function () {
+            $('#demo5').trigger('backward');
+        });
+        $('#demo5-forward').click(function () {
+            $('#demo5').trigger('forward');
+        });
+    });
+
+    $(document).ready(function() {
+        $('select[name="prize"]').change(function () {
+            console.log($(this).val());
+            if($(this).val()==2){
+                $('#project').show();
+            }else{
+                $('#project').hide();
+            }
+        })
+        $('#defaultForm').bootstrapValidator({
+            message: '校验信息',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                company: {
+                    validators: {
+                        notEmpty: {
+                            message: '公司名称不能为空！'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 100,
+                            message: '公司名称输入长度2-100位之间'
+                        }
+                    }
+                },
+                prize:{
+                    validators: {
+                        notEmpty: {
+                            message: '申报奖项不能为空！'
+                        }
+                    }
+                },
+                project: {
+                    validators: {
+                        notEmpty: {
+                            message: '项目名称不能为空！'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 100,
+                            message: '项目名称输入长度2-100位之间'
+                        }
+                    }
+                },
+                link_man:{
+                    validators: {
+                        notEmpty: {
+                            message: '申报人不能为空！'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 20,
+                            message: '申报人名输入长度2-20位之间'
+                        }
+                    }
+                },
+                level:{
+                    validators: {
+                        notEmpty: {
+                            message: '申报人职务不能为空！'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 20,
+                            message: '申报人职务输入长度2-40位之间'
+                        }
+                    }
+                },
+                tel:{
+                    validators: {
+                        notEmpty: {
+                            message: '手机号不能为空！'
+                        },
+                        stringLength: {
+                            min: 11,
+                            max: 11,
+                            message: '手机号输入不符要求'
+                        }
+                    }
+                },
+                material:{
+                    validators: {
+                        notEmpty: {
+                            message: '请上传申请表！'
+                        }
+                    }
+                }
+            },
+            submitButtons: 'button[type="submit"]',
+            submitHandler: function(validator, form,submitButtons) {
+                // 实用ajax提交表单
+                $.post("{:url('enroll/save')}", form.serialize(), function(result) {
+                    console.log(result);
+                    if(result.code===1){
+                        alert(result.msg);
+                        window.location.href=window.location.href;
+                    }else{
+                        alert(result.msg);
+                    }
+                }, 'json');
+            }
+        });
+    });
+
+    // 文件上传
+    $(function() {
+        var $ = jQuery,
+            $list = $('#thelist'),
+            $btn = $('#ctlBtn'),
+            state = 'pending',
+            uploader;
+        var thumbnailWidth=50;
+        var thumbnailHeight=50;
+        var allMaxSize=10;
+
+        uploader = WebUploader.create({
+            // 选完文件后，是否自动上传。
+            auto: true,
+
+            // 不压缩image
+            resize: false,
+            // swf文件路径
+            swf: "__STATIC__/lib/webuploader/script/Uploader.swf",
+            // 文件接收服务端。
+            server: "{:url('enroll/upload')}",
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#picker',
+
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Files',
+                extensions: 'pdf,doc,docx,ppt,pptx,zip,xls,xlsx',
+                mimeTypes: 'text/*'
+                //word
+                +',application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                //ppt
+                +',application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation'
+                +',application/pdf'
+                +',application/zip'
+                +',application/vnd.ms-excel	application/x-excel'
+                +',application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            },
+            fileSizeLimit: allMaxSize * 1024 * 1024,//限制上传所有文件大小10M
+//
+        });
+
+        // 当有文件添加进来的时候
+
+        uploader.on( 'fileQueued', function( file ) {
+            $('.up-name-pic').remove();
+            $list.append( '<div id="' + file.id + '" class="item up-name-pic">' +
+                '<span class="info">' + file.name + '</span>' +
+                '<span class="state">等待上传...</span>' +
+                '</div>' );
+        });
+
+
+
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress .progress-bar');
+
+            // 避免重复创建
+            if ( !$percent.length ) {
+                $percent = $('<div class="progress progress-striped active">' +
+                    '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                    '</div>' +
+                    '</div>').appendTo( $li ).find('.progress-bar');
+            }
+
+            $li.find('span.state').text('上传中');
+
+            $percent.css( 'width', percentage * 100 + '%' );
+        });
+
+        uploader.on( 'uploadSuccess', function( file,response) { //file {File}File对象//•response {Object}服务端返回的数据
+//            console.log(response);
+            $('.pic-input').val(response._raw);
+            $('#imgThumb').attr('src','__STATIC__/'+response._raw).show();
+            $('.up-name-pic').remove();
+//			$( '#'+file.id ).find('span.state').text('已上传');
+        });
+
+        uploader.on( 'uploadError', function( file ) {
+            $( '#'+file.id ).find('span.state').text('上传出错');
+        });
+
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').fadeOut();
+        });
+
+        uploader.on( 'all', function( type ) {
+            if ( type === 'startUpload' ) {
+                state = 'uploading';
+            } else if ( type === 'stopUpload' ) {
+                state = 'paused';
+            } else if ( type === 'uploadFinished' ) {
+                state = 'done';
+            }
+
+            if ( state === 'uploading' ) {
+                $btn.text('暂停上传');
+            } else {
+                $btn.text('开始上传');
+            }
+        });
+
+        //  验证大小
+        uploader.on("error",function (type){
+            if(type == "F_DUPLICATE"){
+                alert("系统提示","请不要重复选择文件！");
+            }else if(type == "Q_EXCEED_SIZE_LIMIT"){
+                alert("系统提示:所选附件总大小不可超过" + allMaxSize + "M哦！");
+            }
+
+        });
+
+        $btn.on( 'click', function() {
+            if ( state === 'uploading' ) {
+                uploader.stop();
+            } else {
+                uploader.upload();
+            }
+        });
+    });
+
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+
+{include file='public/h_footer' /}

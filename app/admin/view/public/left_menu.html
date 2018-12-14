@@ -8,6 +8,7 @@
                     <li><a data-href="{:url('article/activity')}" data-title="协会活动" href="javascript:void(0)">协会活动</a></li>
                     <li><a data-href="{:url('article/x_news')}" data-title="会员资讯" href="javascript:void(0)">会员资讯</a></li>
                     <li><a data-href="{:url('article/z_info')}" data-title="政策信息" href="javascript:void(0)">政策信息</a></li>
+                    <li><a data-href="{:url('article/h_info')}" data-title="活动焦点" href="javascript:void(0)">活动焦点</a></li>
                 </ul>
             </dd>
         </dl>
@@ -42,11 +43,7 @@
             <dd>
                 <ul>
                     <li><a data-href="{:url('services/index')}" data-title="服务列表" href="javascript:;">服务列表</a></li>
-                    <!--<li><a data-href="{:url('services/index')}" data-title="资源对接" href="javascript:void(0)">资源对接</a></li>-->
-                    <!--<li><a data-href="{:url('services/index')}" data-title="双创辅助" href="javascript:;">双创辅助</a></li>-->
-                    <!--<li><a data-href="{:url('services/index')}" data-title="项目申请" href="javascript:void(0)">项目申请</a></li>-->
-                    <!--<li><a data-href="{:url('services/index')}" data-title="投融服务" href="javascript:;">投融服务</a></li>-->
-                    <!--<li><a data-href="{:url('services/index')}" data-title="会议会展" href="javascript:void(0)">会议会展</a></li>-->
+                    <li><a data-href="{:url('apply/index')}" data-title="网页大赛" href="javascript:void(0)">网页大赛报名</a></li>
                     <!--<li><a data-href="{:url('services/index')}" data-title="年度评选" href="javascript:;">年度评选</a></li>-->
                     <!--<li><a data-href="{:url('services/index')}" data-title="宣传推广" href="javascript:void(0)">宣传推广</a></li>-->
                 </ul>
@@ -95,6 +92,38 @@
                 </ul>
             </dd>
         </dl>
+        <dl id="menu-special">
+            <dt><i class="Hui-iconfont">&#xe6e1;</i> 活动专题<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('speech/index')}" data-title="主旨演讲" href="javascript:void(0)">主旨演讲</a></li>
+                    <li><a data-href="{:url('honored/index')}" data-title="出席嘉宾" href="javascript:void(0)">出席嘉宾</a></li>
+                    <li><a data-href="{:url('review/index')}" data-title="评审专家" href="javascript:void(0)">评审专家</a></li>
+                    <li><a data-href="{:url('enroll/index')}" data-title="评选报名" href="javascript:void(0)">评选报名</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+        <dl id="menu-vote">
+            <dt><i class="Hui-iconfont">&#xe6e1;</i> 艾丕奖专题<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('intro/index')}" data-title="艾丕奖简介" href="javascript:void(0)">艾丕奖简介</a></li>
+                    <li><a data-href="{:url('intro/bj')}" data-title="活动背景" href="javascript:void(0)">活动背景</a></li>
+                    <li><a data-href="{:url('intro/sz')}" data-title="奖项介绍" href="javascript:void(0)">奖项介绍</a></li>
+                    <li><a data-href="{:url('intro/bz')}" data-title="区域设置" href="javascript:void(0)">区域设置</a></li>
+                    <li><a data-href="{:url('intro/ap')}" data-title="评选标准" href="javascript:void(0)">评选标准</a></li>
+                    <li><a data-href="{:url('intro/jx')}" data-title="奖项设置" href="javascript:void(0)">奖项设置</a></li>
+                    <li><a data-href="{:url('intro/sj')}" data-title="时间安排" href="javascript:void(0)">时间安排</a></li>
+                    <li><a data-href="{:url('selection/index')}" data-title="评选动态" href="javascript:void(0)">评选动态</a></li>
+                    <li><a data-href="{:url('professor/index')}" data-title="专家评委" href="javascript:void(0)">专家评委</a></li>
+                    <li><a data-href="{:url('partners/index')}" data-title="合作机构" href="javascript:void(0)">合作机构</a></li>
+                    <li><a data-href="{:url('shortlist/index')}" data-title="入围品牌" href="javascript:void(0)">入围品牌</a></li>
+                    <li><a data-href="{:url('datum/index')}" data-title="资料下载" href="javascript:void(0)">资料下载</a></li>
+                    <li><a data-href="{:url('contact/index')}" data-title="联系我们" href="javascript:void(0)">联系我们</a></li>
+                </ul>
+            </dd>
+        </dl>
         <dl id="menu-admin">
             <dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
@@ -105,20 +134,17 @@
                 </ul>
             </dd>
         </dl>
-        <!--<dl id="menu-tongji">-->
-            <!--<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
-            <!--<dd>-->
-                <!--<ul>-->
-                    <!--<li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a></li>-->
-                    <!--<li><a data-href="charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>-->
-                    <!--<li><a data-href="charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a></li>-->
-                    <!--<li><a data-href="charts-4.html" data-title="柱状图" href="javascript:void(0)">柱状图</a></li>-->
-                    <!--<li><a data-href="charts-5.html" data-title="饼状图" href="javascript:void(0)">饼状图</a></li>-->
-                    <!--<li><a data-href="charts-6.html" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a></li>-->
-                    <!--<li><a data-href="charts-7.html" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a></li>-->
-                <!--</ul>-->
-            <!--</dd>-->
-        <!--</dl>-->
+
+        <dl id="menu-user">
+            <dt><i class="Hui-iconfont">&#xe62d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('memberreg/index')}" data-title="会员列表" href="javascript:void(0)">会员列表</a></li>
+                    <li><a data-href="{:url('writing/index')}" data-title="会员文章" href="javascript:void(0)">会员文章</a></li>
+                </ul>
+            </dd>
+        </dl>
+
         <dl id="menu-system">
             <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>

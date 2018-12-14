@@ -1,0 +1,119 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--会员注册-->
+<div class="reg-mode">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+            <div class="reg-list">
+                <form class="form-horizontal" role="form" id="r-form">
+
+                        <ul class="reg-list-ul">
+                            <li class="reg-item active">会员注册</li>
+                            <li class="reg-item">类型选择</li>
+                            <li class="reg-item">入驻审核</li>
+                        </ul>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                            <input type="text" class="form-control" name="email" placeholder="请输入邮箱">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+                            <input type="text" class="form-control" name="tel" placeholder="请输入手机号码">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
+                            <input type="text" class="form-control" name="code" placeholder="请输入验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}">
+                            <span class="input-group-addon"><img src="{:captcha_src()}" alt="captcha" class="code-img" onclick="this.src=this.src+'?'"></span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="password" class="form-control" name="password" placeholder="请设置密码">
+                        </div>
+                        <div class="url-tip">
+                            已有账号，直接<a href="{:url('login')}">登录</a>
+                        </div>
+                        <div class="form-group" style="text-align: center">
+                            <button type="submit" class="btn btn-primary">立即注册</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/base64.js"></script>
+<script>
+    $(function () {
+        //表单验证
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^1\d{10}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+        $("#r-form").validate({
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 30,
+                },
+                tel: {
+                    required: true,
+                    digits: true,
+                    isMobile: true
+                },
+                code:{
+                    required: true,
+                    minlength: 5,
+                    maxlength: 5
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var b=new Base64();
+                $('[name="password"]').val(b.encode($('[name="password"]').val()));
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('index/check_reg')}",
+                    data: $("#r-form").serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                window.location.href = "{:url('reg_type')}?user="+data.data;
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 5, time: 3000}, function () {
+//                                window.location.href = window.location.href;
+                                $('[name="password"]').val('');
+                                $('[name="'+data.data+'"]').css('border','1px red solid');
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.msg);
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+
+{include file='public/footer' /}

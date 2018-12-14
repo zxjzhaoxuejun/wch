@@ -1,0 +1,196 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--会员注册-->
+<div class="reg-mode">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+            <div class="reg-list">
+                <form class="form-horizontal" role="form" id="r-form">
+
+                    <ul class="reg-list-ul">
+                        <li class="reg-item">会员注册</li>
+                        <li class="reg-item">类型选择</li>
+                        <li class="reg-item active">入驻审核</li>
+                    </ul>
+                    {eq name="$status" value="0"}
+                    <div class="table-info">
+                        <input type="hidden" name="email" value="{$user.u}">
+                        <div class="input-group">
+                            <span class="input-group-addon">*网创发布号昵称</span>
+                            <input type="text" class="form-control" name="nickname" placeholder="请昵称,2-8个字符">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">网创发布号简介</span>
+                            <input type="text" class="form-control" name="intro" placeholder="简单介绍点什么,200字符内...">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">*网创发布号头像</span>
+                            <input type="hidden" class="form-control" name="avator" id="avatorVal_1">
+                            <input type="file" id="avator_1" class="form-control">
+                        </div>
+                        <img class="ms-code" alt="预览头像" style="max-width: 180px;height: 120px;margin-left:150px;display: none">
+                        <div class="input-group">
+                            <span class="input-group-addon">*运营者真实姓名</span>
+                            <input type="text" class="form-control" name="name" placeholder="运营者真实姓名">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">*运营者身份证号</span>
+                            <input type="text" class="form-control" name="identity_card" placeholder="运营者身份证号">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">*运营公司名称</span>
+                            <input type="text" class="form-control" name="company_name" placeholder="运营公司名称">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">*运营公司名称营业执照</span>
+                            <input type="hidden" class="form-control" name="company_img" id="avatorVal_2">
+                            <input type="file" class="form-control" id="avator_2"  placeholder="营业执照片">
+                        </div>
+                        <img class="com-code" alt="预览头像" style="max-width: 180px;height: 120px;margin-left:150px;display: none">
+
+                        <div class="form-group" style="text-align: center">
+                            <button type="submit" class="btn btn-primary">提交审核</button>
+                        </div>
+                    </div>
+                    {else/}
+                    <div class="status-info" style="text-align: center;margin: 30px auto;width: 100px">
+                        <a href="{:url('index/process')}" class="btn btn-primary">审核认证</a>
+                    </div>
+                    {/eq}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/base64.js"></script>
+<script>
+    $(function () {
+        $('#avator_1').change(function () {
+            if (this.files.length != 0) {
+                var file = this.files[0],
+                    reader = new FileReader();
+                if (!reader) {
+                    this.value = '';
+                    return;
+                };
+                console.log(file.size)
+                if (file.size >= 1024 * 1024 / 2) {
+                    layer.msg("请上传小于512kb的图片!");
+                    return
+                }
+                reader.onload = function (e) {
+                    this.value = '';
+                    $('form .ms-code').attr('src', e.target.result)
+                    $('form .ms-code').fadeIn().css('display','block')
+                    $('#avatorVal_1').val(e.target.result)
+                };
+                reader.readAsDataURL(file);
+            };
+        })
+
+        $('#avator_2').change(function () {
+            if (this.files.length != 0) {
+                var file = this.files[0],
+                    reader = new FileReader();
+                if (!reader) {
+                    this.value = '';
+                    return;
+                };
+                console.log(file.size)
+                if (file.size >= 1024 * 1024 / 2) {
+                    layer.msg("请上传小于512kb的图片!");
+                    return
+                }
+                reader.onload = function (e) {
+                    this.value = '';
+                    $('form .com-code').attr('src', e.target.result)
+                    $('form .com-code').fadeIn().css('display','block')
+                    $('#avatorVal_2').val(e.target.result)
+                };
+                reader.readAsDataURL(file);
+            };
+        })
+
+
+        //表单验证
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^1\d{10}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+        $("#r-form").validate({
+            rules: {
+                nickname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 8
+                },
+                intro:{
+                    maxlength: 200
+                },
+                avator: {
+                    required: true
+                },
+                name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 8
+                },
+                identity_card:{
+                    required: true,
+                    minlength: 18,
+                    maxlength: 18
+                },
+                company_name:{
+                    required: true,
+                    maxlength: 50
+                },
+                company_img:{
+                    required: true
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('index/audit_save')}",
+                    data: $("#r-form").serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                $('.table-info').hide();
+                                $('.status-info').text(data.data).show();
+                                window.location.href=window.location.href;
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 5, time: 3000}, function () {
+//                                window.location.href = window.location.href;
+                                $('[name="password"]').val('');
+                                $('[name="'+data.data+'"]').css('border','1px red solid');
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.msg);
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+
+{include file='public/footer' /}

@@ -12,4 +12,5 @@ use think\Model;
 
 class Article extends Model{
     protected $autoWriteTimestamp=true;
+
 }

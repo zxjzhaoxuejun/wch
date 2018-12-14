@@ -1,0 +1,117 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--认证流程-->
+<div class="process-mode" style="min-height: 800px;">
+    <div class="container">
+        <div class="r-list">
+            <h3 class="r-title">认证流程</h3>
+            <ul class="process-list">
+                <li class="active">1.审核成功</li> &gt;
+                <li class="active">2.认证缴费</li> &gt;
+                <li {eq name="$type" value="1" }class="active"{/eq}>3.认证成功</li>
+            </ul>
+        </div>
+        <div class="r-list">
+            <h3 class="r-title">机构认证专区</h3>
+            <div class="t-count">
+                <span class="count-text">入驻会员<b>66</b>家</span>
+                <span class="count-text">同步平台<b>23</b>家</span>
+            </div>
+            <ul class="process-type">
+                <li class="process-type-item" data-type="0">
+                    <p class="money-text">免费版</p>
+                    <p class="info-text">同步跟新到网创协会平台</p>
+                    <a href="">点击查看</a>
+                </li>
+
+                <li class="process-type-item active" data-type="1">
+                    <p class="money-text">299<span>元/月</span></p>
+                    <p class="info-text">同步跟新至23家媒体平台</p>
+                    <a href="">点击查看</a>
+                </li>
+                <li class="process-type-item" data-type="2">
+                    <p class="money-text">897<span>元/季（送1月）</span></p>
+                    <p class="info-text">同步跟新至23家媒体平台+6家自媒体</p>
+                    <a href="">点击查看</a>
+                </li>
+                <li class="process-type-item" data-type="3">
+                    <p class="money-text">2899<span>元/年（送1季）</span></p>
+                    <p class="info-text">同步跟新至23家自媒体平台+6家自媒体+10篇/天</p>
+                    <a href="">点击查看</a>
+                </li>
+            </ul>
+            <div style="text-align: center;margin-top: 20px;">
+                <button class="btn btn-primary" id="submit" {eq name="$type" value="1" }disabled{/eq}>确定认证</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/base64.js"></script>
+<script>
+    $(function () {
+
+        $('.process-type-item').click(function () {
+            $('.process-type-item').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('#submit').click(function(){
+            var typeVal=$('.process-type li.active').attr('data-type');//选择的是哪一套餐
+
+            if(typeVal==0){
+                //免费版
+                var email=$('.top-email').text();
+                layer.open({
+                    type: 1,
+                    title:'邮箱认证激活',
+                    btn:['提交','取消'],
+                    yes:function(index, layero){
+                        if($('#emailCode').val()==''||$('#emailCode').val().length>6||$('#emailCode').val().length<6){
+                            layer.msg('验证码输入错误!');
+                        }else{
+                            console.log($('#email').text(),$('#emailCode').val());
+                            $.ajax({
+                                type: 'POST',
+                                url: "{:url('user/email_approve')}",
+                                data: {email:$('.top-email').text(),email_code:$('#emailCode').val()},
+                                dataType: 'json',
+                                success: function (data) {
+                                    console.log(data)
+                                    if (data.code == 1) {
+                                        layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                            layer.close(index);
+                                            window.location.href ="{:url('user/user_info?id=0')}" ;
+                                        });
+                                    } else {
+                                        layer.msg(data.msg, {icon: 5, time: 3000}, function () {
+                                            $('#emailCode').val('');
+                                        });
+                                    }
+                                },
+                                error: function (data) {
+                                    console.log(data.msg);
+                                },
+                            });
+//                    layer.close(index);
+                        }
+                    },
+                    area: ['420px', '240px'], //宽高
+                    content: '<div class="jh-code"><p>已经向<b>'+email+'</b>邮箱发送认证码,请输入认证。</p><p>激活码:<input type="text" id="emailCode" placeholder="输入邮箱激活码" /></p></div>'
+                })
+
+            }else{
+                //付费版
+
+            }
+        })
+
+
+    })
+
+</script>
+
+
+{include file='public/footer' /}

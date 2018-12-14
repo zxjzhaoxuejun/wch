@@ -1,0 +1,90 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--会员注册-->
+<div class="reg-mode">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+            <div class="reg-list">
+                <form class="form-horizontal" role="form" id="r-form">
+                        <input type="hidden" value="{$user}" id="userName">
+                        <ul class="reg-list-ul">
+                            <li class="reg-item">会员注册</li>
+                            <li class="reg-item active">类型选择</li>
+                            <li class="reg-item">入驻审核</li>
+                        </ul>
+
+                    <div class="row" style="margin: 20px 30px;">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail reg-type-m">
+                                <img src="__STATIC__/index/imgs/eidt.png" alt="..." class="img-c red">
+                                <div class="caption">
+                                    <h3 class="reg-type-t">个人</h3>
+                                    <p>适合垂直领域专家、意见领袖、评论家及自媒体人士申请。</p>
+                                    <p class="reg-type-b"><a class="btn btn-primary" type="1">选择</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail reg-type-m">
+                                <img src="__STATIC__/index/imgs/qiye.png" class="img-c blue" alt="...">
+                                <div class="caption">
+                                    <h3 class="reg-type-t">企业</h3>
+                                    <p>适合企业、公司，分支机构，企业相关品牌、产品与服务等。</p>
+                                    <p class="reg-type-b">
+                                        <a class="btn btn-primary" type="2">选择</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail reg-type-m">
+                                <img src="__STATIC__/index/imgs/mt.png" class="img-c green" alt="...">
+                                <div class="caption">
+                                    <h3 class="reg-type-t">媒体</h3>
+                                    <p>适合拥有自有平台的用户，分发网创发布资讯。</p>
+                                    <p class="reg-type-b"><a class="btn btn-primary" type="3">选择</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/base64.js"></script>
+<script>
+    $('.reg-type-b a').click(function () {
+        console.log($('#userName').val());
+        var type=$(this).attr('type');
+        $.ajax({
+            type: 'POST',
+            url: "{:url('index/check_type')}",
+            data: {type:type,u:$('#userName').val()},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                if (data.code == 1) {
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        window.location.href = "{:url('index/audit')}?type="+data.data+'&u='+$('#userName').val();
+                    });
+                } else {
+                    layer.msg(data.msg, {icon: 5, time: 3000});
+                }
+            },
+            error: function (data) {
+                console.log(data.msg);
+            },
+        });
+
+    })
+</script>
+
+{include file='public/footer' /}

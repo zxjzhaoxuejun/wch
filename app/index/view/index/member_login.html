@@ -1,0 +1,95 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--会员注册-->
+<div class="reg-mode">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+            <div class="reg-list">
+                <form class="form-horizontal" role="form" id="r-form">
+                        <div class="page-title">会员登录</div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input type="text" class="form-control" name="email" placeholder="请输入登录邮箱">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="password" class="form-control" name="password" placeholder="请登录密码">
+                        </div>
+                        <div class="url-tip">
+                            没有账号，<a href="{:url('reg')}">立即注册</a>
+                        </div>
+                        <div class="form-group" style="text-align: center">
+                            <button type="submit" class="btn btn-primary">立即登录</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/base64.js"></script>
+<script>
+    $(function () {
+        //表单验证
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^1\d{10}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+        $("#r-form").validate({
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 30,
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var b=new Base64();
+                $('[name="password"]').val(b.encode($('[name="password"]').val()));
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('check_user')}",
+                    data: $("#r-form").serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                window.location.href ="{:url('user/user_info?id=0')}" ;
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 5, time: 3000}, function () {
+//                                window.location.href = window.location.href;
+                                $('[name="password"]').val('');
+                                $('[name="'+data.data+'"]').css('border','1px red solid');
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.msg);
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+
+{include file='public/footer' /}

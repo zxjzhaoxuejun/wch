@@ -17,6 +17,23 @@
                     <li class="top-li">
                         <a href="javascript:void(0)" onclick="shoucang(document.title,window.location)">加入收藏</a>
                     </li>
+                    {eq name="$info.email" value=""}
+                    <li class="top-li">
+                        <a href="{:url('index/login')}">登录</a>
+                    </li>
+                    <li class="top-li">
+                        <a href="{:url('index/reg')}">注册</a>
+                    </li>
+                    {else/}
+                    <li class="top-li info-user">
+                        <img src="{$info.avator}" class="top-nav-img" alt="头像">
+                        <span class="top-email">{$info.email}</span>
+                        <div class="user-list-info">
+                            <a href="{:url('user/user_info')}?id=0" class="user-list-item">个人中心</a>
+                            <a href="{:url('index/login_close')}" class="user-list-item">退出登录</a>
+                        </div>
+                    </li>
+                    {/eq}
                 </ul>
             </div>
         </div>
@@ -31,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand hidden-xs hidden-sm" href="index.html">
+            <a class="navbar-brand hidden-xs hidden-sm" href="{:url('index/index')}">
                 <img class="logo-img" src="__STATIC__/index/imgs/logo.png" alt="logo">
             </a>
             <a class="navbar-brand visible-sm visible-xs" href="index.html">

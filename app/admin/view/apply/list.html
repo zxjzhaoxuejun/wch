@@ -1,0 +1,99 @@
+﻿{include file='public/header' /}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网页大赛报名 <span class="c-gray en">&gt;</span> 报名列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a class="btn btn-primary radius" data-title="生成Excel表"  href="{:url('apply/derives')}"><i class="Hui-iconfont">&#xe601;</i> 生成Excel表</a></span> </div>
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+				<tr class="text-c">
+					<th width="40">ID</th>
+					<th width="80">照片</th>
+					<th width="80">姓名</th>
+					<th width="40">性别</th>
+					<th width="170">身份证</th>
+					<th width="60">户籍所在地</th>
+					<th width="100">电话</th>
+					<th width="100">出生日期</th>
+					<th width="40">项目工龄</th>
+					<th width="100">社保卡号</th>
+					<th width="40">学历</th>
+					<th width="60">资格等级</th>
+					<th width="120">现有职业资格</th>
+					<th width="120">推荐机构</th>
+					<th width="120">单位名称</th>
+					<th width="200">简历</th>
+					<th width="150">提交时间</th>
+				</tr>
+			</thead>
+			<tbody>
+			{foreach $data as $v}
+				<tr class="text-c">
+					<td>{$v.id}</td>
+					<td><img src="{$v.pic}" alt="头像" style="width: 60px;height: 80px"></td>
+					<td>{$v.name}</td>
+					<td>{$v.sex}</td>
+					<td>{$v.identity}</td>
+					<td>{$v.city}</td>
+					<td>{$v.tel}</td>
+					<td>{$v.date}</td>
+					<td>{$v.seniority}</td>
+					<td>{$v.card}</td>
+					<td>{$v.education}</td>
+					<td>{$v.level}</td>
+					<td>{$v.job}</td>
+					<td>{$v.organization}</td>
+					<td>{$v.company}</td>
+					<td><span class="resume">{$v.resume}</span><span data-info="{$v.resume}" class="btn omit-btn">展开</span></td>
+					<td>{$v.create_time}</td>
+				</tr>
+			{/foreach}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{include file='public/base_js' /}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+/*-添加*/
+function nav_add(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+/*-编辑*/
+function nav_edit(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+
+$('.resume').each(function(){
+    var con=$(this).text();
+    if(con.length<=30){
+        $(this).next('.btn').hide();
+        return;
+	}else{
+        $(this).text(con.substring(0,30)+'...');
+	}
+})
+var onOff=true;
+$('.omit-btn').click(function () {
+    var con=$(this).attr('data-info');
+    if(onOff){
+        $(this).prev().text(con);
+        $(this).text('收缩');
+        onOff=false;
+	}else{
+        $(this).prev().text(con.substring(0,30)+'...');
+        $(this).text('展开');
+        onOff=true;
+	}
+
+})
+
+</script> 
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿{include file='public/header'/}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 参会报名 <span class="c-gray en">&gt;</span> 报名列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="9">报名列表</th>
+			</tr>
+			<tr class="text-c">
+				<th width="40">ID</th>
+				<th width="150">姓名</th>
+				<th width="150">电话</th>
+				<th width="150">公司名</th>
+				<th width="130">职位</th>
+				<th width="100">报名时间</th>
+				<!--<th width="100">操作</th>-->
+			</tr>
+		</thead>
+		<tbody>
+		{foreach $data as $v}
+			<tr class="text-c">
+				<td>{$v.id}</td>
+				<td>{$v.name}</td>
+				<td>{$v.tel}</td>
+				<td>{$v.company}</td>
+				<td>{$v.job}</td>
+				<td><span>{$v.create_time}</span></td>
+			</tr>
+		{/foreach}
+		</tbody>
+	</table>
+	{$page}
+</div>
+<!--_footer 作为公共模版分离出去-->
+{include file='public/base_js' /}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-增加*/
+function admin_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-删除*/
+function admin_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: "{:url('admin/delete')}",
+			data:{'id':id},
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg(data.msg,{icon:1,time:1000},function () {
+                    window.location.href=window.location.href;
+                });
+			},
+			error:function(data) {
+                layer.msg(data.msg,{icon:1,time:1000},function () {
+                    window.location.href=window.location.href;
+                });
+			},
+		});		
+	});
+}
+
+/*管理员-编辑*/
+function admin_edit(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+</script>
+</body>
+</html>

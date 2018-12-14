@@ -1,0 +1,118 @@
+{include file='public/header' /}
+{include file='public/nav' /}
+<!--协会简介、组织架构、协会指南、分支机构-->
+<div class="banner-pic">
+    <img src="__STATIC__/{$banner.b_img}" class="logo-img" alt="{$banner.b_name}">
+</div>
+<div class="container list-mode">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-nav">
+                <ul class="ul-left-mode">
+                    <li class="li-title">{$pageTitle}</li>
+                    {foreach $leftNav as $i=>$l}
+                        {eq name="$navId" value="$i"}
+                            <li class="li-nav active"><a href="{:url('user/user_info')}?id={$i}">{$l}</a></li>
+                        {else\}
+                            <li class="li-nav"><a href="{:url('user/user_info')}?id={$i}">{$l}</a></li>
+                        {/eq}
+                    {/foreach}
+                    <li class="li-nav"><a href="{:url('index/login_close')}">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <div class="page-position">
+               <span class="glyphicon glyphicon-home" style="color:#1779b8;"></span>
+               <a href="{:url('index/index')}">首页</a>
+               &gt;&gt;
+               <a href="#">{$navTitle}</a>
+           </div>
+            <div class="article user-mode">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        {eq name="$info.avator" value=""}
+                            <img src="__STATIC__/index/imgs/unlogin.png" alt="头像" class="avator-img" />
+                        {else\}
+                            <img src="{$info.avator}" alt="头像" class="avator-img" />
+                        {/eq}
+                        <input type="file" id="avator" name="image" style="display:none;"/>
+                        <!--<input type="hidden" name="avator" id="avatorVal" value="">-->
+                        <a class="modify-img" type="file">修改头像</a>
+                    </li>
+                    <li class="list-group-item">
+                        账户邮箱:
+                        <span id="email">{$info.email}</span>
+                    </li>
+                    <li class="list-group-item">
+                        手机号码:
+                        <span>{$info.tel}</span>
+                    </li>
+                    <li class="list-group-item">
+                        认证状态:
+                        {eq name="$info.status" value="已认证"}
+                            <a href="{:url('index/process')}?type=1" class="approve"><i class="glyphicon glyphicon-ok"></i>{$info.status}</a>
+                        {/eq}
+                        {eq name="$info.status" value="未认证"}
+                            <a href="{:url('index/process')}" class="approve">{$info.status}</a>
+                        {/eq}
+                        {eq name="$info.status" value="审核中"}
+                            <a href="{:url('index/process')}" class="approve"><i class="glyphicon glyphicon-ok"></i>{$info.status}</a>
+                        {/eq}
+                    </li>
+                    <li class="list-group-item">
+                        登录次数:
+                        <span>{$info.login_count}</span>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.modify-img').on('click', function(e) {
+        e.preventDefault();
+        $('#avator').click()
+        $('#avator').change(function () {
+            if (this.files.length != 0) {
+                var file = this.files[0],
+                    reader = new FileReader();
+                if (!reader) {
+                    this.value = '';
+                    return;
+                };
+                console.log(file.size)
+                if (file.size >= 1024 * 1024 / 2) {
+                    layer.msg("请上传小于512kb的图片!")
+                    return
+                }
+                reader.onload = function (e) {
+                    this.value = '';
+                    $('.avator-img').attr('src', e.target.result)
+//                    $('#avatorVal').val(e.target.result)
+                    $.ajax({
+                        type: 'POST',
+                        url: "{:url('modify_img')}",
+                        data: {email:$('#email').text(),avator:e.target.result},
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 1) {
+                                layer.msg(data.msg, {icon: 1, time: 1000});
+                            } else {
+                                layer.msg(data.msg, {icon: 5, time: 1000});
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data.msg);
+                        },
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+        })
+    })
+
+</script>
+{include file='public/footer' /}

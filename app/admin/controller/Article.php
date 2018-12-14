@@ -74,6 +74,21 @@ class Article extends Base
 
         return $this->fetch('article_list');
     }
+    /**
+     * 显示专题活动资讯列表
+     *cate_id=6
+     * @return \think\Response
+     */
+    public function h_info()
+    {
+        //
+        $data= ArticleModel::all(function ($query){
+            $query->where('cate_id=6');
+        });
+        $this->assign('data',$data);
+
+        return $this->fetch('article_list');
+    }
 
     /**
      * 显示创建资讯表单页.

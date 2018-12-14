@@ -32,7 +32,7 @@ class Schools extends Base{
     public function create()
     {
         //
-        $cate=["双创培训"];
+        $cate=["培训动态","品牌人物","品牌故事","品牌发布"];
         $this->assign('cate',$cate);
         return $this->fetch('add');
     }
@@ -87,7 +87,7 @@ class Schools extends Base{
 
         $info=SchoolModel::get($request->param('id'));
         $this->assign('info',$info);
-        $cate=["双创培训"];
+        $cate=["培训动态","品牌人物","品牌故事","品牌发布"];
         $this->assign('cate',$cate);
         return $this->fetch('edit');
     }

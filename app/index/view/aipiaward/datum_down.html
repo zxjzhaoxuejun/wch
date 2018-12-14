@@ -1,0 +1,25 @@
+{include file='aipiaward/head' /}
+<!--资料下载-->
+<div class="row vote-model" id="page3">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg">
+        <h1 class="page-title">
+            资料下载区
+        </h1>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-xs-12">
+        <div style="margin-top: 40px;">
+
+            {eq name="$isVal" value='0'}
+            <h3>没有资料下载...</h3>
+            {else\}
+            {/eq}
+            {foreach $data as $i=>$s}
+            <h3><a href="__STATIC__/{$s.url}">{$i+1}、{$s.name}</a><span class="down-time">{$s.create_time}</span> </h3>
+            {/foreach}
+
+        </div>
+    </div>
+</div>
+
+{include file='aipiaward/footer' /}

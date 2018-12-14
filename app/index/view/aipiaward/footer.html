@@ -1,0 +1,99 @@
+<!--联系我们-->
+<div class="row vote-model" id="page6">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 25px">
+        <h1 class="page-title">
+            联系我们
+            <!--<a href="{:url('member_show')}?id=2" class="more-class">MORE&gt;&gt;</a>-->
+        </h1>
+    </div>
+    <div class="col-md-5 col-md-offset-2">
+        <div class="text-titles">{$us.title} </div>
+        <div class="text-item">
+            <span>QQ：{$us.qq}</span>
+            <span>微信：{$us.wx}</span>
+        </div>
+        <div class="text-item">
+            <span>邮箱：{$us.email}</span>
+            <span>电话：{$us.tel}</span>
+        </div>
+        <div class="text-item">
+            <span>地址：{$us.address}</span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <img src="{$us.qr_code}" alt="qcode" class="qcode">
+        <p class="wx-text">webrand艾丕奖公众号</p>
+    </div>
+    <div class="col-md-2" style="margin-left: 20px;">
+        <img src="{$us.qr_code_1}" alt="qcode" class="qcode">
+        <p class="wx-text">@艾丕奖总召集人微信</p>
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript">
+    jQuery(".slide-item-box").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        autoPage: true,
+        effect: "leftLoop",
+        autoPlay: true,
+        scroll: 1,
+        vis: 3,
+        delayTime: 500,
+        trigger: "click"
+    })
+
+    $(function () {
+        $('.poll-click').click(function () {
+            var id=$(this).attr('data-id');
+            var obj=$(this).parent().prev().children('.poll-num');
+            console.log(id)
+            $.ajax({
+                type: 'POST',
+                url: "{:url('vote/poll')}",
+                data:{'id':id},
+                dataType: 'json',
+                success: function(data){
+                    console.log(data);
+                    if(data.code==1){
+                        layer.msg(data.msg,{icon:1,time:2000},function () {
+                            obj.text(Number(obj.text())+1);
+                        });
+                    }else{
+                        layer.msg(data.msg,{icon:0,time:2000});
+                    }
+
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                }
+            })
+        })
+
+
+        $('.navbar-toggle').click(function () {
+            $('.small-menu').toggle().click(function () {
+                $(this).hide();
+            });
+
+        })
+
+        $('.page-title li').click(function () {
+            var indexVal=$(this).index();
+            $('.page-title li').removeClass('active');
+            $(this).addClass('active');
+            $('.project').hide();
+            $('.project').eq(indexVal).show();
+            var hrefIndex=Number(indexVal)+1;
+            var hrefVal=$('#pollIndex').attr('href').substring(0,$('#pollIndex').attr('href').length-1)+hrefIndex;
+            $('#pollIndex').attr('href',hrefVal);
+
+        })
+    })
+</script>
+
+</body>
+</html>

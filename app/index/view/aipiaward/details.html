@@ -1,0 +1,32 @@
+{include file='aipiaward/head' /}
+<!--评选动态详情-->
+<div class="row vote-model" id="page3">
+    <div class="col-md-12 col-sm-12 col-xs-12 page-bg" style="margin-bottom: 30px;">
+        <h1 class="page-title">
+            <a href="javascript:history.go(-1);" class="more-class">&lt;&lt; 返回</a>
+            评选动态详情
+        </h1>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-xs-12">
+        <h3 style="text-align: center;font-size: 18px;color: #d9534f;">{$con.art_title}</h3>
+        <div class="athor">
+            <span>发布时间：{$con.create_time}</span>
+            <span>浏览量：{$con.art_view}</span>
+        </div>
+        <div>{$con.art_content}</div>
+        <div style="margin-top: 40px;">
+            {eq name="$prevInfo" value=""} {else/}
+            <p>[上一条]：
+                <a href="{:url('vote/details')}?id={$prevInfo.id}">{$prevInfo.art_title}</a>
+            </p>
+            {/eq} {eq name="$nextInfo" value=""} {else/}
+            <p>[下一条]：
+                <a href="{:url('vote/details')}?id={$nextInfo.id}">{$nextInfo.art_title}</a>
+            </p>
+            {/eq}
+        </div>
+    </div>
+</div>
+
+{include file='aipiaward/footer' /}
