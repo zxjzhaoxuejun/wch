@@ -4,7 +4,7 @@
  * User: 赵学军
  * Date: 2018-06-23
  * Time: 14:32
- 小程序
+ * 小程序
  */
 namespace app\index\controller;
 use think\Controller;
@@ -19,6 +19,8 @@ use app\admin\model\Leader;//协会领导
 use app\admin\model\Partisan;//理事单位
 use app\admin\model\Download;//下载专区
 use app\admin\model\Schools;//双创学院
+use app\admin\model\Figure;//双创人物
+use app\admin\model\Characters;
 use think\Db;
 use think\Request;
 
@@ -31,22 +33,26 @@ class Chat extends Controller{
     {
         header('Access-Control-Allow-Origin: *');
         $hots= Article::all(function ($query){//2业界动态,3.协会动态，4.会员资讯，5.政策信息
-            $query->where('art_statue',5)->order('create_time','desc')->limit(3);
+            $query->where('art_statue',5)->order('create_time','desc')->limit(5);
         });//焦点新闻
-        $com=MemberCompany::all(function ($query){
-            $query->order('create_time','desc')->limit(6);
-        });//会员单位
+        // $com=MemberCompany::all(function ($query){
+        //     $query->order('create_time','desc')->limit(6);
+        // });//会员单位
+        $fig=Figure::all(function($query){
+            $query->order('create_time','desc')->limit(1);
+        });
         $cou=Counselor::all(function ($query){
             $query->order('create_time','desc')->limit(6);
         });//网创智库
         $sch=Schools::all(function ($query){
-            $query->order('create_time','desc')->limit(2);
+            $query->order('create_time','desc')->limit(1);
         });//网创学院
         $art=Article::all(function ($query){//2业界动态,3.协会动态，4.会员资讯，5.政策信息
-            $query->where('art_statue=2 or art_statue=5')->order('create_time','desc')->limit(3);
+            $query->where('art_statue=2 or art_statue=5')->order('create_time','desc')->limit(1);
         });//热门资讯
         $data=array();
-        $data['company']=$com;
+        // $data['company']=$com;
+        $data['figure']=$fig;
         $data['counselor']=$cou;
         $data['schools']=$sch;
         $data['article']=$art;
@@ -102,6 +108,42 @@ class Chat extends Controller{
         return $json;
     }
 
+    /**
+     * 双创人物列表
+     * 
+     */
+
+     public function figures(Request $request){
+        header('Access-Control-Allow-Origin:*');
+        $data=$request->param();
+        //每次显示记录数
+        $size=10;
+        //确定页数p参数
+        if($data['page']){
+            $p = $data['page']?$data['page']:1;
+        }else{
+            $p =1;
+        }
+        //数据指针
+        $offset = ($p-1)*$size;
+        $fig=Db::query("select id,create_time,abstract,img,video,view from figure ORDER BY create_time DESC LIMIT $offset,$size");
+        $json =json_encode($fig,JSON_UNESCAPED_UNICODE);
+        return $json;
+     }
+
+     /**
+      * 双创人物详情
+      */
+    public function figureDetail(Request $request){
+        header('Access-Control-Allow-Origin:*');
+        $data=$request->param();
+        $id=$data['id'];
+        $info=Db::query("select *from figure WHERE id=$id");
+        $view=$info[0]['view']+1;
+        Db::query("UPDATE figure SET view=$view WHERE id=$id");
+        $json=json_encode($info,JSON_UNESCAPED_UNICODE);
+        return $json;
+    }
     /**
      * @param Request $request
      * @return string
@@ -281,6 +323,29 @@ class Chat extends Controller{
             $sys=new Partisan();
             $res=$sys->allowField(true)->save($data);
         }
+        if($res){
+            $state=[
+                'msg'=>'提交成功!',
+                'code'=>1
+            ];
+        }else{
+            $state=[
+                'msg'=>'提交失败!',
+                'code'=>0
+            ];
+        }
+        return json_encode($state,JSON_UNESCAPED_UNICODE);
+    }
+
+
+    /**
+     * 双创人物申请
+     */
+    public function figureIn(Request $request){
+        $data=$request->param();
+        $sys=new Characters();
+        $res=$sys->allowField(true)->save($data);
+        
         if($res){
             $state=[
                 'msg'=>'提交成功!',

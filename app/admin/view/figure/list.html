@@ -1,0 +1,241 @@
+﻿{include file='public/header' /}
+
+<body>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span>
+		资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);"
+		 title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="page-container">
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
+					 class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加" data-href="add.html"
+				 onclick="article_add('添加','{:url(\'figure/create\')}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
+					添加</a></span> </div>
+		<div class="mt-20">
+			<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+				<thead>
+					<tr class="text-c">
+						<th width="25"><input type="checkbox" name="" value=""></th>
+						<th width="80">序号</th>
+						<th width="150">标题</th>
+						<th width="200">简介</th>
+						<th width="150">封面图</th>
+						<th width="120">更新时间</th>
+						<th width="75">浏览次数</th>
+						<th width="60">发布状态</th>
+						<th width="120">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach $data as $i=>$v}
+					<tr class="text-c">
+						<td><input type="checkbox" value="{$v.id}" name="del"></td>
+						<td>{++$i}</td>
+						<td>{$v.title}</td>
+						<td class="text-l">{$v.abstract}</td>
+						<td><img src="__STATIC__/{$v.img}" alt="封面图" style="width:120px;height:60px;" /></td>
+						<td>{$v.create_time}</td>
+						<td>{$v.view}</td>
+						<td class="td-status">
+							{equal name='$v.art_statue' value='0'}
+							<span class="label label-success radius" name="0">默认</span>
+							{/equal}
+							{equal name='$v.art_statue' value='1'}
+							<span class="label label-success radius" name="1">推荐</span>
+							{/equal}
+							{equal name='$v.art_statue' value='2'}
+							<span class="label label-success radius" name="2">已推荐</span>
+							{/equal}
+							{equal name='$v.art_statue' value='3'}
+							<span class="label label-danger radius" name="3">未推荐</span>
+							{/equal}
+							{equal name='$v.art_statue' value='4'}
+							<span class="label label-success radius" name="4">热门</span>
+							{/equal}
+							{equal name='$v.art_statue' value='5'}
+							<span class="label label-success radius" name="5">热门</span>
+							{/equal}
+							{equal name='$v.art_statue' value='6'}
+							<span class="label label-danger radius" name="6">已下架</span>
+							{/equal}
+
+						</td>
+						<td class="f-14 td-manage">
+							{equal name='$v.art_statue' value='0'}
+							<a style="text-decoration:none" onClick="article_shenhe(this,{$v.id})" href="javascript:;" title="推荐">推荐</a>
+							{/equal}
+							{equal name='$v.art_statue' value='2'}
+							<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="热门">已推荐</a>
+							{/equal}
+							{equal name='$v.art_statue' value='3'}
+							<a style="text-decoration:none" onClick="article_shenhe(this,{$v.id})" href="javascript:;" title="推荐">未推荐</a>
+							{/equal}
+							{equal name='$v.art_statue' value='5'}
+							<a style="text-decoration:none" onClick="article_stop(this,{$v.id})" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>
+							{/equal}
+							{equal name='$v.art_statue' value='6'}
+							<a style="text-decoration:none" onClick="article_start(this,{$v.id})" href="javascript:;" title="热门"><i class="Hui-iconfont">&#xe603;</i></a>
+							{/equal}
+							<a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑','{:url(\'figure/edit\')}'+'?id='+{$v.id})"
+							 href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a style="text-decoration:none" class="ml-5" onClick="article_del(this,{$v.id})" href="javascript:;" title="删除"><i
+								 class="Hui-iconfont">&#xe6e2;</i></a>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	{include file='public/base_js' /}
+
+	<!--请在下方写此页面业务相关的脚本jquery-1.9.min.js-->
+	<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="__STATIC__/lib/jquery/jquery-1.9.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+		$('.table-sort').dataTable({
+			"aaSorting": [[1, "desc"]],//默认第几个排序
+			"bStateSave": true,//状态保存
+			"pading": false,
+			"aoColumnDefs": [
+				//	  {"bVisible": false, "aTargets": [ 3 ]},//控制列的隐藏显示
+				{ "orderable": false, "aTargets": [0, 2, 3, 6, 7] }// 不参与排序的列
+			],
+			'lengthMenu': [5, 10, 15, 20, 50, 100],//选择每页显示多少条数据，下拉选项
+		});
+
+		/*资讯-添加*/
+		function article_add(title, url) {
+			var index = layer.open({
+				type: 2,
+				title: title,
+				content: url
+			});
+			layer.full(index);
+		}
+		/*资讯-编辑*/
+		function article_edit(title, url) {
+			var index = layer.open({
+				type: 2,
+				title: title,
+				content: url
+			});
+			layer.full(index);
+		}
+		/*资讯-删除*/
+		function article_del(obj, art_id) {
+			var data = {
+				"id": art_id
+			}
+			layer.confirm('确认要删除吗？', function (index) {
+				$.ajax({
+					type: 'POST',
+					url: "{:url('figure/delete')}",
+					data: data,
+					dataType: 'json',
+					success: function (data) {
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!', { icon: 1, time: 1000 });
+					},
+					error: function (data) {
+						console.log(data.msg);
+					},
+				});
+			});
+		}
+
+		/*批量删除*/
+		function datadel() {
+			layer.confirm('确认要批量删除吗？', function (index) {
+				var id = [];
+				$('input[name="del"]:checked').each(function () {
+					id.push($(this).val());
+				});
+
+				$.post("{:url('figure/delete')}", { 'id': id }, function (data) {
+					if (data.code == 1) {
+						layer.msg(data.msg, { icon: 1, time: 1000 }, function () {
+							window.location.href = window.location.href;
+						});
+					} else {
+						layer.msg(data.msg, { icon: 1, time: 1000 }, function () {
+							window.location.href = window.location.href;
+						});
+					}
+				})
+			});
+		}
+
+		/*资讯-审核*/
+		function article_shenhe(obj, id) {
+			layer.confirm('推荐文章？', {
+				btn: ['推荐', '不推荐', '取消'],
+				shade: false,
+				closeBtn: 0
+			},
+				function () {
+					$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="推荐">推荐</a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="2">推荐</span>');
+					$(obj).remove();
+					var _this = $(obj).parents("tr").find(".td-status");
+					layer.msg('推荐', { icon: 6, time: 1000 }, function () {
+						status(2, id);
+					});
+				},
+				function () {
+					$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="推荐">推荐</a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius" name="3">不推荐</span>');
+					var _this = $(obj);
+					layer.msg('不推荐', { icon: 5, time: 1000 }, function () {
+						status(3, id);
+					});
+				});
+
+		}
+		/*资讯-下架*/
+		function article_stop(obj, id) {
+			layer.confirm('确认要下架吗？', function (index) {
+				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="热门"><i class="Hui-iconfont">&#xe603;</i></a>');
+				$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius" name="6">已下架</span>');
+				$(obj).remove();
+				var _this = $(obj);
+				layer.msg('已下架!', { icon: 5, time: 1000 }, function () {
+					status(6, id);
+				});
+			});
+		}
+		function status(num, id) {
+			console.log(num)
+			var postData = {
+				'art_statue': num,
+				'id': id
+			};
+			$.post("{:url('figure/changeStatus')}", postData, function (data) {
+				window.location.href = window.location.href;
+			})
+		}
+		/*资讯-发布*/
+		function article_start(obj, id) {
+			layer.confirm('确认要发布热门文章吗？', function (index) {
+				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius" name="5">热门</span>');
+				$(obj).remove();
+				var _this = $(obj);
+				layer.msg('已发布!', { icon: 6, time: 1000 }, function () {
+					status(5, id);
+				})
+			});
+
+		}
+		/*资讯-申请上线*/
+		function article_shenqing(obj, id) {
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
+			$(obj).parents("tr").find(".td-manage").html("");
+			layer.msg('已提交申请，耐心等待审核!', { icon: 1, time: 2000 });
+		}
+
+	</script>
+</body>
+
+</html>
